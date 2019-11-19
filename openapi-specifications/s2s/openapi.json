@@ -1,0 +1,1636 @@
+{
+    "openapi": "3.0.0",
+    "paths": {
+        "/api/rainbow/ucs/v1.0/connections/{id}": {
+            "get": {
+                "tags": [
+                    "Connection"
+                ],
+                "summary": "Get the data of a connection",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Connection"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "required": true,
+                        "name": "id",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "operationId": "Connection.show",
+                "description": "Get the data of a connection"
+            },
+            "delete": {
+                "tags": [
+                    "Connection"
+                ],
+                "summary": "Delete a connection",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                },
+                "parameters": [
+                    {
+                        "required": true,
+                        "name": "id",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "operationId": "Connection.delete",
+                "description": "Delete a connection"
+            }
+        },
+        "/api/rainbow/ucs/v1.0/connections/{cnxId}/rooms/{roomId}/join": {
+            "post": {
+                "tags": [
+                    "Room"
+                ],
+                "summary": "Join a room",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RoomStatus"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "required": true,
+                        "name": "cnxId",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "required": true,
+                        "name": "roomId",
+                        "in": "path",
+                        "description": "Room id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "operationId": "Room.join",
+                "description": "Join a room"
+            }
+        },
+        "/api/rainbow/ucs/v1.0/connections/{cnxId}/presences/{userId}": {
+            "get": {
+                "tags": [
+                    "Presence"
+                ],
+                "summary": "Probe a user's presence",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Presence"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "required": true,
+                        "name": "cnxId",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "required": true,
+                        "name": "userId",
+                        "in": "path",
+                        "description": "User id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "operationId": "Presence.show",
+                "description": "Probe a user's presence"
+            }
+        },
+        "/api/rainbow/ucs/v1.0/connections/{cnxId}/presences": {
+            "put": {
+                "tags": [
+                    "Presence"
+                ],
+                "summary": "Set the user's presence",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted"
+                    }
+                },
+                "parameters": [
+                    {
+                        "required": true,
+                        "name": "cnxId",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "operationId": "Presence.update",
+                "description": "A user presence preference could be managed with the following API :\n\n**/api/rainbow/enduser/v1.0/users/{userId}/settings**\n\nThe mapping between this presence setting and the **show/status** fields of the presence stanza is show here :\n\n| setting   | show | status    |\n| --------- | ---- | --------- |\n| away      | xa   | away      |\n| invisible | xa   | n/a       | \n| dnd       | dnd  | n/a       | \n| online    | n/a  | mode=auto | \n\nMoreover, the Rainbow webclient sends presence stanzas with the following **show/status** fields to show user (keyboard/focus) state :\n\n| state    | show | status |\n| -------- | ---- | ------ |\n| inactive | away | n/a    |\n| active   | n/a  | n/a    |\n",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PresenceUpdate"
+                            }
+                        }
+                    },
+                    "description": "Presence data"
+                }
+            }
+        },
+        "/api/rainbow/ucs/v1.0/connections/{cnxId}/conversations/{cvId}/messages/{id}/received": {
+            "put": {
+                "tags": [
+                    "Message"
+                ],
+                "summary": "Send a received receipt",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted"
+                    }
+                },
+                "parameters": [
+                    {
+                        "required": true,
+                        "name": "cnxId",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "required": true,
+                        "name": "cvId",
+                        "in": "path",
+                        "description": "Conversation id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "required": true,
+                        "name": "id",
+                        "in": "path",
+                        "description": "Message id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "operationId": "Message.received_receipt",
+                "description": "Send a message received receipt"
+            }
+        },
+        "/api/rainbow/ucs/v1.0/connections/{cnxId}/conversations/{cvId}/messages/{id}/read": {
+            "put": {
+                "tags": [
+                    "Message"
+                ],
+                "summary": "Send a read receipt",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted"
+                    }
+                },
+                "parameters": [
+                    {
+                        "required": true,
+                        "name": "cnxId",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "required": true,
+                        "name": "cvId",
+                        "in": "path",
+                        "description": "Conversation id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "required": true,
+                        "name": "id",
+                        "in": "path",
+                        "description": "Message id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "operationId": "Message.read_receipt",
+                "description": "Send a message read receipt"
+            }
+        },
+        "/api/rainbow/ucs/v1.0/connections/{cnxId}/conversations/{cvId}/messages": {
+            "post": {
+                "tags": [
+                    "Message"
+                ],
+                "summary": "Send a new message",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MessageCreateResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "required": true,
+                        "name": "cnxId",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "required": true,
+                        "name": "cvId",
+                        "in": "path",
+                        "description": "Conversation id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "operationId": "Message.create",
+                "description": "Send a new message",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MessageCreate"
+                            }
+                        }
+                    },
+                    "description": "Message data"
+                }
+            },
+            "get": {
+                "tags": [
+                    "Message"
+                ],
+                "summary": "List the messages of a conversation",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Messages"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "required": true,
+                        "name": "cnxId",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "required": true,
+                        "name": "cvId",
+                        "in": "path",
+                        "description": "Conversation id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "operationId": "Message.index",
+                "description": "Paginated list the messages of a conversation"
+            }
+        },
+        "/api/rainbow/ucs/v1.0/connections/{cnxId}/conversations/{cvId}/chatstate/{state}": {
+            "put": {
+                "tags": [
+                    "Conversation"
+                ],
+                "summary": "Send a chat state",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Accepted"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "parameters": [
+                    {
+                        "required": true,
+                        "name": "cnxId",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "required": true,
+                        "name": "cvId",
+                        "in": "path",
+                        "description": "Conversation id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "required": true,
+                        "name": "state",
+                        "in": "path",
+                        "description": "Chatstate value",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "active",
+                                "composing",
+                                "paused",
+                                "inactive",
+                                "gone"
+                            ]
+                        }
+                    }
+                ],
+                "operationId": "Conversation.chatstate",
+                "description": "Send a conversation state"
+            }
+        },
+        "/api/rainbow/ucs/v1.0/connections": {
+            "post": {
+                "tags": [
+                    "Connection"
+                ],
+                "summary": "Create a new user connection",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ConnectionCreateResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "operationId": "Connection.create",
+                "description": "Create a new user connection",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ConnectionCreate"
+                            }
+                        }
+                    },
+                    "description": "Connection creation data"
+                },
+                "callbacks": {
+                    "connection": {
+                        "{$request.body#/callback_url}/connection": {
+                            "post": {
+                                "operationId": "connectionNotificationReceived",
+                                "requestBody": {
+                                    "required": true,
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "the connection Id",
+                                                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                                                    },
+                                                    "timestamp": {
+                                                        "type": "string",
+                                                        "description": "the message timestamp",
+                                                        "example": "2018-08-23T08:52:04.001535Z"
+                                                    },
+                                                    "connection": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "state": {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "ready",
+                                                                    "terminated"
+                                                                ]
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "state"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "timestamp",
+                                                    "connection"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "responses": {
+                                    "200": {
+                                        "description": "return this code if your server accepts the callback"
+                                    }
+                                },
+                                "x-swagger-router-controller": "ConnectionCtrl"
+                            }
+                        }
+                    },
+                    "presence": {
+                        "{$request.body#/callback_url}/presence": {
+                            "post": {
+                                "operationId": "presenceNotificationReceived",
+                                "requestBody": {
+                                    "required": true,
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "the connection Id",
+                                                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                                                    },
+                                                    "timestamp": {
+                                                        "type": "string",
+                                                        "description": "the message timestamp",
+                                                        "example": "2018-08-23T08:52:04.001535Z"
+                                                    },
+                                                    "presence": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "from": {
+                                                                "type": "string",
+                                                                "example": "59f1ecc4ea84f9b5c339958d"
+                                                            },
+                                                            "show": {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "away",
+                                                                    "chat",
+                                                                    "dnd",
+                                                                    "xa"
+                                                                ],
+                                                                "example": "away",
+                                                                "description": "presence 'show' attribute"
+                                                            },
+                                                            "status": {
+                                                                "type": "string",
+                                                                "example": "out for lunch",
+                                                                "description": "presence 'status' attribute"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "from"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "timestamp",
+                                                    "presence"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "responses": {
+                                    "200": {
+                                        "description": "return this code if your server accepts the callback"
+                                    }
+                                },
+                                "x-swagger-router-controller": "PresenceCtrl"
+                            }
+                        }
+                    },
+                    "chat-state": {
+                        "{$request.body#/callback_url}/chat-state": {
+                            "post": {
+                                "operationId": "chatStateNotificationReceived",
+                                "requestBody": {
+                                    "required": true,
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "the connection Id",
+                                                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                                                    },
+                                                    "timestamp": {
+                                                        "type": "string",
+                                                        "description": "the message timestamp",
+                                                        "example": "2018-08-23T08:52:04.001535Z"
+                                                    },
+                                                    "chatstate": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "state": {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "composing",
+                                                                    "paused",
+                                                                    "inactive",
+                                                                    "active"
+                                                                ],
+                                                                "description": "The chat state"
+                                                            },
+                                                            "conversation_id": {
+                                                                "type": "string",
+                                                                "example": "1555081424877876"
+                                                            },
+                                                            "peer": {
+                                                                "type": "string",
+                                                                "example": "59f1ecc4ea84f9b5c339958d"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "state",
+                                                            "conversation_id",
+                                                            "peer"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "timestamp",
+                                                    "chatstate"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "responses": {
+                                    "200": {
+                                        "description": "return this code if your server accepts the callback"
+                                    }
+                                },
+                                "x-swagger-router-controller": "ChatStateCtrl"
+                            }
+                        }
+                    },
+                    "receipt": {
+                        "{$request.body#/callback_url}/receipt": {
+                            "post": {
+                                "operationId": "receiptNotificationReceived",
+                                "requestBody": {
+                                    "required": true,
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "the connection Id",
+                                                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                                                    },
+                                                    "timestamp": {
+                                                        "type": "string",
+                                                        "description": "the message timestamp",
+                                                        "example": "2018-08-23T08:52:04.001535Z"
+                                                    },
+                                                    "receipt": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "msg_id": {
+                                                                "type": "string",
+                                                                "example": "cf05daec-c32e-11e8-affe-309c2364ed11"
+                                                            },
+                                                            "entity": {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "client",
+                                                                    "server"
+                                                                ],
+                                                                "description": "The receipt emitter entity",
+                                                                "example": "server"
+                                                            },
+                                                            "conversation_id": {
+                                                                "type": "string",
+                                                                "example": "1555081424877876"
+                                                            },
+                                                            "event": {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "received",
+                                                                    "read"
+                                                                ],
+                                                                "example": "received"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "msg_id",
+                                                            "entity",
+                                                            "event"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "timestamp",
+                                                    "receipt"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "responses": {
+                                    "200": {
+                                        "description": "return this code if your server accepts the callback"
+                                    }
+                                },
+                                "x-swagger-router-controller": "ReceiptCtrl"
+                            }
+                        }
+                    },
+                    "all-receipt": {
+                        "{$request.body#/callback_url}/all-receipt": {
+                            "post": {
+                                "operationId": "allReceiptNotificationReceived",
+                                "requestBody": {
+                                    "required": true,
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "the connection Id",
+                                                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                                                    },
+                                                    "timestamp": {
+                                                        "type": "string",
+                                                        "description": "the message timestamp",
+                                                        "example": "2018-08-23T08:52:04.001535Z"
+                                                    },
+                                                    "all-receipt": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "all-received",
+                                                                    "all-sent"
+                                                                ],
+                                                                "description": "Receipt applies to 'sent' or 'received' messages",
+                                                                "example": "all-received"
+                                                            },
+                                                            "conversation_id": {
+                                                                "type": "string",
+                                                                "example": "1555081424877876"
+                                                            },
+                                                            "with": {
+                                                                "type": "string",
+                                                                "example": "59f1ecc4ea84f9b5c339958d"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "id",
+                                                            "conversation_id",
+                                                            "with"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "timestamp",
+                                                    "all-receipt"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "responses": {
+                                    "200": {
+                                        "description": "return this code if your server accepts the callback"
+                                    }
+                                },
+                                "x-swagger-router-controller": "AllReceiptCtrl"
+                            }
+                        }
+                    },
+                    "conversation": {
+                        "{$request.body#/callback_url}/conversation": {
+                            "post": {
+                                "operationId": "conversationNotificationReceived",
+                                "requestBody": {
+                                    "required": true,
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "the connection Id",
+                                                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                                                    },
+                                                    "timestamp": {
+                                                        "type": "string",
+                                                        "description": "the message timestamp",
+                                                        "example": "2018-08-23T08:52:04.001535Z"
+                                                    },
+                                                    "conversation": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "description": "the conversation Id",
+                                                                "example": "1554380274531685"
+                                                            },
+                                                            "action": {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "create",
+                                                                    "update",
+                                                                    "delete"
+                                                                ],
+                                                                "description": "the action type",
+                                                                "example": "update"
+                                                            },
+                                                            "peer": {
+                                                                "type": "string",
+                                                                "description": "the peer Id",
+                                                                "example": "59f1ecc4ea84f9b5c339958d"
+                                                            },
+                                                            "type": {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "user",
+                                                                    "bot",
+                                                                    "room"
+                                                                ],
+                                                                "description": "the peer type",
+                                                                "example": "user"
+                                                            },
+                                                            "mute": {
+                                                                "type": "boolean",
+                                                                "description": "the mute flag",
+                                                                "example": "true"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "id",
+                                                            "action",
+                                                            "peer",
+                                                            "type"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "timestamp",
+                                                    "conversation"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "responses": {
+                                    "200": {
+                                        "description": "return this code if your server accepts the callback"
+                                    }
+                                },
+                                "x-swagger-router-controller": "ConversationCtrl"
+                            }
+                        }
+                    },
+                    "room-invite": {
+                        "{$request.body#/callback_url}/room-invite": {
+                            "post": {
+                                "operationId": "roomInviteNotificationReceived",
+                                "requestBody": {
+                                    "required": true,
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "the connection Id",
+                                                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                                                    },
+                                                    "timestamp": {
+                                                        "type": "string",
+                                                        "description": "the message timestamp",
+                                                        "example": "2018-08-23T08:52:04.001535Z"
+                                                    },
+                                                    "room-invite": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "description": "the room Id",
+                                                                "example": "1554380274531685"
+                                                            },
+                                                            "by": {
+                                                                "type": "string",
+                                                                "description": "the inviting user Id",
+                                                                "example": "59f1ecc4ea84f9b5c339958d"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "description": "the room name",
+                                                                "example": "Hot news"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "id",
+                                                            "by",
+                                                            "name"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "timestamp",
+                                                    "room-invite"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "responses": {
+                                    "200": {
+                                        "description": "return this code if your server accepts the callback"
+                                    }
+                                },
+                                "x-swagger-router-controller": "RoomInviteCtrl"
+                            }
+                        }
+                    },
+                    "room-member": {
+                        "{$request.body#/callback_url}/room-member": {
+                            "post": {
+                                "operationId": "roomMemberNotificationReceived",
+                                "requestBody": {
+                                    "required": true,
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "the connection Id",
+                                                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                                                    },
+                                                    "timestamp": {
+                                                        "type": "string",
+                                                        "description": "the message timestamp",
+                                                        "example": "2018-08-23T08:52:04.001535Z"
+                                                    },
+                                                    "room-member": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "description": "the room Id",
+                                                                "example": "1554380274531685"
+                                                            },
+                                                            "user": {
+                                                                "type": "string",
+                                                                "description": "the user Id",
+                                                                "example": "59f1ecc4ea84f9b5c339958d"
+                                                            },
+                                                            "status": {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "accepted",
+                                                                    "rejected",
+                                                                    "unsubscribed"
+                                                                ],
+                                                                "description": "the member status",
+                                                                "example": "accepted"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "id",
+                                                            "user",
+                                                            "status"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "timestamp",
+                                                    "room-member"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "responses": {
+                                    "200": {
+                                        "description": "return this code if your server accepts the callback"
+                                    }
+                                },
+                                "x-swagger-router-controller": "RoomMemberCtrl"
+                            }
+                        }
+                    },
+                    "room-state": {
+                        "{$request.body#/callback_url}/room-state": {
+                            "post": {
+                                "operationId": "roomStateNotificationReceived",
+                                "requestBody": {
+                                    "required": true,
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "the connection Id",
+                                                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                                                    },
+                                                    "timestamp": {
+                                                        "type": "string",
+                                                        "description": "the message timestamp",
+                                                        "example": "2018-08-23T08:52:04.001535Z"
+                                                    },
+                                                    "room-state": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "description": "the room Id",
+                                                                "example": "1554380274531685"
+                                                            },
+                                                            "event": {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "available",
+                                                                    "unavailable",
+                                                                    "deactivated",
+                                                                    "resumed",
+                                                                    "shutdown",
+                                                                    "deleted"
+                                                                ],
+                                                                "description": "the room event",
+                                                                "example": "deleted"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "id",
+                                                            "event"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "timestamp",
+                                                    "room-state"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "responses": {
+                                    "200": {
+                                        "description": "return this code if your server accepts the callback"
+                                    }
+                                },
+                                "x-swagger-router-controller": "RoomStateCtrl"
+                            }
+                        }
+                    },
+                    "message": {
+                        "{$request.body#/callback_url}/message": {
+                            "post": {
+                                "operationId": "messageNotificationReceived",
+                                "requestBody": {
+                                    "required": true,
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "the connection Id",
+                                                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                                                    },
+                                                    "timestamp": {
+                                                        "type": "string",
+                                                        "description": "the message timestamp",
+                                                        "example": "2018-08-23T08:52:04.001535Z"
+                                                    },
+                                                    "message": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "description": "the message Id",
+                                                                "example": "cf05daec-c32e-11e8-affe-309c2364ed11"
+                                                            },
+                                                            "conversation_id": {
+                                                                "type": "string",
+                                                                "example": "1555081424877876"
+                                                            },
+                                                            "from": {
+                                                                "type": "string",
+                                                                "description": "the sender Id",
+                                                                "example": "59f1ecc4ea84f9b5c339958d"
+                                                            },
+                                                            "is_group": {
+                                                                "type": "boolean",
+                                                                "description": "is a multi-user message",
+                                                                "example": "true"
+                                                            },
+                                                            "subject": {
+                                                                "type": "string",
+                                                                "description": "the subject",
+                                                                "example": "this is the subject"
+                                                            },
+                                                            "body": {
+                                                                "type": "string",
+                                                                "description": "the content",
+                                                                "example": "this is the body"
+                                                            },
+                                                            "lang": {
+                                                                "type": "string",
+                                                                "description": "the text language",
+                                                                "example": "en"
+                                                            },
+                                                            "attachment": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "url": {
+                                                                        "type": "string",
+                                                                        "description": "the attachment Url",
+                                                                        "example": "https://hello.com/filename.pdf"
+                                                                    },
+                                                                    "filename": {
+                                                                        "type": "string",
+                                                                        "description": "the attachment filename",
+                                                                        "example": "filename.pdf"
+                                                                    },
+                                                                    "mime": {
+                                                                        "type": "string",
+                                                                        "description": "the attachment mime type",
+                                                                        "example": "application/pdf"
+                                                                    },
+                                                                    "size": {
+                                                                        "type": "integer",
+                                                                        "description": "the attachment size in bytes",
+                                                                        "example": 1000
+                                                                    }
+                                                                }
+                                                            },
+                                                            "markdown": {
+                                                                "type": "string",
+                                                                "description": "the markdown content",
+                                                                "example": "this is the markdown"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "id",
+                                                            "conversation_id",
+                                                            "body",
+                                                            "from"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "timestamp",
+                                                    "message"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "responses": {
+                                    "200": {
+                                        "description": "return this code if your server accepts the callback"
+                                    }
+                                },
+                                "x-swagger-router-controller": "MessageCtrl"
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Connection"
+                ],
+                "summary": "List all user connections",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Connections"
+                                }
+                            }
+                        }
+                    }
+                },
+                "operationId": "Connection.index",
+                "description": "List all user connections"
+            }
+        }
+    },
+    "info": {
+        "x-logo": {
+            "url": "https://hub.openrainbow.com/img/logohub.svg",
+            "backgroundColor": "#ff4900"
+        },
+        "version": "1.86.0",
+        "title": "S2S api",
+        "description": "# Rainbow S2S API guide\n\n## Preamble\n\n### Introduction\n\nThis guide describes list of API services that are provided by OT Rainbow S2S portal. This portal is dedicated to s2s features.\n\n### Protocol\n\nREST interface is used for sending/receiving OT rainbow API messages. HTTP requests GET, DELETE, POST, UPDATE are used. Standard HTTP responses are used to provide requested information or error status. There is no session notion in OT Rainbow system, so requests could be issued according stateless model, without transport conservation between them. Additional data could be provided in message body. JSON is used as a main format for data encoding in message body part. Each request is started with the following pattern /{module}/{version}/ where {module} is a portal module name to address and {version} is a version of used API, par example, “v1.0”.\n\n### Security considerations\n\nEach request should contain some credential information to authenticate itself. Standard HTTP authentication with basic/bearer modes is used. JSON Web Token mechanism is used to provide authentication information. JWT has a expire timeout that is controlled by OT Rainbow portal to prevent very long token usage. Also authentication with application token is used. The token must be provided in the request HTTP header, using a custom header: APIKey. At server side, token is verified, and if it doesn’t match, 403 Not Allowed response is sent. TLS is used as a transport protocol to support message exchanges between OT Rainbow portal and an application.\n\n"
+    },
+    "servers": [
+        {
+            "url": "//localhost:4000"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "Bearer": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header",
+                "description": "For accessing the API a valid JWT token or a valid OAuth access token must be passed in all the queries in the 'Authorization' header. \n\n* JWT \n  * A valid JWT token is generated by the API and returned as answer of a call to the route GET /api/rainbow/authentication/v1.0/login giving a valid user & password.\n  * The following syntax must be used in the 'Authorization' header:   \nBearer xxxxxx.yyyyyyy.zzzzzz\n* OAuth access token \n  * A valid OAuth access token is generated and returned as answer of the OAuth 2.0 workflow with authorization code grant. This is done by calling the route GET /api/rainbow/authentication/v1.0/oauth/authorize to get an authorization code and then POST /api/rainbow/authentication/v1.0/oauth/token to exchange it agains an access token and a refresh token.\n  * The following syntax must be used in the 'Authorization' header:   \nBearer xxxxxx.yyyyyyy.zzzzzz\n"
+            }
+        },
+        "schemas": {
+            "RoomStatus": {
+                "type": "object",
+                "title": "RoomStatus",
+                "properties": {
+                    "role": {
+                        "type": "string",
+                        "enum": [
+                            "member",
+                            "moderator"
+                        ],
+                        "description": "Your role in this room"
+                    }
+                },
+                "example": {
+                    "role": "member"
+                },
+                "description": "Status of a room joining"
+            },
+            "ReceiptStatus": {
+                "type": "object",
+                "title": "ReceiptStatus",
+                "properties": {
+                    "msg_id": {
+                        "type": "string",
+                        "description": "The message identifier"
+                    },
+                    "event": {
+                        "type": "string",
+                        "enum": [
+                            "received",
+                            "read"
+                        ],
+                        "description": "The receipt event"
+                    }
+                },
+                "example": {
+                    "msg_id": "web_c5d5b89e-17ba-4cf5-8f45-5a1d221a8abf0",
+                    "event": "received"
+                },
+                "description": "A receipt status"
+            },
+            "PresenceUpdate": {
+                "type": "object",
+                "title": "PresenceUpdate",
+                "properties": {
+                    "presence": {
+                        "$ref": "#/components/schemas/Presence"
+                    }
+                },
+                "example": {
+                    "presence": {
+                        "status": "out for lunch",
+                        "show": "away"
+                    }
+                },
+                "description": "Presence data"
+            },
+            "Presence": {
+                "type": "object",
+                "title": "Presence",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "An optional additional information"
+                    },
+                    "show": {
+                        "type": "string",
+                        "enum": [
+                            "away",
+                            "chat",
+                            "dnd",
+                            "xa"
+                        ],
+                        "description": "The user presence status"
+                    }
+                },
+                "example": {
+                    "status": "out for lunch",
+                    "show": "away"
+                },
+                "description": "A presence status"
+            },
+            "Messages": {
+                "type": "array",
+                "title": "Messages",
+                "items": {
+                    "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                    "total_count": "3",
+                    "messages": [
+                        {
+                            "subject": "",
+                            "markdown": "##Hello BOB",
+                            "lang": "en",
+                            "id": "web_5ed74032-2b8c-48c0-8e4b-414da884c7c71",
+                            "from": "59f1ecc4ea84f9b5c339958d",
+                            "datetime": "2018-08-23T08:52:04.001535Z",
+                            "body": "Hello BOB",
+                            "attachments": {}
+                        },
+                        {
+                            "subject": "",
+                            "lang": "en",
+                            "id": "web_25d0910a-b211-4845-8b04-6c045fe395a20",
+                            "from": "59f1ecc63139e1b60519f505",
+                            "datetime": "2018-08-23T09:03:18.001535Z",
+                            "body": "Hello Alice",
+                            "attachments": {}
+                        }
+                    ],
+                    "_links": {
+                        "prev": "/connections/f8e81b4e-a7dc-11e8-a734-f894c2dba3d5/conversations/5b714769ce2730336a9076d6/messages?before=1535014324828089&limit=2",
+                        "next": "/connections/f8e81b4e-a7dc-11e8-a734-f894c2dba3d5/conversations/5b714769ce2730336a9076d6/messages?after=1535014998848233&limit=2"
+                    }
+                },
+                "description": "All messages for a specific chat/groupchat"
+            },
+            "MessageCreateResponse": {
+                "type": "object",
+                "title": "MessageCreateResponse",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "to": {
+                                "type": "string",
+                                "description": "5bc50eea4ca684544b694004"
+                            },
+                            "subject": {
+                                "type": "string",
+                                "description": "Message subject"
+                            },
+                            "markdown": {
+                                "type": "string",
+                                "description": "##Markdown message"
+                            },
+                            "lang": {
+                                "type": "string",
+                                "description": "en"
+                            },
+                            "id": {
+                                "type": "string",
+                                "description": "3dfdecf6-d1e8-11e8-bbed-00146c8c2dd7"
+                            },
+                            "body": {
+                                "type": "string",
+                                "description": "Message body"
+                            }
+                        }
+                    }
+                },
+                "example": {
+                    "data": {
+                        "to": "5bc50eea4ca684544b694004",
+                        "subject": "Greeting",
+                        "markdown": "##Hello world",
+                        "lang": "en",
+                        "id": "3dfdecf6-d1e8-11e8-bbed-00146c8c2dd7",
+                        "body": "Hello world"
+                    }
+                }
+            },
+            "MessageCreate": {
+                "type": "object",
+                "title": "MessageCreate",
+                "properties": {
+                    "message": {
+                        "type": "object",
+                        "properties": {
+                            "subject": {
+                                "type": "string",
+                                "description": "Message subject"
+                            },
+                            "markdown": {
+                                "type": "string",
+                                "description": "##Markdown message"
+                            },
+                            "lang": {
+                                "type": "string",
+                                "description": "en"
+                            },
+                            "body": {
+                                "type": "string",
+                                "description": "Message body"
+                            }
+                        }
+                    }
+                },
+                "example": {
+                    "message": {
+                        "subject": "Greeting",
+                        "markdown": "##Hello world",
+                        "lang": "en",
+                        "body": "Hello world"
+                    }
+                },
+                "description": "Message creation data"
+            },
+            "Message": {
+                "type": "object",
+                "title": "Message",
+                "properties": {
+                    "subject": {
+                        "type": "string",
+                        "description": "The subject"
+                    },
+                    "markdown": {
+                        "type": "string",
+                        "description": "##The markdown content"
+                    },
+                    "lang": {
+                        "type": "string",
+                        "description": "en"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The identifier"
+                    },
+                    "from": {
+                        "type": "string",
+                        "description": "The message sender"
+                    },
+                    "datetime": {
+                        "type": "string",
+                        "description": "The creation datetime"
+                    },
+                    "body": {
+                        "type": "string",
+                        "description": "The body"
+                    },
+                    "attachments": {
+                        "type": "object",
+                        "description": "The attachments"
+                    }
+                },
+                "example": {
+                    "subject": "",
+                    "markdown": "##Hello BOB",
+                    "lang": "en",
+                    "id": "web_5ed74032-2b8c-48c0-8e4b-414da884c7c71",
+                    "from": "59f1ecc4ea84f9b5c339958d",
+                    "datetime": "2018-08-23T08:52:04.001535Z",
+                    "body": "Hello BOB",
+                    "attachments": {}
+                },
+                "description": "A message"
+            },
+            "Connections": {
+                "type": "object",
+                "title": "Connections",
+                "properties": {
+                    "items": {
+                        "$ref": "#/components/schemas/Connection"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {}
+                    }
+                },
+                "description": "All connections for a specific user"
+            },
+            "ConnectionCreateResponse": {
+                "type": "object",
+                "title": "ConnectionCreateResponse",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "required": [
+                            "id",
+                            "resource",
+                            "callback_url"
+                        ],
+                        "properties": {
+                            "resource": {
+                                "type": "string",
+                                "description": "The client resource"
+                            },
+                            "id": {
+                                "type": "string",
+                                "description": "The connection identifier"
+                            },
+                            "callback_url": {
+                                "type": "string",
+                                "description": "The app webhook"
+                            }
+                        }
+                    }
+                },
+                "example": {
+                    "data": {
+                        "resource": "s2s_1533285965700317606",
+                        "id": "a8c152dc-96f9-11e8-b33d-00146c8c2dd7",
+                        "callback_url": "https://thirdpartyapp.com/api"
+                    }
+                },
+                "description": "Creation crreate response data"
+            },
+            "ConnectionCreate": {
+                "type": "object",
+                "title": "ConnectionCreate",
+                "required": [
+                    "connection"
+                ],
+                "properties": {
+                    "connection": {
+                        "$ref": "#/components/schemas/Connection"
+                    }
+                },
+                "example": {
+                    "connection": {
+                        "resource": "s2s_1533285965700317606",
+                        "callback_url": "https://thirdpartyapp.com/api"
+                    }
+                },
+                "description": "Connection creation data"
+            },
+            "Connection": {
+                "type": "object",
+                "title": "Connection",
+                "required": [
+                    "callback_url"
+                ],
+                "properties": {
+                    "resource": {
+                        "type": "string",
+                        "description": "The client resource"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The connection identifier"
+                    },
+                    "callback_url": {
+                        "type": "string",
+                        "description": "The app webhook"
+                    }
+                },
+                "example": {
+                    "resource": "s2s_1533285965700317606",
+                    "id": "a8c152dc-96f9-11e8-b33d-00146c8c2dd7",
+                    "callback_url": "https://thirdpartyapp.com/api"
+                },
+                "description": "A S2S client connection"
+            }
+        }
+    }
+}

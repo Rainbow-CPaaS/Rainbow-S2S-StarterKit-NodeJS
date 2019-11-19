@@ -1,0 +1,207 @@
+'use strict';
+
+const S2sSdk = require('../../Rainbow-S2S-StarterKit-NodeJS');
+const sdkConfig = require('./config/sdkConfig.json');
+
+let cmdLineArgs = require('node-getopt').create([
+        ['L', 'protocol=ARG', 'http protocol [http or https]'],
+        ['L', 'port=ARG', 'http port'],
+        ['L', 'jwt=ARG', 'json web token for authentication'],
+        ['h', 'help', 'display this help'],
+        ['v', 'version', 'show version']
+    ]) // create Getopt instance
+    .bindHelp() // bind option 'help' to default action
+    .parseSystem(); // parse command line
+
+console.log(cmdLineArgs.options);
+
+const myS2sSdk = new S2sSdk(sdkConfig);
+(async() => {
+    try {
+        await myS2sSdk.start().then((data) => {
+        }).catch((e) => {
+            console.error(e);
+            myS2sSdk.stop();
+        });
+    } catch (ex) {
+        console.log(ex);
+    }
+})();
+myS2sSdk.events.on('rainbow_onmessageserverreceiptreceived', (data) => {
+    console.log('test : rainbow_onmessageserverreceiptreceived : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onmessagereceiptreceived', (data) => {
+    console.log('test : rainbow_onmessagereceiptreceived : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onmessagereceiptreadreceived', (data) => {
+    console.log('test : rainbow_onmessagereceiptreadreceived : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onmessagereceived', (data) => {
+    console.log('test : rainbow_onmessagereceived : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_oncontactpresencechanged', (data) => {
+    console.log('test : rainbow_oncontactpresencechanged : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onpresencechanged', (data) => {
+    console.log('test : rainbow_onpresencechanged : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onconversationremoved', (data) => {
+    console.log('test : rainbow_onconversationremoved : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onconversationchanged', (data) => {
+    console.log('test : rainbow_onconversationchanged : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onchatstate', (data) => {
+    console.log('test : rainbow_onchatstate : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_oncontactinformationchanged', (data) => {
+    console.log('test : rainbow_oncontactinformationchanged : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onuserinvitereceived', (data) => {
+    console.log('test : rainbow_onuserinvitereceived : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onuserinviteaccepted', (data) => {
+    console.log('test : rainbow_onuserinviteaccepted : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onuserinvitecanceled', (data) => {
+    console.log('test : rainbow_onuserinvitecanceled : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onbubbleaffiliationchanged', (data) => {
+    console.log('test : rainbow_onbubbleaffiliationchanged : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onbubbleownaffiliationchanged', (data) => {
+    console.log('test : rainbow_onbubbleownaffiliationchanged : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onbubbleinvitationreceived', (data) => {
+    console.log('test : rainbow_onbubbleinvitationreceived : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onbubblecustomDatachanged', (data) => {
+    console.log('test : rainbow_onbubblecustomDatachanged : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onbubbletopicchanged', (data) => {
+    console.log('test : rainbow_onbubbletopicchanged : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onbubblenamechanged', (data) => {
+    console.log('test : rainbow_onbubblenamechanged : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_ongroupcreated', (data) => {
+    console.log('test : rainbow_ongroupcreated : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_ongroupdeleted', (data) => {
+    console.log('test : rainbow_ongroupdeleted : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_ongroupupdated', (data) => {
+    console.log('test : rainbow_ongroupupdated : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onuseraddedingroup', (data) => {
+    console.log('test : rainbow_onuseraddedingroup : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onuserremovedfromgroup', (data) => {
+    console.log('test : rainbow_onuserremovedfromgroup : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onstarted', (data) => {
+    console.log('test : rainbow_onstarted : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onstopped', (data) => {
+    console.log('test : rainbow_onstopped : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onready', (data) => {
+    console.log('test : rainbow_onready : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onerror', (data) => {
+    console.log('test : rainbow_onerror : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onconnected', (data) => {
+    console.log('test : rainbow_onconnected : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onconnectionerror', (data) => {
+    console.log('test : rainbow_onconnectionerror : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_ondisconnected', (data) => {
+    console.log('test : rainbow_ondisconnected : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onreconnecting', (data) => {
+    console.log('test : rainbow_onreconnecting : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onfailed', (data) => {
+    console.log('test : rainbow_onfailed : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_oncallupdated', (data) => {
+    console.log('test : rainbow_oncallupdated : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onvoicemessageupdated', (data) => {
+    console.log('test : rainbow_onvoicemessageupdated : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_oncallforwarded', (data) => {
+    console.log('test : rainbow_oncallforwarded : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onchannelmessagereceived', (data) => {
+    console.log('test : rainbow_onchannelmessagereceived : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onchannelmessagedeletedreceived', (data) => {
+    console.log('test : rainbow_onchannelmessagedeletedreceived : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onprofilefeatureupdated', (data) => {
+    console.log('test : rainbow_onprofilefeatureupdated : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onfilecreated', (data) => {
+    console.log('test : rainbow_onfilecreated : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onfileupdated', (data) => {
+    console.log('test : rainbow_onfileupdated : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onfiledeleted', (data) => {
+    console.log('test : rainbow_onfiledeleted : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onthumbnailcreated', (data) => {
+    console.log('test : rainbow_onthumbnailcreated : ' + JSON.stringify(data));
+});
+
+myS2sSdk.events.on('rainbow_onchannelcreated', (data) => {
+    console.log('test : rainbow_onchannelcreated : ' + JSON.stringify(data));
+});
+myS2sSdk.events.on('rainbow_onroommemberreceived', (data) => {
+    console.log('test : rainbow_onroommemberreceived : ' + JSON.stringify(data));
+});
