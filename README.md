@@ -139,7 +139,7 @@ For example when a connected user (for s2s users are bots) recieves a chat messa
 ```
 'use strict';
 
-const S2sSdk = require('Rainbow-S2S-StarterKit-NodeJS');
+const S2sSdk = require('rainbow-s2s-starterkit-nodejs');
 const starterKitConfig = require('./config/myStarterKitProjectConfig.json');
 const myS2sSdk = new S2sSdk(starterKitConfig);
 (async() => {

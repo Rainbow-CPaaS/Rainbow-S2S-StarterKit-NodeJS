@@ -3,18 +3,18 @@
 
 ---
 
-This page recaps all the legals aspects regarding the  S2S Dev Kit for Node.
+This page recaps all the legals aspects regarding the  S2S Starter Kit for Node.
 
 
 ### Beta Disclaimer
 
 ---
 
-Please note that this is a Beta version of the Rainbow  S2S Dev Kit for Node.js which is still undergoing final testing before its official release. The  S2S Dev Kit for Node.js, the application samples and the documentation are provided on a "as is" and "as available" basis. Before releasing the official release, all these content can change depending on the feedback we receive in one hand and the development of the Rainbow official product in the other hand.
+Please note that this is a Beta version of the Rainbow  S2S Starter Kit for Node.js which is still undergoing final testing before its official release. The  S2S Starter Kit for Node.js, the application samples and the documentation are provided on a "as is" and "as available" basis. Before releasing the official release, all these content can change depending on the feedback we receive in one hand and the development of the Rainbow official product in the other hand.
 
-Alcatel-Lucent Enterprise will not be liable for any loss, whether such loss is direct, indirect, special or consequential, suffered by any party as a result of their use of the Rainbow  S2S Dev Kit for Node.js, the application sample software or the documentation content.
+Alcatel-Lucent Enterprise will not be liable for any loss, whether such loss is direct, indirect, special or consequential, suffered by any party as a result of their use of the Rainbow  S2S Starter Kit for Node.js, the application sample software or the documentation content.
 
-If you encounter any bugs, lack of functionality or other problems regarding the Rainbow  S2S Dev Kit for Node.js, the application samples or the documentation, please let us know immediately so we can rectify these accordingly. Your help in this regard is greatly appreciated.
+If you encounter any bugs, lack of functionality or other problems regarding the Rainbow  S2S Starter Kit for Node.js, the application samples or the documentation, please let us know immediately so we can rectify these accordingly. Your help in this regard is greatly appreciated.
 
 
 ### Software License
@@ -49,7 +49,7 @@ If you encounter any bugs, lack of functionality or other problems regarding the
 
 ---
 
-The Rainbow  S2S Dev Kit includes the following third parties libraries:
+The Rainbow  S2S Starter Kit includes the following third parties libraries:
 <br>
 <br>
 

@@ -1,4 +1,4 @@
-# Getting started
+## Getting started
 
 Rainbow S2S (Server to Server) API is a server side REST API that enables user to communicate with rainbow plateform without any GUI.<br>
 The API is intended to be used from backends by bots or agents.<br>
@@ -7,7 +7,7 @@ Rainbow S2S module also provides its RESTful APIs description over openapi stand
 in various languages and hide REST calls by manipulating objects.<br>
 User can directly make REST call to rainbow S2S plateform,in this case he will have to implement callbacks events over webhook (web server that will received POST events messages from rainbow system) or he can use s2s-dev-kit to avoid webhook implementation and direct use of REST protocol.
 
-## Introduction
+### Introduction
 
 The goal of this starter kit is to help user build a Rainbow S2S application or interact with Rainbow system without implementing REST protocol and webhook.</br>
 
@@ -18,9 +18,9 @@ This API are externally generated from swagger definition files and plugged in t
 2. The seconde part is an event chanel based on a webhook mechanism used for notification on Rainbow platform or users changes.<br>
 The event chanel core (event router,event data and its validation process) is also generated appart from swagger file and plugged in the starter kit.
 
-## Main directories and files description
+### Main directories and files description
 
-### Rainbow-S2S-StarterKit-NodeJS clients API directory plugin structure
+#### Rainbow-S2S-StarterKit-NodeJS clients API directory plugin structure
 
 **Rainbow-S2S-StarterKit-NodeJS/modules/sdkkernel/rest/client** is clients API base directory<br>
 
@@ -34,7 +34,7 @@ The event chanel core (event router,event data and its validation process) is al
 
 The hightlited directories are the more important, they have to be filled with the proper generated client API.
 
-### Rainbow-S2S-StarterKit-NodeJS webhook directory structure
+#### Rainbow-S2S-StarterKit-NodeJS webhook directory structure
 
 **Rainbow-S2S-StarterKit-NodeJS/modules/sdkkernel/webhook** is the webhook API base directory<br>
 
@@ -43,9 +43,9 @@ The hightlited directories are the more important, they have to be filled with t
 | (*) Rainbow-S2S-StarterKit-NodeJS/Rainbow-S2S-StarterKit-NodeJS/openapi-specifications/webhook | Directory that must contains webhook swagger definition (openapi-3.0.json).<br>|
 | Rainbow-S2S-StarterKit-NodeJS/modules/sdkkernel/webhook | Contains webhook custom controllers and services implementation.|
 
-## Rainbow-S2S-StarterKit-NodeJS Clients API, webhook generation and swagger definition.
+### Rainbow-S2S-StarterKit-NodeJS Clients API, webhook generation and swagger definition.
 
-### Rainbow-S2S-StarterKit-NodeJS and swagger definitions
+#### Rainbow-S2S-StarterKit-NodeJS and swagger definitions
 
 **A swagger file is an API description format for REST APIs** [https://swagger.io/docs/specification/about/](https://swagger.io/docs/specification/about/ "definition from https://swagger.io website")
 
@@ -70,7 +70,7 @@ The Rainbow-S2S-StarterKit-NodeJS can be used as is ( it already contains necess
 
 Excepte for Rainbow-S2S-StarterKit-NodeJS/openapi-specifications/webhook/openapi-3.0.json, all swagger can be updated from files downloaded from hub.
 
-### Rainbow-S2S-StarterKit-NodeJS client API generation commands
+#### Rainbow-S2S-StarterKit-NodeJS client API generation commands
 
 Rainbow-S2S-StarterKit-NodeJS provides commands for S2S, EndUser and Authentication clients API generation.<br>
 It also provides commands for webhook implementation generation.<br>
@@ -85,14 +85,14 @@ It also provides commands for webhook implementation generation.<br>
 | gen-webhook-swagger |  generates **webhook swagger** definition to be used by webhook implementation (6 in previous table ) |
 | gen-all-client-api |  generates all clients API and webhook from swagger definition (1,2,3,4,5 in previous table ) |
 
-## Rainbow-S2S-StarterKit-NodeJS webhook
+### Rainbow-S2S-StarterKit-NodeJS webhook
 
 One of the main part of Rainbow-S2S-StarterKit-NodeJS, is its webhooks inplementation.<br>
 The webhook is an http server that accept POST requests (as events) from Rainbow plateform in response to Rainbow clients interractions.<br>
 Webhook recieve requests and fires underlining data as events handled by s2s modules.<br>
 For example when a connected user (s2s users are bots) recieves a chat message from a Rainbow client, the message data is POSTED to webhook module and a **rainbow_onmessagereceived event** is fired to a Rainbow-S2S-StarterKit-NodeJS specific service that responds using generated client API).<br>
 
-### Rainbow-S2S-StarterKit-NodeJS webhook s2s events
+#### Rainbow-S2S-StarterKit-NodeJS webhook s2s events
 
 |events|
 |-------------------------------------|
@@ -107,9 +107,9 @@ For example when a connected user (s2s users are bots) recieves a chat message f
 | rainbow_onpresencechanged |
 | rainbow_onroomstate |
 
-## How to use Rainbow-S2S-StarterKit-NodeJS
+### How to use Rainbow-S2S-StarterKit-NodeJS
 
-### Before starting : Create a Rainbow application on the Hub web site
+#### Before starting : Create a Rainbow application on the Hub web site
 ---
 To use the S2S starter kit you need an `applicationID` and a `secretKey` from the [openrainbow hub](https://hub.openrainbow.com/). These information allow you to identify your application and allow you to use the rainbow platform. For more information, see [Applications lifecycle](/#/documentation/doc/hub/application-lifecycle) which explains what is the purpose, how to create an application and how to get the application ID and the secret key.
 
@@ -177,7 +177,7 @@ In configuration file some parameters are related to your credentials and allow 
 ```
 'use strict';
 
-const S2sSdk = require('Rainbow-S2S-StarterKit-NodeJS');
+const S2sSdk = require('rainbow-s2s-starterkit-nodejs');
 const starterKitConfig = require('./config/myStarterKitProjectConfig.json');
 const myS2sSdk = new S2sSdk(starterKitConfig);
 (async() => {

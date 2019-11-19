@@ -1,6 +1,6 @@
 ## Connect to Rainbow
 
-S2S dev kit core engine connects to Rainbow using provided configuration file in json format.
+S2S Starter kit core engine connects to Rainbow using provided configuration file in json format.
 
 Copy Rainbow-S2S-StarterKit-NodeJS/config/StarterKitConfig.json.sample to your project and rename it as you want (for example myStarterKitProjectConfig.json ).
 
@@ -46,15 +46,15 @@ To connect to Rainbow, you first need to initialize the S2S dev kit module - cf.
 ```
 'use strict';
 
-const S2sSdk = require('Rainbow-S2S-StarterKit-NodeJS');
+const S2SStarterKit = require('Rainbow-S2S-StarterKit-NodeJS');
 const starterKitConfig = require('./config/myStarterKitProjectConfig.json');
-const myS2sSdk = new S2sSdk(starterKitConfig);
+const myS2SStarterKit = new S2SStarterKit(starterKitConfig);
 (async() => {
     try {
-        await myS2sSdk.start().then((data) => { // when start method is called, the S2S dev kit core engine connects to rainbow 
+        await myS2SStarterKit.start().then((data) => { // when start method is called, the S2S dev kit core engine connects to rainbow 
         }).catch((e) => {
             console.error(e);
-            myS2sSdk.stop();
+            myS2SStarterKit.stop();
         });
     } catch (ex) {
         console.log(ex);

@@ -5,7 +5,7 @@
     - Connecting to Rainbow: "ref:doc/sdk/s2s-dev-kit/guides/Connecting_to_Rainbow.md"
     - Development Kit: "ref:doc/sdk/s2s-dev-kit/guides/Development_Kit.md"
     - Legals: "ref:doc/sdk/s2s-dev-kit/guides/Legals.md"
-- S2S DEV KIT SERVICES:
+- S2S STARTER KIT SERVICES:
     - BotsService: "ref:doc/sdk/s2s-dev-kit/services/BotsService.md"
     - ImService: "ref:doc/sdk/s2s-dev-kit/services/ImService.md"
     - PresenceService: "ref:doc/sdk/s2s-dev-kit/services/PresenceService.md"
