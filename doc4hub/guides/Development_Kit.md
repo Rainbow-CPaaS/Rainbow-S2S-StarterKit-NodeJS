@@ -12,7 +12,7 @@ The Rainbow S2S Starter Kit contains:
 
 ---
 
-The Rainbow S2S Starter Kit is available from Github. See the [Getting started](/#/documentation/doc/sdk/s2s-dev-kit/guides/Getting_Started) guide to understand how to load it.
+The Rainbow S2S Starter Kit is available from Github. See the [Getting started](/#/documentation/doc/sdk/s2s-starterkit-nodejs/guides/Getting_Started) guide to understand how to load it.
 
 
 ### Appplications samples

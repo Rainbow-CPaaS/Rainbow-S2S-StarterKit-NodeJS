@@ -8,7 +8,7 @@ const path = require('path');
 const hostname = 'https://@hub_fqdn@';
 const pathPrefix = '/#/documentation/';
 
-let docDir = `${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-dev-kit`;
+let docDir = `${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-starterkit-nodejs`;
 
 let appendUrl = function (obj, stack, cb) {
     for (var property in obj) {

@@ -42,7 +42,7 @@ In configuration file some parameters are related to your credentials and allow 
 
 ### Connecting to Rainbow
 ---
-To connect to Rainbow, you first need to initialize the S2S dev kit module - cf. [Getting Started](/#/documentation/doc/sdk/s2s-dev-kit/guides/Getting_Started)
+To connect to Rainbow, you first need to initialize the S2S Starter kit module - cf. [Getting Started](/#/documentation/doc/sdk/s2s-starterkit-nodejs/guides/Getting_Started)
 ```
 'use strict';
 

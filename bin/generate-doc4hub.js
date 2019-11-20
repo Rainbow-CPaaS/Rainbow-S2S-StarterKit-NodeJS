@@ -31,16 +31,16 @@ var createDirectory = (destdirectory) => {
 var destdirectories = [
 	`${__dirname}${path.sep}..${path.sep}doc`,
 	`${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk`,
-	`${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-dev-kit`,
-//	`${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-dev-kit${path.sep}guides`,
-//	`${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-dev-kit${path.sep}services`,
-	`${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-dev-kit${path.sep}api`
+	`${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-starterkit-nodejs`,
+//	`${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-starterkit-nodejs${path.sep}guides`,
+//	`${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-starterkit-nodejs${path.sep}services`,
+	`${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-starterkit-nodejs${path.sep}api`
 ];
 
 var dir2copyParams = [
-	{src:`${__dirname}${path.sep}..${path.sep}doc4hub`,dest:`${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-dev-kit${path.sep}`},
-	//{src:`${__dirname}${path.sep}..${path.sep}doc4hub${path.sep}services${path.sep}*`,dest:`${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-dev-kit${path.sep}services`},
-	{src:`${__dirname}${path.sep}..${path.sep}modules${path.sep}sdkkernel${path.sep}rest${path.sep}client${path.sep}s2s${path.sep}/docs`,dest:`${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-dev-kit${path.sep}api`},
+	{src:`${__dirname}${path.sep}..${path.sep}doc4hub`,dest:`${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-starterkit-nodejs${path.sep}`},
+	//{src:`${__dirname}${path.sep}..${path.sep}doc4hub${path.sep}services${path.sep}*`,dest:`${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-starterkit-nodejs${path.sep}services`},
+	{src:`${__dirname}${path.sep}..${path.sep}modules${path.sep}sdkkernel${path.sep}rest${path.sep}client${path.sep}s2s${path.sep}/docs`,dest:`${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-starterkit-nodejs${path.sep}api`},
 ];
 for(var idx in destdirectories){
 	createDirectory(destdirectories[idx]);

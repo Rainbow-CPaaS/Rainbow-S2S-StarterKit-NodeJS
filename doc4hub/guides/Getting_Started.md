@@ -5,7 +5,7 @@ The API is intended to be used from backends by bots or agents.<br>
 For the first step, S2S API provides chat and presence communication features between server side programm and users or group of users via bubbles.<br>
 Rainbow S2S module also provides its RESTful APIs description over openapi standard (via swagger files [openapi.yaml ou openapi.json]) so user can generates clients inplementation
 in various languages and hide REST calls by manipulating objects.<br>
-User can directly make REST call to rainbow S2S plateform,in this case he will have to implement callbacks events over webhook (web server that will received POST events messages from rainbow system) or he can use s2s-dev-kit to avoid webhook implementation and direct use of REST protocol.
+User can directly make REST call to rainbow S2S plateform,in this case he will have to implement callbacks events over webhook (web server that will received POST events messages from rainbow system) or he can use Rainbow-S2S-StarterKit-NodeJS to avoid webhook implementation and direct use of REST protocol.
 
 ### Introduction
 
