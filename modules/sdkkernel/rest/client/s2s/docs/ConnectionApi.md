@@ -1,6 +1,6 @@
 # S2SApi.ConnectionApi
 
-All URIs are relative to *http://localhost:4000*
+All URIs are relative to *http://openrainbow.com:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 Create a new user connection
 
-Create a new user connection
+Create a new user connection. NOTE: If a connection with a same &#39;resource&#39; or &#39;callback_url&#39; already exists for a given user, this connection is reused. In such a case, the &#39;callback_url&#39; may be updated
 
 ### Example
 
@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: */*
+- **Accept**: application/json
 
 
 ## connectionDelete
@@ -158,7 +158,7 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 
 ## connectionShow
@@ -209,5 +209,5 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 

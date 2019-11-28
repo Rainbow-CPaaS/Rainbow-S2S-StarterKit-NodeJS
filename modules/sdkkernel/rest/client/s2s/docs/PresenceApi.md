@@ -1,6 +1,6 @@
 # S2SApi.PresenceApi
 
-All URIs are relative to *http://localhost:4000*
+All URIs are relative to *http://openrainbow.com:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -59,7 +59,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 
 ## presenceUpdate

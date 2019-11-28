@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**emails** | [**[UpdateContactSuccessEmails]**](UpdateContactSuccessEmails.md) | Contact emails | 
+**id** | **String** | Contact unique identifier | 
+**contactId** | **String** | Id of the contact coming from the source who created it | 
 **firstName** | **String** | Contact firstName | 
 **lastName** | **String** | Contact lastName | 
-**addresses** | [**[UpdateContactSuccessAddresses]**](UpdateContactSuccessAddresses.md) | Contact addresses | 
-**contactId** | **String** | Id of the contact coming from the source who created it | 
 **displayName** | **String** | Contact displayName | 
-**otherData** | [**[UpdateContactSuccessOtherData]**](UpdateContactSuccessOtherData.md) | Other user data – may include birthday date, Skype/Facebook pseudo/profile | 
-**jobTitle** | **String** | Contact jobTitle | 
-**groups** | **[String]** | Contact groups type | 
 **company** | **String** | Contact company | 
-**id** | **String** | Contact unique identifier | 
+**jobTitle** | **String** | Contact jobTitle | 
 **phoneNumbers** | [**[UpdateContactSuccessPhoneNumbers]**](UpdateContactSuccessPhoneNumbers.md) | Contact phone numbers | 
+**emails** | [**[UpdateContactSuccessEmails]**](UpdateContactSuccessEmails.md) | Contact emails | 
+**addresses** | [**[UpdateContactSuccessAddresses]**](UpdateContactSuccessAddresses.md) | Contact addresses | 
+**groups** | **[String]** | Contact groups type | 
+**otherData** | [**[UpdateContactSuccessOtherData]**](UpdateContactSuccessOtherData.md) | Other user data – may include birthday date, Skype/Facebook pseudo/profile | 
 
 

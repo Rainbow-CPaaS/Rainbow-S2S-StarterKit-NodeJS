@@ -1,6 +1,6 @@
-# RainbowAuthentPortal.AuthenticationApi
+# RainbowAuthenticationPortal.AuthenticationApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://openrainbow.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -22,15 +22,15 @@ This API allows to get a validation status on a token.
 ### Example
 
 ```javascript
-var RainbowAuthentPortal = require('rainbow_authent_portal');
-var defaultClient = RainbowAuthentPortal.ApiClient.instance;
+var RainbowAuthenticationPortal = require('rainbow_authentication_portal');
+var defaultClient = RainbowAuthenticationPortal.ApiClient.instance;
 // Configure API key authorization: Bearer
 var Bearer = defaultClient.authentications['Bearer'];
 Bearer.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //Bearer.apiKeyPrefix = 'Token';
 
-var apiInstance = new RainbowAuthentPortal.AuthenticationApi();
+var apiInstance = new RainbowAuthenticationPortal.AuthenticationApi();
 var accept = "accept_example"; // String | application/json
 apiInstance.getApiRainbowAuthenticationV10Validator(accept).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -64,26 +64,30 @@ Name | Type | Description  | Notes
 
 ## getBasicLogin
 
-> GetBasicLoginSuccess getBasicLogin(authorization, xRainbowAppAuth, accept, opts)
+> GetBasicLoginSuccess getBasicLogin(xRainbowAppAuth, accept, opts)
 
 Login user
 
-This API allows Rainbow users to login.       Application is also authenticated during the user login.       If login is successful, the API returns a **JSON Web Token** (JWT) which has to be provided by clients for all Rainbow APIs requiring user authentication:   * The JWT is valid only for a given time period. * The JWT can be renewed a few times using API [GET /api/rainbow/authentication/v1.0/renew][0]. * The maximum number of renew is given in the JWT payload, as well as the current number of time the token has been renewed (see below). * Once the JWT expired, or if the maximum of token renew has been reached, user must login again using this API.  The JWT returned contains the following data in payload:        &#x60;&#x60;&#x60;json {       \&quot;countRenewed\&quot;: 0,  // Number of times the token has been renewed       \&quot;maxTokenRenew\&quot;: 5,  // Number of times the token can be renewed       \&quot;user\&quot;: {           \&quot;id\&quot;: \&quot;572756967bfbca0d0e09a6b4\&quot;,  // Logged in user id           \&quot;loginEmail\&quot;: \&quot;user@company.com\&quot;  // Logged in user loginEmail       },       \&quot;app\&quot;: {           \&quot;id\&quot;: \&quot;598983029db9b5b14693a6f0\&quot;,  // Application id used for the authentication           \&quot;name\&quot;: \&quot;My App\&quot;  // Application name       },       \&quot;iat\&quot;: 1463588327,  // (Issued At) Time at which the JWT was issued       \&quot;exp\&quot;: 2183588327  // (Expiration Time) Expiration time after which the JWT won&#39;t be accepted } &#x60;&#x60;&#x60;       If login / password combination is wrong, an error 401 is return.    If appId / appSecret combination is wrong, an error 401 is return.    The following login protection is implemented:   * After a given number of login failure (5 by default), the user account is **locked** for a given time period (60 min by default). * As long as the maximum number of login failure has not been reached, a 401 error with errorDetailsCode &#x60;401500&#x60; is returned. * Once the maximum number of login attempts has been reached, a 401 error with errorDetailsCode &#x60;401501&#x60; is returned: the user account is locked for the given time period. * While the user account is locked, the same response with errorDetailsCode &#x60;401501&#x60; will be returned for each new login attempt for this user account (even if a good login / password combination is provided). If the login / password combination is wrong, the locked time period restarts from this new wrong attempt. * Once the locked time period is over, a login with the good credentials will be allowed. * While the account is locked, the user can reset his password. In that case, his account will be unlocked and he will be able to login with his new password. * While the account is locked, a superadmin / support / admin (organisation or company level) user can set a new password for this account. In that case, this account will be unlocked and the user will be able to login with this new password.  - Warning login url is case sensitive (lowercase). For example, /Login or /LOGIN won&#39;t work.login will be forbidden for a certain delay if too much consecutive wrong password errors occurs, after this user has to request a password change or just wait (see implementation details above).   [0]: #api-authentication-GetRenew
+This API allows Rainbow users to login. &lt;br/&gt; &lt;br/&gt; Application is also authenticated during the user login. &lt;br/&gt; &lt;br/&gt; If login is successful, the API returns a &lt;b&gt;JSON Web Token&lt;/b&gt; (&lt;abbr title&#x3D;\&quot;JSON Web Token\&quot;&gt;JWT&lt;/abbr&gt;) which has to be provided by clients for all Rainbow APIs requiring user authentication: &lt;ul&gt;     &lt;li&gt;The JWT is valid only for a given time period.&lt;/li&gt;     &lt;li&gt;The JWT can be renewed a few times using API &lt;a href&#x3D;\&quot;#api-authentication-GetRenew\&quot;&gt;GET /api/rainbow/authentication/v1.0/renew&lt;/a&gt;.&lt;/li&gt;     &lt;li&gt;The maximum number of renew is given in the JWT payload, as well as the current number of time the token has been renewed (see below).&lt;/li&gt;     &lt;li&gt;Once the JWT expired, or if the maximum of token renew has been reached, user must login again using this API.&lt;/li&gt; &lt;/ul&gt; The JWT returned contains the following data in payload: &lt;pre&gt;&lt;code class&#x3D;\&quot;language-json\&quot;&gt;{       \&quot;countRenewed\&quot;: 0,  // Number of times the token has been renewed       \&quot;maxTokenRenew\&quot;: 5,  // Number of times the token can be renewed       \&quot;user\&quot;: {           \&quot;id\&quot;: \&quot;572756967bfbca0d0e09a6b4\&quot;,  // Logged in user id           \&quot;loginEmail\&quot;: \&quot;user@company.com\&quot;  // Logged in user loginEmail       },       \&quot;app\&quot;: {           \&quot;id\&quot;: \&quot;598983029db9b5b14693a6f0\&quot;,  // Application id used for the authentication           \&quot;name\&quot;: \&quot;My App\&quot;  // Application name       },       \&quot;iat\&quot;: 1463588327,  // (Issued At) Time at which the JWT was issued       \&quot;exp\&quot;: 2183588327  // (Expiration Time) Expiration time after which the JWT won&#39;t be accepted }&lt;/code&gt;&lt;/pre&gt; &lt;br/&gt; &lt;br/&gt; If login / password combination is wrong, an error 401 is return. &lt;br/&gt; If appId / appSecret combination is wrong, an error 401 is return. &lt;br/&gt;The following login protection is implemented: &lt;ul&gt;     &lt;li&gt;After a given number of login failure (5 by default), the user account is &lt;b&gt;locked&lt;/b&gt; for a given time period (60 min by default).&lt;/li&gt;     &lt;li&gt;As long as the maximum number of login failure has not been reached, a 401 error with errorDetailsCode &lt;code&gt;401500&lt;/code&gt; is returned.&lt;/li&gt;     &lt;li&gt;Once the maximum number of login attempts has been reached, a 401 error with errorDetailsCode &lt;code&gt;401501&lt;/code&gt; is returned: the user account is locked for the given time period.&lt;/li&gt;     &lt;li&gt;While the user account is locked, the same response with errorDetailsCode &lt;code&gt;401501&lt;/code&gt; will be returned for each new login attempt for this user account     (even if a good login / password combination is provided). If the login / password combination is wrong, the locked time period restarts from this new wrong attempt.&lt;/li&gt;     &lt;li&gt;Once the locked time period is over, a login with the good credentials will be allowed.&lt;/li&gt;     &lt;li&gt;While the account is locked, the user can reset his password. In that case, his account will be unlocked and he will be able to login with his new password.&lt;/li&gt;     &lt;li&gt;While the account is locked, a superadmin / support / admin (organisation or company level) user can set a new password for this account. In that case, this account will be unlocked     and the user will be able to login with this new password.&lt;/li&gt; &lt;/ul&gt; &lt;dl&gt;     &lt;dt&gt;Warning&lt;/dt&gt;     &lt;dd&gt;login url is case sensitive (lowercase). For example, /Login or /LOGIN won&#39;t work.&lt;/dd&gt;     &lt;dd&gt;login will be forbidden for a certain delay if too much consecutive wrong password errors occurs, after this user has to request a password change or just wait (see implementation details above).&lt;/dd&gt; &lt;/dl&gt; &lt;br/&gt;
 
 ### Example
 
 ```javascript
-var RainbowAuthentPortal = require('rainbow_authent_portal');
+var RainbowAuthenticationPortal = require('rainbow_authentication_portal');
+var defaultClient = RainbowAuthenticationPortal.ApiClient.instance;
+// Configure HTTP basic authorization: Basic
+var Basic = defaultClient.authentications['Basic'];
+Basic.username = 'YOUR USERNAME';
+Basic.password = 'YOUR PASSWORD';
 
-var apiInstance = new RainbowAuthentPortal.AuthenticationApi();
-var authorization = "authorization_example"; // String | Basic <base64encode(userLogin:userPassword)>
+var apiInstance = new RainbowAuthenticationPortal.AuthenticationApi();
 var xRainbowAppAuth = "xRainbowAppAuth_example"; // String | Basic <base64encode(appId:sha256(appSecretuserPassword))> (concatenation of appSecret and userPassword, hashed with sha256)
 var accept = "accept_example"; // String | application/json
 var opts = {
   'xRainbowClient': "xRainbowClient_example", // String | the app used
   'xRainbowClientVersion': "xRainbowClientVersion_example" // String | 1.10.7
 };
-apiInstance.getBasicLogin(authorization, xRainbowAppAuth, accept, opts).then(function(data) {
+apiInstance.getBasicLogin(xRainbowAppAuth, accept, opts).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -97,7 +101,6 @@ apiInstance.getBasicLogin(authorization, xRainbowAppAuth, accept, opts).then(fun
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **String**| Basic &lt;base64encode(userLogin:userPassword)&gt; | 
  **xRainbowAppAuth** | **String**| Basic &lt;base64encode(appId:sha256(appSecretuserPassword))&gt; (concatenation of appSecret and userPassword, hashed with sha256) | 
  **accept** | **String**| application/json | 
  **xRainbowClient** | **String**| the app used | [optional] 
@@ -109,7 +112,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[Basic](../README.md#Basic)
 
 ### HTTP request headers
 
@@ -126,15 +129,15 @@ Logout user
 ### Example
 
 ```javascript
-var RainbowAuthentPortal = require('rainbow_authent_portal');
-var defaultClient = RainbowAuthentPortal.ApiClient.instance;
+var RainbowAuthenticationPortal = require('rainbow_authentication_portal');
+var defaultClient = RainbowAuthenticationPortal.ApiClient.instance;
 // Configure API key authorization: Bearer
 var Bearer = defaultClient.authentications['Bearer'];
 Bearer.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //Bearer.apiKeyPrefix = 'Token';
 
-var apiInstance = new RainbowAuthentPortal.AuthenticationApi();
+var apiInstance = new RainbowAuthenticationPortal.AuthenticationApi();
 var accept = "accept_example"; // String | application/json
 apiInstance.getLogout(accept).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
@@ -172,20 +175,20 @@ Name | Type | Description  | Notes
 
 Renew user JWT
 
-This API allows Rainbow users to renew their JSON Web Token (JWT), thus extending the expiration date of their current JWT.       This API requires user to be authenticated with a valid non expired JWT.    If so, a new JWT is returned, with the expiration date starting from now.       **Warning:** The JWT can only be renewed a given number of times, after this user has to login again to get a new token using API [GET /api/rainbow/authentication/v1.0/login][0].    The maximum number of renew is given in the JWT, as well as the current number of time the token has been renewed.  [0]: #api-authentication-GetLogin
+This API allows Rainbow users to renew their JSON Web Token (&lt;abbr title&#x3D;\&quot;JSON Web Token\&quot;&gt;JWT&lt;/abbr&gt;), thus extending the expiration date of their current JWT. &lt;br/&gt; &lt;br/&gt; This API requires user to be authenticated with a valid non expired JWT. &lt;br/&gt; If so, a new JWT is returned, with the expiration date starting from now. &lt;br/&gt; &lt;br/&gt; &lt;b&gt;Warning:&lt;/b&gt; The JWT can only be renewed a given number of times, after this user has to login again to get a new token using API &lt;a href&#x3D;\&quot;#api-authentication-GetLogin\&quot;&gt;GET /api/rainbow/authentication/v1.0/login&lt;/a&gt;. &lt;br/&gt; The maximum number of renew is given in the JWT, as well as the current number of time the token has been renewed.
 
 ### Example
 
 ```javascript
-var RainbowAuthentPortal = require('rainbow_authent_portal');
-var defaultClient = RainbowAuthentPortal.ApiClient.instance;
+var RainbowAuthenticationPortal = require('rainbow_authentication_portal');
+var defaultClient = RainbowAuthenticationPortal.ApiClient.instance;
 // Configure API key authorization: Bearer
 var Bearer = defaultClient.authentications['Bearer'];
 Bearer.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //Bearer.apiKeyPrefix = 'Token';
 
-var apiInstance = new RainbowAuthentPortal.AuthenticationApi();
+var apiInstance = new RainbowAuthenticationPortal.AuthenticationApi();
 var accept = "accept_example"; // String | application/json
 apiInstance.getRenew(accept).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);

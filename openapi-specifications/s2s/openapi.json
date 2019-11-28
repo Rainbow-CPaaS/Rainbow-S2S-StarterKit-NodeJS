@@ -7,16 +7,14 @@
                     "Connection"
                 ],
                 "summary": "Get the data of a connection",
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
+                "security": [{
+                    "Bearer": []
+                }],
                 "responses": {
                     "200": {
                         "description": "Ok",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Connection"
                                 }
@@ -24,17 +22,15 @@
                         }
                     }
                 },
-                "parameters": [
-                    {
-                        "required": true,
-                        "name": "id",
-                        "in": "path",
-                        "description": "Connection id",
-                        "schema": {
-                            "type": "string"
-                        }
+                "parameters": [{
+                    "required": true,
+                    "name": "id",
+                    "in": "path",
+                    "description": "Connection id",
+                    "schema": {
+                        "type": "string"
                     }
-                ],
+                }],
                 "operationId": "Connection.show",
                 "description": "Get the data of a connection"
             },
@@ -43,27 +39,23 @@
                     "Connection"
                 ],
                 "summary": "Delete a connection",
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
+                "security": [{
+                    "Bearer": []
+                }],
                 "responses": {
                     "204": {
                         "description": "No Content"
                     }
                 },
-                "parameters": [
-                    {
-                        "required": true,
-                        "name": "id",
-                        "in": "path",
-                        "description": "Connection id",
-                        "schema": {
-                            "type": "string"
-                        }
+                "parameters": [{
+                    "required": true,
+                    "name": "id",
+                    "in": "path",
+                    "description": "Connection id",
+                    "schema": {
+                        "type": "string"
                     }
-                ],
+                }],
                 "operationId": "Connection.delete",
                 "description": "Delete a connection"
             }
@@ -74,16 +66,14 @@
                     "Room"
                 ],
                 "summary": "Join a room",
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
+                "security": [{
+                    "Bearer": []
+                }],
                 "responses": {
                     "200": {
                         "description": "Ok",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/RoomStatus"
                                 }
@@ -91,8 +81,7 @@
                         }
                     }
                 },
-                "parameters": [
-                    {
+                "parameters": [{
                         "required": true,
                         "name": "cnxId",
                         "in": "path",
@@ -121,16 +110,14 @@
                     "Presence"
                 ],
                 "summary": "Probe a user's presence",
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
+                "security": [{
+                    "Bearer": []
+                }],
                 "responses": {
                     "200": {
                         "description": "Ok",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Presence"
                                 }
@@ -138,8 +125,7 @@
                         }
                     }
                 },
-                "parameters": [
-                    {
+                "parameters": [{
                         "required": true,
                         "name": "cnxId",
                         "in": "path",
@@ -168,27 +154,23 @@
                     "Presence"
                 ],
                 "summary": "Set the user's presence",
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
+                "security": [{
+                    "Bearer": []
+                }],
                 "responses": {
                     "202": {
                         "description": "Accepted"
                     }
                 },
-                "parameters": [
-                    {
-                        "required": true,
-                        "name": "cnxId",
-                        "in": "path",
-                        "description": "Connection id",
-                        "schema": {
-                            "type": "string"
-                        }
+                "parameters": [{
+                    "required": true,
+                    "name": "cnxId",
+                    "in": "path",
+                    "description": "Connection id",
+                    "schema": {
+                        "type": "string"
                     }
-                ],
+                }],
                 "operationId": "Presence.update",
                 "description": "A user presence preference could be managed with the following API :\n\n**/api/rainbow/enduser/v1.0/users/{userId}/settings**\n\nThe mapping between this presence setting and the **show/status** fields of the presence stanza is show here :\n\n| setting   | show | status    |\n| --------- | ---- | --------- |\n| away      | xa   | away      |\n| invisible | xa   | n/a       | \n| dnd       | dnd  | n/a       | \n| online    | n/a  | mode=auto | \n\nMoreover, the Rainbow webclient sends presence stanzas with the following **show/status** fields to show user (keyboard/focus) state :\n\n| state    | show | status |\n| -------- | ---- | ------ |\n| inactive | away | n/a    |\n| active   | n/a  | n/a    |\n",
                 "requestBody": {
@@ -203,24 +185,103 @@
                 }
             }
         },
+        "/api/rainbow/ucs/v1.0/connections/{cnxId}/conversations/{id}": {
+            "get": {
+                "tags": [
+                    "Conversation"
+                ],
+                "summary": "Get a conversation",
+                "security": [{
+                    "Bearer": []
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Conversation"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "parameters": [{
+                        "required": true,
+                        "name": "cnxId",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "required": true,
+                        "name": "id",
+                        "in": "path",
+                        "description": "Conversation id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "operationId": "Conversation.show",
+                "description": "Get a conversation"
+            },
+            "delete": {
+                "tags": [
+                    "Conversation"
+                ],
+                "summary": "Delete a conversation",
+                "security": [{
+                    "Bearer": []
+                }],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                },
+                "parameters": [{
+                        "required": true,
+                        "name": "cnxId",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "required": true,
+                        "name": "id",
+                        "in": "path",
+                        "description": "Conversation id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "operationId": "Conversation.delete",
+                "description": "Delete a conversation"
+            }
+        },
         "/api/rainbow/ucs/v1.0/connections/{cnxId}/conversations/{cvId}/messages/{id}/received": {
             "put": {
                 "tags": [
                     "Message"
                 ],
                 "summary": "Send a received receipt",
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
+                "security": [{
+                    "Bearer": []
+                }],
                 "responses": {
                     "202": {
                         "description": "Accepted"
                     }
                 },
-                "parameters": [
-                    {
+                "parameters": [{
                         "required": true,
                         "name": "cnxId",
                         "in": "path",
@@ -258,18 +319,15 @@
                     "Message"
                 ],
                 "summary": "Send a read receipt",
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
+                "security": [{
+                    "Bearer": []
+                }],
                 "responses": {
                     "202": {
                         "description": "Accepted"
                     }
                 },
-                "parameters": [
-                    {
+                "parameters": [{
                         "required": true,
                         "name": "cnxId",
                         "in": "path",
@@ -307,11 +365,9 @@
                     "Message"
                 ],
                 "summary": "Send a new message",
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
+                "security": [{
+                    "Bearer": []
+                }],
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -324,8 +380,7 @@
                         }
                     }
                 },
-                "parameters": [
-                    {
+                "parameters": [{
                         "required": true,
                         "name": "cnxId",
                         "in": "path",
@@ -345,7 +400,7 @@
                     }
                 ],
                 "operationId": "Message.create",
-                "description": "Send a new message",
+                "description": "Send a new message to a recipient identified by a conversation Id.\n**Caution**: prior to sending a message to a room, you will have to 'join' it",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -362,16 +417,14 @@
                     "Message"
                 ],
                 "summary": "List the messages of a conversation",
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
+                "security": [{
+                    "Bearer": []
+                }],
                 "responses": {
                     "200": {
                         "description": "Ok",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Messages"
                                 }
@@ -379,8 +432,7 @@
                         }
                     }
                 },
-                "parameters": [
-                    {
+                "parameters": [{
                         "required": true,
                         "name": "cnxId",
                         "in": "path",
@@ -409,21 +461,21 @@
                     "Conversation"
                 ],
                 "summary": "Send a chat state",
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
+                "security": [{
+                    "Bearer": []
+                }],
                 "responses": {
                     "202": {
                         "description": "Accepted"
+                    },
+                    "400": {
+                        "description": "Bad Request"
                     },
                     "404": {
                         "description": "Not Found"
                     }
                 },
-                "parameters": [
-                    {
+                "parameters": [{
                         "required": true,
                         "name": "cnxId",
                         "in": "path",
@@ -462,22 +514,102 @@
                 "description": "Send a conversation state"
             }
         },
+        "/api/rainbow/ucs/v1.0/connections/{cnxId}/conversations": {
+            "post": {
+                "tags": [
+                    "Conversation"
+                ],
+                "summary": "Create a conversation",
+                "security": [{
+                    "Bearer": []
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Conversation"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "parameters": [{
+                    "required": true,
+                    "name": "cnxId",
+                    "in": "path",
+                    "description": "Connection id",
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "operationId": "Conversation.create",
+                "description": "Create a conversation",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ConversationCreate"
+                            }
+                        }
+                    },
+                    "description": "Conversation data"
+                }
+            },
+            "get": {
+                "tags": [
+                    "Conversation"
+                ],
+                "summary": "Get all conversations",
+                "security": [{
+                    "Bearer": []
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Conversations"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "parameters": [{
+                    "required": true,
+                    "name": "cnxId",
+                    "in": "path",
+                    "description": "Connection id",
+                    "schema": {
+                        "type": "string"
+                    }
+                }],
+                "operationId": "Conversation.index",
+                "description": "Get all conversations"
+            }
+        },
         "/api/rainbow/ucs/v1.0/connections": {
             "post": {
                 "tags": [
                     "Connection"
                 ],
                 "summary": "Create a new user connection",
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
+                "security": [{
+                    "Bearer": []
+                }],
                 "responses": {
                     "201": {
                         "description": "Created",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ConnectionCreateResponse"
                                 }
@@ -486,7 +618,7 @@
                     }
                 },
                 "operationId": "Connection.create",
-                "description": "Create a new user connection",
+                "description": "Create a new user connection.\nNOTE: If a connection with a same 'resource' or 'callback_url' already exists for a given user,\nthis connection is reused. In such a case, the 'callback_url' may be updated",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -526,6 +658,7 @@
                                                                 "type": "string",
                                                                 "enum": [
                                                                     "ready",
+                                                                    "unavailable",
                                                                     "terminated"
                                                                 ]
                                                             }
@@ -580,6 +713,11 @@
                                                             "from": {
                                                                 "type": "string",
                                                                 "example": "59f1ecc4ea84f9b5c339958d"
+                                                            },
+                                                            "resource": {
+                                                                "type": "string",
+                                                                "description": "the presence emitting resource",
+                                                                "example": "web_win_1.57.6_O3MRXPqy"
                                                             },
                                                             "show": {
                                                                 "type": "string",
@@ -728,6 +866,7 @@
                                                             },
                                                             "conversation_id": {
                                                                 "type": "string",
+                                                                "description": "Its value is the 'undefined' conversation '0000000000000000' on the server 'received receipt' event",
                                                                 "example": "1555081424877876"
                                                             },
                                                             "event": {
@@ -1119,10 +1258,92 @@
                             }
                         }
                     },
+                    "error": {
+                        "{$request.body#/callback_url}/error": {
+                            "post": {
+                                "operationId": "errorNotificationReceived",
+                                "requestBody": {
+                                    "required": true,
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "the connection Id",
+                                                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                                                    },
+                                                    "timestamp": {
+                                                        "type": "string",
+                                                        "description": "the message timestamp",
+                                                        "example": "2018-08-23T08:52:04.001535Z"
+                                                    },
+                                                    "error": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "code": {
+                                                                "type": "integer",
+                                                                "description": "the error code",
+                                                                "example": "406"
+                                                            },
+                                                            "reason": {
+                                                                "type": "string",
+                                                                "description": "the error reason",
+                                                                "example": "not-acceptable"
+                                                            },
+                                                            "description": {
+                                                                "type": "string",
+                                                                "description": "the error description",
+                                                                "example": "Only occupants are allowed to send messages to the conference"
+                                                            },
+                                                            "conversation_id": {
+                                                                "type": "string",
+                                                                "example": "1555081424877876"
+                                                            },
+                                                            "msg_id": {
+                                                                "type": "string",
+                                                                "description": "the message Id",
+                                                                "example": "e68d78c0-aa3a-11e9-920b-00146c8c2dd7"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "code",
+                                                            "reason"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "timestamp",
+                                                    "error"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "responses": {
+                                    "200": {
+                                        "description": "return this code if your server accepts the callback"
+                                    }
+                                },
+                                "x-swagger-router-controller": "ErrorCtrl"
+                            }
+                        }
+                    },
                     "message": {
                         "{$request.body#/callback_url}/message": {
                             "post": {
                                 "operationId": "messageNotificationReceived",
+                                "parameters": [{
+                                    "name": "x-resource",
+                                    "in": "header",
+                                    "description": "resource of the message sender",
+                                    "schema": {
+                                        "type": "string"
+                                    },
+                                    "example": "mobile_android_020000000000"
+                                }],
                                 "requestBody": {
                                     "required": true,
                                     "content": {
@@ -1202,10 +1423,21 @@
                                                                     }
                                                                 }
                                                             },
-                                                            "markdown": {
-                                                                "type": "string",
-                                                                "description": "the markdown content",
-                                                                "example": "this is the markdown"
+                                                            "contents": {
+                                                                "type": "array",
+                                                                "items": {
+                                                                    "$ref": "#/components/schemas/Content"
+                                                                },
+                                                                "example": [{
+                                                                        "type": "application/json",
+                                                                        "data": "{\"isTest\": true}"
+                                                                    },
+                                                                    {
+                                                                        "type": "text/markdown",
+                                                                        "data": "# Title"
+                                                                    }
+                                                                ],
+                                                                "description": "list of alternative content"
                                                             }
                                                         },
                                                         "required": [
@@ -1241,16 +1473,14 @@
                     "Connection"
                 ],
                 "summary": "List all user connections",
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
+                "security": [{
+                    "Bearer": []
+                }],
                 "responses": {
                     "200": {
                         "description": "Ok",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Connections"
                                 }
@@ -1268,15 +1498,13 @@
             "url": "https://hub.openrainbow.com/img/logohub.svg",
             "backgroundColor": "#ff4900"
         },
-        "version": "1.86.0",
+        "version": "1.99.0",
         "title": "S2S api",
-        "description": "# Rainbow S2S API guide\n\n## Preamble\n\n### Introduction\n\nThis guide describes list of API services that are provided by OT Rainbow S2S portal. This portal is dedicated to s2s features.\n\n### Protocol\n\nREST interface is used for sending/receiving OT rainbow API messages. HTTP requests GET, DELETE, POST, UPDATE are used. Standard HTTP responses are used to provide requested information or error status. There is no session notion in OT Rainbow system, so requests could be issued according stateless model, without transport conservation between them. Additional data could be provided in message body. JSON is used as a main format for data encoding in message body part. Each request is started with the following pattern /{module}/{version}/ where {module} is a portal module name to address and {version} is a version of used API, par example, “v1.0”.\n\n### Security considerations\n\nEach request should contain some credential information to authenticate itself. Standard HTTP authentication with basic/bearer modes is used. JSON Web Token mechanism is used to provide authentication information. JWT has a expire timeout that is controlled by OT Rainbow portal to prevent very long token usage. Also authentication with application token is used. The token must be provided in the request HTTP header, using a custom header: APIKey. At server side, token is verified, and if it doesn’t match, 403 Not Allowed response is sent. TLS is used as a transport protocol to support message exchanges between OT Rainbow portal and an application.\n\n"
+        "description": "# Rainbow S2S API guide\n\n## Preamble\n\n### Introduction\n\nThis guide describes a list of API services that are provided by the OT Rainbow S2S portal.\nThis portal is dedicated to S2S features, providing a full REST API for Rainbow features.\n\n### Protocol\n\nREST interface is used for sending/receiving OT rainbow API messages.\nHTTP verbs GET, DELETE, POST, PUT, etc. are used.\nStandard HTTP responses are used to provide requested information or error status.\nThere is no session notion in OT Rainbow system, so requests could be issued according to the stateless model,\nwithout transport conservation between them.\nAdditional data could be provided in message body.\nJSON is used as a main format for data encoding in message body part.\nEach request is started with the following pattern /{module}/{version}/ where {module} is a portal module name\nto address and {version} is a version of used API, e.g. “v1.0”.\n\n### Security considerations\n\nEach request should contain some credential information to authenticate itself.\nStandard HTTP authentication with basic/bearer modes is used.\nJSON Web Token mechanism is used to provide authentication information.\nJWT has a expire timeout that is controlled by OT Rainbow portal to prevent very long token usage.\nAlso authentication with application token is used.\nThe token must be provided in the request HTTP header, using a custom header: APIKey.\nAt server side, token is verified, and if it doesn’t match, 403 Not Allowed response is sent.\nTLS is used as a transport protocol to support message exchanges between OT Rainbow portal and an application.\n\n# Authentication\n\n<!-- ReDoc-Inject: <security-definitions> -->"
     },
-    "servers": [
-        {
-            "url": "//localhost:4000"
-        }
-    ],
+    "servers": [{
+        "url": "//openrainbow.com:443"
+    }],
     "components": {
         "securitySchemes": {
             "Bearer": {
@@ -1377,16 +1605,23 @@
                 },
                 "example": {
                     "total_count": "3",
-                    "messages": [
-                        {
+                    "messages": [{
                             "subject": "",
-                            "markdown": "##Hello BOB",
                             "lang": "en",
                             "id": "web_5ed74032-2b8c-48c0-8e4b-414da884c7c71",
                             "from": "59f1ecc4ea84f9b5c339958d",
                             "datetime": "2018-08-23T08:52:04.001535Z",
+                            "contents": [{
+                                "type": "text/markdown",
+                                "data": "## Hello BOB"
+                            }],
                             "body": "Hello BOB",
-                            "attachments": {}
+                            "attachment": {
+                                "url": "https://openrainbow.com:443/api/rainbow/fileserver/v1.0/files/5d4d3696cfd53e023dadcb07",
+                                "size": 93536,
+                                "mime": "text/csv",
+                                "filename": "sales.csv"
+                            }
                         },
                         {
                             "subject": "",
@@ -1394,8 +1629,7 @@
                             "id": "web_25d0910a-b211-4845-8b04-6c045fe395a20",
                             "from": "59f1ecc63139e1b60519f505",
                             "datetime": "2018-08-23T09:03:18.001535Z",
-                            "body": "Hello Alice",
-                            "attachments": {}
+                            "body": "Hello Alice"
                         }
                     ],
                     "_links": {
@@ -1420,10 +1654,6 @@
                                 "type": "string",
                                 "description": "Message subject"
                             },
-                            "markdown": {
-                                "type": "string",
-                                "description": "##Markdown message"
-                            },
                             "lang": {
                                 "type": "string",
                                 "description": "en"
@@ -1432,9 +1662,19 @@
                                 "type": "string",
                                 "description": "3dfdecf6-d1e8-11e8-bbed-00146c8c2dd7"
                             },
+                            "contents": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Content"
+                                },
+                                "description": "list of alternative content"
+                            },
                             "body": {
                                 "type": "string",
                                 "description": "Message body"
+                            },
+                            "attachment": {
+                                "$ref": "#/components/schemas/Attachment"
                             }
                         }
                     }
@@ -1443,9 +1683,12 @@
                     "data": {
                         "to": "5bc50eea4ca684544b694004",
                         "subject": "Greeting",
-                        "markdown": "##Hello world",
                         "lang": "en",
                         "id": "3dfdecf6-d1e8-11e8-bbed-00146c8c2dd7",
+                        "contents": [{
+                            "type": "application/markdown",
+                            "data": "##Hello World"
+                        }],
                         "body": "Hello world"
                     }
                 }
@@ -1453,6 +1696,9 @@
             "MessageCreate": {
                 "type": "object",
                 "title": "MessageCreate",
+                "required": [
+                    "message"
+                ],
                 "properties": {
                     "message": {
                         "type": "object",
@@ -1461,26 +1707,36 @@
                                 "type": "string",
                                 "description": "Message subject"
                             },
-                            "markdown": {
-                                "type": "string",
-                                "description": "##Markdown message"
-                            },
                             "lang": {
                                 "type": "string",
                                 "description": "en"
                             },
+                            "contents": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Content"
+                                },
+                                "description": "list of alternative content"
+                            },
                             "body": {
                                 "type": "string",
                                 "description": "Message body"
+                            },
+                            "attachment": {
+                                "$ref": "#/components/schemas/Attachment"
                             }
-                        }
+                        },
+                        "description": "Message object"
                     }
                 },
                 "example": {
                     "message": {
                         "subject": "Greeting",
-                        "markdown": "##Hello world",
                         "lang": "en",
+                        "contents": [{
+                            "type": "text/markdown",
+                            "data": "## Hello Bob"
+                        }],
                         "body": "Hello world"
                     }
                 },
@@ -1493,10 +1749,6 @@
                     "subject": {
                         "type": "string",
                         "description": "The subject"
-                    },
-                    "markdown": {
-                        "type": "string",
-                        "description": "##The markdown content"
                     },
                     "lang": {
                         "type": "string",
@@ -1514,37 +1766,160 @@
                         "type": "string",
                         "description": "The creation datetime"
                     },
+                    "contents": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Content"
+                        },
+                        "description": "list of alternative content"
+                    },
                     "body": {
                         "type": "string",
                         "description": "The body"
                     },
-                    "attachments": {
-                        "type": "object",
-                        "description": "The attachments"
+                    "attachment": {
+                        "$ref": "#/components/schemas/Attachment"
                     }
                 },
                 "example": {
                     "subject": "",
-                    "markdown": "##Hello BOB",
                     "lang": "en",
                     "id": "web_5ed74032-2b8c-48c0-8e4b-414da884c7c71",
                     "from": "59f1ecc4ea84f9b5c339958d",
                     "datetime": "2018-08-23T08:52:04.001535Z",
+                    "contents": [{
+                        "type": "text/markdown",
+                        "data": "## Hello BOB"
+                    }],
                     "body": "Hello BOB",
-                    "attachments": {}
+                    "attachment": {
+                        "url": "https://openrainbow.com:443/api/rainbow/fileserver/v1.0/files/5d4d3696cfd53e023dadcb07",
+                        "size": 93536,
+                        "mime": "text/csv",
+                        "filename": "sales.csv"
+                    }
                 },
                 "description": "A message"
+            },
+            "Conversations": {
+                "type": "object",
+                "title": "Conversations",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Conversation"
+                        },
+                        "description": "the list of conversations"
+                    }
+                },
+                "description": "All users's conversations"
+            },
+            "ConversationCreate": {
+                "type": "object",
+                "title": "ConversationCreate",
+                "required": [
+                    "conversation"
+                ],
+                "properties": {
+                    "conversation": {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "enum": [
+                                    "user",
+                                    "room",
+                                    "bot"
+                                ],
+                                "description": "The conversation type"
+                            },
+                            "peer": {
+                                "type": "string",
+                                "description": "The peer id"
+                            }
+                        },
+                        "description": "Conversation object"
+                    }
+                },
+                "example": {
+                    "conversation": {
+                        "type": "user",
+                        "peer": "59f1ecc4ea84f9b5c339958d"
+                    }
+                },
+                "description": "Conversation creation data"
+            },
+            "Conversation": {
+                "type": "object",
+                "title": "Conversation",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "user",
+                            "room",
+                            "bot"
+                        ],
+                        "description": "The conversation type"
+                    },
+                    "peer": {
+                        "type": "string",
+                        "description": "The peer id"
+                    },
+                    "mute": {
+                        "type": "boolean",
+                        "description": "The conversation mute state"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The conversation identifier"
+                    },
+                    "creationDate": {
+                        "type": "string",
+                        "description": "The creation datetime"
+                    }
+                },
+                "example": {
+                    "type": "user",
+                    "peer": "59f1ecc4ea84f9b5c339958d",
+                    "mute": false,
+                    "id": "1562678813674931",
+                    "creationDate": "2018-08-23T08:52:04.001535Z"
+                },
+                "description": "A conversation"
+            },
+            "Content": {
+                "type": "object",
+                "title": "Content",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Content mime type"
+                    },
+                    "data": {
+                        "type": "string",
+                        "description": "Content value"
+                    }
+                },
+                "example": {
+                    "content": {
+                        "type": "application/json",
+                        "data": "{\n              \"my_object\": {\n                \"a\": 1.0,\n                \"c\": true,\n                \"e\": \"welcome\"\n              },\n              \"my_string\": \"Hello World\"\n            }"
+                    }
+                },
+                "description": "Content data"
             },
             "Connections": {
                 "type": "object",
                 "title": "Connections",
                 "properties": {
-                    "items": {
-                        "$ref": "#/components/schemas/Connection"
-                    },
                     "data": {
                         "type": "array",
-                        "items": {}
+                        "items": {
+                            "$ref": "#/components/schemas/Connection"
+                        },
+                        "description": "the list of connections"
                     }
                 },
                 "description": "All connections for a specific user"
@@ -1552,28 +1927,12 @@
             "ConnectionCreateResponse": {
                 "type": "object",
                 "title": "ConnectionCreateResponse",
+                "required": [
+                    "data"
+                ],
                 "properties": {
                     "data": {
-                        "type": "object",
-                        "required": [
-                            "id",
-                            "resource",
-                            "callback_url"
-                        ],
-                        "properties": {
-                            "resource": {
-                                "type": "string",
-                                "description": "The client resource"
-                            },
-                            "id": {
-                                "type": "string",
-                                "description": "The connection identifier"
-                            },
-                            "callback_url": {
-                                "type": "string",
-                                "description": "The app webhook"
-                            }
-                        }
+                        "$ref": "#/components/schemas/Connection"
                     }
                 },
                 "example": {
@@ -1593,7 +1952,21 @@
                 ],
                 "properties": {
                     "connection": {
-                        "$ref": "#/components/schemas/Connection"
+                        "type": "object",
+                        "required": [
+                            "callback_url"
+                        ],
+                        "properties": {
+                            "resource": {
+                                "type": "string",
+                                "description": "The client resource"
+                            },
+                            "callback_url": {
+                                "type": "string",
+                                "description": "The app webhook"
+                            }
+                        },
+                        "description": "Connection object"
                     }
                 },
                 "example": {
@@ -1630,6 +2003,37 @@
                     "callback_url": "https://thirdpartyapp.com/api"
                 },
                 "description": "A S2S client connection"
+            },
+            "Attachment": {
+                "type": "object",
+                "title": "Attachment",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "description": "Attachment URL"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "description": "Attachment size"
+                    },
+                    "mime": {
+                        "type": "string",
+                        "description": "Attachment mime type"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "Attachment filename"
+                    }
+                },
+                "example": {
+                    "attachment": {
+                        "url": "https://openrainbow.com:443/api/rainbow/fileserver/v1.0/files/5d4d3696cfd53e023dadcb07",
+                        "size": 93536,
+                        "mime": "text/csv",
+                        "filename": "sales.csv"
+                    }
+                },
+                "description": "Attachment data"
             }
         }
     }

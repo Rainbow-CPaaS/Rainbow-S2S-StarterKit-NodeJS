@@ -233,28 +233,164 @@
                 }
             }
         },
-        "/message": {
+        "/error": {
             "post": {
-                "operationId": "messageNotificationReceived",
+                "operationId": "errorNotificationReceived",
                 "responses": {
                     "200": {
                         "description": "return this code if your server accepts the callback"
                     }
                 },
-                "x-swagger-router-controller": "MessageCtrl",
+                "x-swagger-router-controller": "ErrorCtrl",
                 "tags": [
-                    "Message"
+                    "Error"
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/CbMessage"
+                                "$ref": "#/components/schemas/CbError"
                             }
                         }
                     },
                     "required": true
                 }
+            }
+        },
+        "/message": {
+            "post": {
+                "operationId": "messageNotificationReceived",
+                "parameters": [
+                    {
+                        "name": "x-resource",
+                        "in": "header",
+                        "description": "resource of the message sender",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "mobile_android_020000000000"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "the connection Id",
+                                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                                    },
+                                    "timestamp": {
+                                        "type": "string",
+                                        "description": "the message timestamp",
+                                        "example": "2018-08-23T08:52:04.001535Z"
+                                    },
+                                    "message": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "description": "the message Id",
+                                                "example": "cf05daec-c32e-11e8-affe-309c2364ed11"
+                                            },
+                                            "conversation_id": {
+                                                "type": "string",
+                                                "example": "1555081424877876"
+                                            },
+                                            "from": {
+                                                "type": "string",
+                                                "description": "the sender Id",
+                                                "example": "59f1ecc4ea84f9b5c339958d"
+                                            },
+                                            "is_group": {
+                                                "type": "boolean",
+                                                "description": "is a multi-user message",
+                                                "example": "true"
+                                            },
+                                            "subject": {
+                                                "type": "string",
+                                                "description": "the subject",
+                                                "example": "this is the subject"
+                                            },
+                                            "body": {
+                                                "type": "string",
+                                                "description": "the content",
+                                                "example": "this is the body"
+                                            },
+                                            "lang": {
+                                                "type": "string",
+                                                "description": "the text language",
+                                                "example": "en"
+                                            },
+                                            "attachment": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "url": {
+                                                        "type": "string",
+                                                        "description": "the attachment Url",
+                                                        "example": "https://hello.com/filename.pdf"
+                                                    },
+                                                    "filename": {
+                                                        "type": "string",
+                                                        "description": "the attachment filename",
+                                                        "example": "filename.pdf"
+                                                    },
+                                                    "mime": {
+                                                        "type": "string",
+                                                        "description": "the attachment mime type",
+                                                        "example": "application/pdf"
+                                                    },
+                                                    "size": {
+                                                        "type": "integer",
+                                                        "description": "the attachment size in bytes",
+                                                        "example": 1000
+                                                    }
+                                                }
+                                            },
+                                            "contents": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/components/schemas/Content"
+                                                },
+                                                "example": [
+                                                    {
+                                                        "type": "application/json",
+                                                        "data": "{\"isTest\": true}"
+                                                    },
+                                                    {
+                                                        "type": "text/markdown",
+                                                        "data": "# Title"
+                                                    }
+                                                ],
+                                                "description": "list of alternative content"
+                                            }
+                                        },
+                                        "required": [
+                                            "id",
+                                            "conversation_id",
+                                            "body",
+                                            "from"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "id",
+                                    "timestamp",
+                                    "message"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "return this code if your server accepts the callback"
+                    }
+                },
+                "x-swagger-router-controller": "MessageCtrl"
             }
         }
     },
@@ -353,13 +489,23 @@
                     "messages": [
                         {
                             "subject": "",
-                            "markdown": "##Hello BOB",
                             "lang": "en",
                             "id": "web_5ed74032-2b8c-48c0-8e4b-414da884c7c71",
                             "from": "59f1ecc4ea84f9b5c339958d",
                             "datetime": "2018-08-23T08:52:04.001535Z",
+                            "contents": [
+                                {
+                                    "type": "text/markdown",
+                                    "data": "## Hello BOB"
+                                }
+                            ],
                             "body": "Hello BOB",
-                            "attachments": {}
+                            "attachment": {
+                                "url": "https://openrainbow.com:443/api/rainbow/fileserver/v1.0/files/5d4d3696cfd53e023dadcb07",
+                                "size": 93536,
+                                "mime": "text/csv",
+                                "filename": "sales.csv"
+                            }
                         },
                         {
                             "subject": "",
@@ -367,8 +513,7 @@
                             "id": "web_25d0910a-b211-4845-8b04-6c045fe395a20",
                             "from": "59f1ecc63139e1b60519f505",
                             "datetime": "2018-08-23T09:03:18.001535Z",
-                            "body": "Hello Alice",
-                            "attachments": {}
+                            "body": "Hello Alice"
                         }
                     ],
                     "_links": {
@@ -393,10 +538,6 @@
                                 "type": "string",
                                 "description": "Message subject"
                             },
-                            "markdown": {
-                                "type": "string",
-                                "description": "##Markdown message"
-                            },
                             "lang": {
                                 "type": "string",
                                 "description": "en"
@@ -405,9 +546,19 @@
                                 "type": "string",
                                 "description": "3dfdecf6-d1e8-11e8-bbed-00146c8c2dd7"
                             },
+                            "contents": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Content"
+                                },
+                                "description": "list of alternative content"
+                            },
                             "body": {
                                 "type": "string",
                                 "description": "Message body"
+                            },
+                            "attachment": {
+                                "$ref": "#/components/schemas/Attachment"
                             }
                         }
                     }
@@ -416,9 +567,14 @@
                     "data": {
                         "to": "5bc50eea4ca684544b694004",
                         "subject": "Greeting",
-                        "markdown": "##Hello world",
                         "lang": "en",
                         "id": "3dfdecf6-d1e8-11e8-bbed-00146c8c2dd7",
+                        "contents": [
+                            {
+                                "type": "application/markdown",
+                                "data": "##Hello World"
+                            }
+                        ],
                         "body": "Hello world"
                     }
                 }
@@ -426,6 +582,9 @@
             "MessageCreate": {
                 "type": "object",
                 "title": "MessageCreate",
+                "required": [
+                    "message"
+                ],
                 "properties": {
                     "message": {
                         "type": "object",
@@ -434,26 +593,38 @@
                                 "type": "string",
                                 "description": "Message subject"
                             },
-                            "markdown": {
-                                "type": "string",
-                                "description": "##Markdown message"
-                            },
                             "lang": {
                                 "type": "string",
                                 "description": "en"
                             },
+                            "contents": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Content"
+                                },
+                                "description": "list of alternative content"
+                            },
                             "body": {
                                 "type": "string",
                                 "description": "Message body"
+                            },
+                            "attachment": {
+                                "$ref": "#/components/schemas/Attachment"
                             }
-                        }
+                        },
+                        "description": "Message object"
                     }
                 },
                 "example": {
                     "message": {
                         "subject": "Greeting",
-                        "markdown": "##Hello world",
                         "lang": "en",
+                        "contents": [
+                            {
+                                "type": "text/markdown",
+                                "data": "## Hello Bob"
+                            }
+                        ],
                         "body": "Hello world"
                     }
                 },
@@ -466,10 +637,6 @@
                     "subject": {
                         "type": "string",
                         "description": "The subject"
-                    },
-                    "markdown": {
-                        "type": "string",
-                        "description": "##The markdown content"
                     },
                     "lang": {
                         "type": "string",
@@ -487,37 +654,162 @@
                         "type": "string",
                         "description": "The creation datetime"
                     },
+                    "contents": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Content"
+                        },
+                        "description": "list of alternative content"
+                    },
                     "body": {
                         "type": "string",
                         "description": "The body"
                     },
-                    "attachments": {
-                        "type": "object",
-                        "description": "The attachments"
+                    "attachment": {
+                        "$ref": "#/components/schemas/Attachment"
                     }
                 },
                 "example": {
                     "subject": "",
-                    "markdown": "##Hello BOB",
                     "lang": "en",
                     "id": "web_5ed74032-2b8c-48c0-8e4b-414da884c7c71",
                     "from": "59f1ecc4ea84f9b5c339958d",
                     "datetime": "2018-08-23T08:52:04.001535Z",
+                    "contents": [
+                        {
+                            "type": "text/markdown",
+                            "data": "## Hello BOB"
+                        }
+                    ],
                     "body": "Hello BOB",
-                    "attachments": {}
+                    "attachment": {
+                        "url": "https://openrainbow.com:443/api/rainbow/fileserver/v1.0/files/5d4d3696cfd53e023dadcb07",
+                        "size": 93536,
+                        "mime": "text/csv",
+                        "filename": "sales.csv"
+                    }
                 },
                 "description": "A message"
+            },
+            "Conversations": {
+                "type": "object",
+                "title": "Conversations",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Conversation"
+                        },
+                        "description": "the list of conversations"
+                    }
+                },
+                "description": "All users's conversations"
+            },
+            "ConversationCreate": {
+                "type": "object",
+                "title": "ConversationCreate",
+                "required": [
+                    "conversation"
+                ],
+                "properties": {
+                    "conversation": {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "enum": [
+                                    "user",
+                                    "room",
+                                    "bot"
+                                ],
+                                "description": "The conversation type"
+                            },
+                            "peer": {
+                                "type": "string",
+                                "description": "The peer id"
+                            }
+                        },
+                        "description": "Conversation object"
+                    }
+                },
+                "example": {
+                    "conversation": {
+                        "type": "user",
+                        "peer": "59f1ecc4ea84f9b5c339958d"
+                    }
+                },
+                "description": "Conversation creation data"
+            },
+            "Conversation": {
+                "type": "object",
+                "title": "Conversation",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "user",
+                            "room",
+                            "bot"
+                        ],
+                        "description": "The conversation type"
+                    },
+                    "peer": {
+                        "type": "string",
+                        "description": "The peer id"
+                    },
+                    "mute": {
+                        "type": "boolean",
+                        "description": "The conversation mute state"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The conversation identifier"
+                    },
+                    "creationDate": {
+                        "type": "string",
+                        "description": "The creation datetime"
+                    }
+                },
+                "example": {
+                    "type": "user",
+                    "peer": "59f1ecc4ea84f9b5c339958d",
+                    "mute": false,
+                    "id": "1562678813674931",
+                    "creationDate": "2018-08-23T08:52:04.001535Z"
+                },
+                "description": "A conversation"
+            },
+            "Content": {
+                "type": "object",
+                "title": "Content",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Content mime type"
+                    },
+                    "data": {
+                        "type": "string",
+                        "description": "Content value"
+                    }
+                },
+                "example": {
+                    "content": {
+                        "type": "application/json",
+                        "data": "{\n              \"my_object\": {\n                \"a\": 1.0,\n                \"c\": true,\n                \"e\": \"welcome\"\n              },\n              \"my_string\": \"Hello World\"\n            }"
+                    }
+                },
+                "description": "Content data"
             },
             "Connections": {
                 "type": "object",
                 "title": "Connections",
                 "properties": {
-                    "items": {
-                        "$ref": "#/components/schemas/Connection"
-                    },
                     "data": {
                         "type": "array",
-                        "items": {}
+                        "items": {
+                            "$ref": "#/components/schemas/Connection"
+                        },
+                        "description": "the list of connections"
                     }
                 },
                 "description": "All connections for a specific user"
@@ -525,28 +817,12 @@
             "ConnectionCreateResponse": {
                 "type": "object",
                 "title": "ConnectionCreateResponse",
+                "required": [
+                    "data"
+                ],
                 "properties": {
                     "data": {
-                        "type": "object",
-                        "required": [
-                            "id",
-                            "resource",
-                            "callback_url"
-                        ],
-                        "properties": {
-                            "resource": {
-                                "type": "string",
-                                "description": "The client resource"
-                            },
-                            "id": {
-                                "type": "string",
-                                "description": "The connection identifier"
-                            },
-                            "callback_url": {
-                                "type": "string",
-                                "description": "The app webhook"
-                            }
-                        }
+                        "$ref": "#/components/schemas/Connection"
                     }
                 },
                 "example": {
@@ -566,7 +842,21 @@
                 ],
                 "properties": {
                     "connection": {
-                        "$ref": "#/components/schemas/Connection"
+                        "type": "object",
+                        "required": [
+                            "callback_url"
+                        ],
+                        "properties": {
+                            "resource": {
+                                "type": "string",
+                                "description": "The client resource"
+                            },
+                            "callback_url": {
+                                "type": "string",
+                                "description": "The app webhook"
+                            }
+                        },
+                        "description": "Connection object"
                     }
                 },
                 "example": {
@@ -604,6 +894,37 @@
                 },
                 "description": "A S2S client connection"
             },
+            "Attachment": {
+                "type": "object",
+                "title": "Attachment",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "description": "Attachment URL"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "description": "Attachment size"
+                    },
+                    "mime": {
+                        "type": "string",
+                        "description": "Attachment mime type"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "Attachment filename"
+                    }
+                },
+                "example": {
+                    "attachment": {
+                        "url": "https://openrainbow.com:443/api/rainbow/fileserver/v1.0/files/5d4d3696cfd53e023dadcb07",
+                        "size": 93536,
+                        "mime": "text/csv",
+                        "filename": "sales.csv"
+                    }
+                },
+                "description": "Attachment data"
+            },
             "CbConnection": {
                 "type": "object",
                 "properties": {
@@ -624,6 +945,7 @@
                                 "type": "string",
                                 "enum": [
                                     "ready",
+                                    "unavailable",
                                     "terminated"
                                 ]
                             }
@@ -659,6 +981,11 @@
                             "from": {
                                 "type": "string",
                                 "example": "59f1ecc4ea84f9b5c339958d"
+                            },
+                            "resource": {
+                                "type": "string",
+                                "description": "the presence emitting resource",
+                                "example": "web_win_1.57.6_O3MRXPqy"
                             },
                             "show": {
                                 "type": "string",
@@ -769,6 +1096,7 @@
                             },
                             "conversation_id": {
                                 "type": "string",
+                                "description": "Its value is the 'undefined' conversation '0000000000000000' on the server 'received receipt' event",
                                 "example": "1555081424877876"
                             },
                             "event": {
@@ -1054,7 +1382,7 @@
                 ],
                 "title": "CbRoomState"
             },
-            "CbMessage": {
+            "CbError": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1067,88 +1395,46 @@
                         "description": "the message timestamp",
                         "example": "2018-08-23T08:52:04.001535Z"
                     },
-                    "message": {
+                    "error": {
                         "type": "object",
                         "properties": {
-                            "id": {
+                            "code": {
+                                "type": "integer",
+                                "description": "the error code",
+                                "example": "406"
+                            },
+                            "reason": {
                                 "type": "string",
-                                "description": "the message Id",
-                                "example": "cf05daec-c32e-11e8-affe-309c2364ed11"
+                                "description": "the error reason",
+                                "example": "not-acceptable"
+                            },
+                            "description": {
+                                "type": "string",
+                                "description": "the error description",
+                                "example": "Only occupants are allowed to send messages to the conference"
                             },
                             "conversation_id": {
                                 "type": "string",
                                 "example": "1555081424877876"
                             },
-                            "from": {
+                            "msg_id": {
                                 "type": "string",
-                                "description": "the sender Id",
-                                "example": "59f1ecc4ea84f9b5c339958d"
-                            },
-                            "is_group": {
-                                "type": "boolean",
-                                "description": "is a multi-user message",
-                                "example": "true"
-                            },
-                            "subject": {
-                                "type": "string",
-                                "description": "the subject",
-                                "example": "this is the subject"
-                            },
-                            "body": {
-                                "type": "string",
-                                "description": "the content",
-                                "example": "this is the body"
-                            },
-                            "lang": {
-                                "type": "string",
-                                "description": "the text language",
-                                "example": "en"
-                            },
-                            "attachment": {
-                                "type": "object",
-                                "properties": {
-                                    "url": {
-                                        "type": "string",
-                                        "description": "the attachment Url",
-                                        "example": "https://hello.com/filename.pdf"
-                                    },
-                                    "filename": {
-                                        "type": "string",
-                                        "description": "the attachment filename",
-                                        "example": "filename.pdf"
-                                    },
-                                    "mime": {
-                                        "type": "string",
-                                        "description": "the attachment mime type",
-                                        "example": "application/pdf"
-                                    },
-                                    "size": {
-                                        "type": "integer",
-                                        "description": "the attachment size in bytes",
-                                        "example": 1000
-                                    }
-                                }
-                            },
-                            "markdown": {
-                                "type": "string",
-                                "description": "the markdown content",
-                                "example": "this is the markdown"
+                                "description": "the message Id",
+                                "example": "e68d78c0-aa3a-11e9-920b-00146c8c2dd7"
                             }
                         },
                         "required": [
-                            "id",
-                            "conversation_id",
-                            "body",
-                            "from"
+                            "code",
+                            "reason"
                         ]
                     }
                 },
                 "required": [
                     "id",
                     "timestamp",
-                    "message"
+                    "error"
                 ],
-                "title": "CbMessage"
+                "title": "CbError"
             }
         }
     }

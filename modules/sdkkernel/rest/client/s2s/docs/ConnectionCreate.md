@@ -4,6 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**connection** | [**Connection**](Connection.md) |  | 
+**connection** | [**ConnectionCreateConnection**](ConnectionCreateConnection.md) |  | 
 
 

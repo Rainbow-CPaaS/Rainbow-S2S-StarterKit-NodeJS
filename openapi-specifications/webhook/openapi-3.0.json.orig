@@ -1,0 +1,1437 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "S2S api callback",
+        "version": "1.0.0",
+        "contact": {
+            "name": "CpaaS Team"
+        },
+        "license": {
+            "name": "Copy Right ALE"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost",
+            "description": "Webhook server"
+        }
+    ],
+    "paths": {
+        "/connection": {
+            "post": {
+                "operationId": "connectionNotificationReceived",
+                "responses": {
+                    "200": {
+                        "description": "return this code if your server accepts the callback"
+                    }
+                },
+                "x-swagger-router-controller": "ConnectionCtrl",
+                "tags": [
+                    "Connection"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CbConnection"
+                            }
+                        }
+                    },
+                    "required": true
+                }
+            }
+        },
+        "/presence": {
+            "post": {
+                "operationId": "presenceNotificationReceived",
+                "responses": {
+                    "200": {
+                        "description": "return this code if your server accepts the callback"
+                    }
+                },
+                "x-swagger-router-controller": "PresenceCtrl",
+                "tags": [
+                    "Presence"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CbPresence"
+                            }
+                        }
+                    },
+                    "required": true
+                }
+            }
+        },
+        "/chat-state": {
+            "post": {
+                "operationId": "chatStateNotificationReceived",
+                "responses": {
+                    "200": {
+                        "description": "return this code if your server accepts the callback"
+                    }
+                },
+                "x-swagger-router-controller": "ChatStateCtrl",
+                "tags": [
+                    "ChatState"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CbChatState"
+                            }
+                        }
+                    },
+                    "required": true
+                }
+            }
+        },
+        "/receipt": {
+            "post": {
+                "operationId": "receiptNotificationReceived",
+                "responses": {
+                    "200": {
+                        "description": "return this code if your server accepts the callback"
+                    }
+                },
+                "x-swagger-router-controller": "ReceiptCtrl",
+                "tags": [
+                    "Receipt"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CbReceipt"
+                            }
+                        }
+                    },
+                    "required": true
+                }
+            }
+        },
+        "/all-receipt": {
+            "post": {
+                "operationId": "allReceiptNotificationReceived",
+                "responses": {
+                    "200": {
+                        "description": "return this code if your server accepts the callback"
+                    }
+                },
+                "x-swagger-router-controller": "AllReceiptCtrl",
+                "tags": [
+                    "AllReceipt"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CbAllReceipt"
+                            }
+                        }
+                    },
+                    "required": true
+                }
+            }
+        },
+        "/conversation": {
+            "post": {
+                "operationId": "conversationNotificationReceived",
+                "responses": {
+                    "200": {
+                        "description": "return this code if your server accepts the callback"
+                    }
+                },
+                "x-swagger-router-controller": "ConversationCtrl",
+                "tags": [
+                    "Conversation"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CbConversation"
+                            }
+                        }
+                    },
+                    "required": true
+                }
+            }
+        },
+        "/room-invite": {
+            "post": {
+                "operationId": "roomInviteNotificationReceived",
+                "responses": {
+                    "200": {
+                        "description": "return this code if your server accepts the callback"
+                    }
+                },
+                "x-swagger-router-controller": "RoomInviteCtrl",
+                "tags": [
+                    "RoomInvite"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CbRoomInvite"
+                            }
+                        }
+                    },
+                    "required": true
+                }
+            }
+        },
+        "/room-member": {
+            "post": {
+                "operationId": "roomMemberNotificationReceived",
+                "responses": {
+                    "200": {
+                        "description": "return this code if your server accepts the callback"
+                    }
+                },
+                "x-swagger-router-controller": "RoomMemberCtrl",
+                "tags": [
+                    "RoomMember"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CbRoomMember"
+                            }
+                        }
+                    },
+                    "required": true
+                }
+            }
+        },
+        "/room-state": {
+            "post": {
+                "operationId": "roomStateNotificationReceived",
+                "responses": {
+                    "200": {
+                        "description": "return this code if your server accepts the callback"
+                    }
+                },
+                "x-swagger-router-controller": "RoomStateCtrl",
+                "tags": [
+                    "RoomState"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CbRoomState"
+                            }
+                        }
+                    },
+                    "required": true
+                }
+            }
+        },
+        "/error": {
+            "post": {
+                "operationId": "errorNotificationReceived",
+                "responses": {
+                    "200": {
+                        "description": "return this code if your server accepts the callback"
+                    }
+                },
+                "x-swagger-router-controller": "ErrorCtrl",
+                "tags": [
+                    "Error"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CbError"
+                            }
+                        }
+                    },
+                    "required": true
+                }
+            }
+        },
+        "/message": {
+            "post": {
+                "operationId": "messageNotificationReceived",
+                "parameters": [
+                    {
+                        "name": "x-resource",
+                        "in": "header",
+                        "description": "resource of the message sender",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "mobile_android_020000000000"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "the connection Id",
+                                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                                    },
+                                    "timestamp": {
+                                        "type": "string",
+                                        "description": "the message timestamp",
+                                        "example": "2018-08-23T08:52:04.001535Z"
+                                    },
+                                    "message": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "description": "the message Id",
+                                                "example": "cf05daec-c32e-11e8-affe-309c2364ed11"
+                                            },
+                                            "conversation_id": {
+                                                "type": "string",
+                                                "example": "1555081424877876"
+                                            },
+                                            "from": {
+                                                "type": "string",
+                                                "description": "the sender Id",
+                                                "example": "59f1ecc4ea84f9b5c339958d"
+                                            },
+                                            "is_group": {
+                                                "type": "boolean",
+                                                "description": "is a multi-user message",
+                                                "example": "true"
+                                            },
+                                            "subject": {
+                                                "type": "string",
+                                                "description": "the subject",
+                                                "example": "this is the subject"
+                                            },
+                                            "body": {
+                                                "type": "string",
+                                                "description": "the content",
+                                                "example": "this is the body"
+                                            },
+                                            "lang": {
+                                                "type": "string",
+                                                "description": "the text language",
+                                                "example": "en"
+                                            },
+                                            "attachment": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "url": {
+                                                        "type": "string",
+                                                        "description": "the attachment Url",
+                                                        "example": "https://hello.com/filename.pdf"
+                                                    },
+                                                    "filename": {
+                                                        "type": "string",
+                                                        "description": "the attachment filename",
+                                                        "example": "filename.pdf"
+                                                    },
+                                                    "mime": {
+                                                        "type": "string",
+                                                        "description": "the attachment mime type",
+                                                        "example": "application/pdf"
+                                                    },
+                                                    "size": {
+                                                        "type": "integer",
+                                                        "description": "the attachment size in bytes",
+                                                        "example": 1000
+                                                    }
+                                                }
+                                            },
+                                            "contents": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/components/schemas/Content"
+                                                },
+                                                "example": [
+                                                    {
+                                                        "type": "application/json",
+                                                        "data": "{\"isTest\": true}"
+                                                    },
+                                                    {
+                                                        "type": "text/markdown",
+                                                        "data": "# Title"
+                                                    }
+                                                ],
+                                                "description": "list of alternative content"
+                                            }
+                                        },
+                                        "required": [
+                                            "id",
+                                            "conversation_id",
+                                            "body",
+                                            "from"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "id",
+                                    "timestamp",
+                                    "message"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "return this code if your server accepts the callback"
+                    }
+                },
+                "x-swagger-router-controller": "MessageCtrl"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "RoomStatus": {
+                "type": "object",
+                "title": "RoomStatus",
+                "properties": {
+                    "role": {
+                        "type": "string",
+                        "enum": [
+                            "member",
+                            "moderator"
+                        ],
+                        "description": "Your role in this room"
+                    }
+                },
+                "example": {
+                    "role": "member"
+                },
+                "description": "Status of a room joining"
+            },
+            "ReceiptStatus": {
+                "type": "object",
+                "title": "ReceiptStatus",
+                "properties": {
+                    "msg_id": {
+                        "type": "string",
+                        "description": "The message identifier"
+                    },
+                    "event": {
+                        "type": "string",
+                        "enum": [
+                            "received",
+                            "read"
+                        ],
+                        "description": "The receipt event"
+                    }
+                },
+                "example": {
+                    "msg_id": "web_c5d5b89e-17ba-4cf5-8f45-5a1d221a8abf0",
+                    "event": "received"
+                },
+                "description": "A receipt status"
+            },
+            "PresenceUpdate": {
+                "type": "object",
+                "title": "PresenceUpdate",
+                "properties": {
+                    "presence": {
+                       "description": "Presence data",
+                        "$ref": "#/components/schemas/Presence"
+                    }
+                },
+                "example": {
+                    "presence": {
+                        "status": "out for lunch",
+                        "show": "away"
+                    }
+                },
+                "description": "Presence data"
+            },
+            "Presence": {
+                "type": "object",
+                "title": "Presence",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "An optional additional information"
+                    },
+                    "show": {
+                        "type": "string",
+                        "enum": [
+                            "away",
+                            "chat",
+                            "dnd",
+                            "xa"
+                        ],
+                        "description": "The user presence status"
+                    }
+                },
+                "example": {
+                    "status": "out for lunch",
+                    "show": "away"
+                },
+                "description": "A presence status"
+            },
+            "Messages": {
+                "type": "array",
+                "title": "Messages",
+                "items": {
+                    "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                    "total_count": "3",
+                    "messages": [
+                        {
+                            "subject": "",
+                            "lang": "en",
+                            "id": "web_5ed74032-2b8c-48c0-8e4b-414da884c7c71",
+                            "from": "59f1ecc4ea84f9b5c339958d",
+                            "datetime": "2018-08-23T08:52:04.001535Z",
+                            "contents": [
+                                {
+                                    "type": "text/markdown",
+                                    "data": "## Hello BOB"
+                                }
+                            ],
+                            "body": "Hello BOB",
+                            "attachment": {
+                                "url": "https://openrainbow.com:443/api/rainbow/fileserver/v1.0/files/5d4d3696cfd53e023dadcb07",
+                                "size": 93536,
+                                "mime": "text/csv",
+                                "filename": "sales.csv"
+                            }
+                        },
+                        {
+                            "subject": "",
+                            "lang": "en",
+                            "id": "web_25d0910a-b211-4845-8b04-6c045fe395a20",
+                            "from": "59f1ecc63139e1b60519f505",
+                            "datetime": "2018-08-23T09:03:18.001535Z",
+                            "body": "Hello Alice"
+                        }
+                    ],
+                    "_links": {
+                        "prev": "/connections/f8e81b4e-a7dc-11e8-a734-f894c2dba3d5/conversations/5b714769ce2730336a9076d6/messages?before=1535014324828089&limit=2",
+                        "next": "/connections/f8e81b4e-a7dc-11e8-a734-f894c2dba3d5/conversations/5b714769ce2730336a9076d6/messages?after=1535014998848233&limit=2"
+                    }
+                },
+                "description": "All messages for a specific chat/groupchat"
+            },
+            "MessageCreateResponse": {
+                "type": "object",
+                "title": "MessageCreateResponse",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "to": {
+                                "type": "string",
+                                "description": "5bc50eea4ca684544b694004"
+                            },
+                            "subject": {
+                                "type": "string",
+                                "description": "Message subject"
+                            },
+                            "lang": {
+                                "type": "string",
+                                "description": "en"
+                            },
+                            "id": {
+                                "type": "string",
+                                "description": "3dfdecf6-d1e8-11e8-bbed-00146c8c2dd7"
+                            },
+                            "contents": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Content"
+                                },
+                                "description": "list of alternative content"
+                            },
+                            "body": {
+                                "type": "string",
+                                "description": "Message body"
+                            },
+                            "attachment": {
+                                "$ref": "#/components/schemas/Attachment"
+                            }
+                        }
+                    }
+                },
+                "example": {
+                    "data": {
+                        "to": "5bc50eea4ca684544b694004",
+                        "subject": "Greeting",
+                        "lang": "en",
+                        "id": "3dfdecf6-d1e8-11e8-bbed-00146c8c2dd7",
+                        "contents": [
+                            {
+                                "type": "application/markdown",
+                                "data": "##Hello World"
+                            }
+                        ],
+                        "body": "Hello world"
+                    }
+                }
+            },
+            "MessageCreate": {
+                "type": "object",
+                "title": "MessageCreate",
+                "required": [
+                    "message"
+                ],
+                "properties": {
+                    "message": {
+                        "type": "object",
+                        "properties": {
+                            "subject": {
+                                "type": "string",
+                                "description": "Message subject"
+                            },
+                            "lang": {
+                                "type": "string",
+                                "description": "en"
+                            },
+                            "contents": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Content"
+                                },
+                                "description": "list of alternative content"
+                            },
+                            "body": {
+                                "type": "string",
+                                "description": "Message body"
+                            },
+                            "attachment": {
+                                "$ref": "#/components/schemas/Attachment"
+                            }
+                        },
+                        "description": "Message object"
+                    }
+                },
+                "example": {
+                    "message": {
+                        "subject": "Greeting",
+                        "lang": "en",
+                        "contents": [
+                            {
+                                "type": "text/markdown",
+                                "data": "## Hello Bob"
+                            }
+                        ],
+                        "body": "Hello world"
+                    }
+                },
+                "description": "Message creation data"
+            },
+            "Message": {
+                "type": "object",
+                "title": "Message",
+                "properties": {
+                    "subject": {
+                        "type": "string",
+                        "description": "The subject"
+                    },
+                    "lang": {
+                        "type": "string",
+                        "description": "en"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The identifier"
+                    },
+                    "from": {
+                        "type": "string",
+                        "description": "The message sender"
+                    },
+                    "datetime": {
+                        "type": "string",
+                        "description": "The creation datetime"
+                    },
+                    "contents": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Content"
+                        },
+                        "description": "list of alternative content"
+                    },
+                    "body": {
+                        "type": "string",
+                        "description": "The body"
+                    },
+                    "attachment": {
+                        "$ref": "#/components/schemas/Attachment"
+                    }
+                },
+                "example": {
+                    "subject": "",
+                    "lang": "en",
+                    "id": "web_5ed74032-2b8c-48c0-8e4b-414da884c7c71",
+                    "from": "59f1ecc4ea84f9b5c339958d",
+                    "datetime": "2018-08-23T08:52:04.001535Z",
+                    "contents": [
+                        {
+                            "type": "text/markdown",
+                            "data": "## Hello BOB"
+                        }
+                    ],
+                    "body": "Hello BOB",
+                    "attachment": {
+                        "url": "https://openrainbow.com:443/api/rainbow/fileserver/v1.0/files/5d4d3696cfd53e023dadcb07",
+                        "size": 93536,
+                        "mime": "text/csv",
+                        "filename": "sales.csv"
+                    }
+                },
+                "description": "A message"
+            },
+            "Conversations": {
+                "type": "array",
+                "title": "Conversations",
+                "items": {
+                    "$ref": "#/components/schemas/Conversation"
+                },
+                "description": "All users's conversations"
+            },
+            "ConversationCreate": {
+                "type": "object",
+                "title": "ConversationCreate",
+                "required": [
+                    "conversation"
+                ],
+                "properties": {
+                    "conversation": {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "enum": [
+                                    "user",
+                                    "room",
+                                    "bot"
+                                ],
+                                "description": "The conversation type"
+                            },
+                            "peer": {
+                                "type": "string",
+                                "description": "The peer id"
+                            }
+                        },
+                        "description": "Conversation object"
+                    }
+                },
+                "example": {
+                    "conversation": {
+                        "type": "user",
+                        "peer": "59f1ecc4ea84f9b5c339958d"
+                    }
+                },
+                "description": "Conversation creation data"
+            },
+            "Conversation": {
+                "type": "object",
+                "title": "Conversation",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "user",
+                            "room",
+                            "bot"
+                        ],
+                        "description": "The conversation type"
+                    },
+                    "peer": {
+                        "type": "string",
+                        "description": "The peer id"
+                    },
+                    "mute": {
+                        "type": "boolean",
+                        "description": "The conversation mute state"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The conversation identifier"
+                    },
+                    "creationDate": {
+                        "type": "string",
+                        "description": "The creation datetime"
+                    }
+                },
+                "example": {
+                    "type": "user",
+                    "peer": "59f1ecc4ea84f9b5c339958d",
+                    "mute": false,
+                    "id": "1562678813674931",
+                    "creationDate": "2018-08-23T08:52:04.001535Z"
+                },
+                "description": "A conversation"
+            },
+            "Content": {
+                "type": "object",
+                "title": "Content",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Content mime type"
+                    },
+                    "data": {
+                        "type": "string",
+                        "description": "Content value"
+                    }
+                },
+                "example": {
+                    "content": {
+                        "type": "application/json",
+                        "data": "{\n              \"my_object\": {\n                \"a\": 1.0,\n                \"c\": true,\n                \"e\": \"welcome\"\n              },\n              \"my_string\": \"Hello World\"\n            }"
+                    }
+                },
+                "description": "Content data"
+            },
+            "Connections": {
+                "type": "object",
+                "title": "Connections",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Connection"
+                        },
+                        "description": "the list of connections"
+                    }
+                },
+                "description": "All connections for a specific user"
+            },
+            "ConnectionCreateResponse": {
+                "type": "object",
+                "title": "ConnectionCreateResponse",
+                "required": [
+                    "data"
+                ],
+                "properties": {
+                    "data": {
+                        "description": "Connection object",
+                        "$ref": "#/components/schemas/Connection"
+                    }
+                },
+                "example": {
+                    "data": {
+                        "resource": "s2s_1533285965700317606",
+                        "id": "a8c152dc-96f9-11e8-b33d-00146c8c2dd7",
+                        "callback_url": "https://thirdpartyapp.com/api"
+                    }
+                },
+                "description": "Creation crreate response data"
+            },
+            "ConnectionCreate": {
+                "type": "object",
+                "title": "ConnectionCreate",
+                "required": [
+                    "connection"
+                ],
+                "properties": {
+                    "connection": {
+                        "type": "object",
+                        "required": [
+                            "callback_url"
+                        ],
+                        "properties": {
+                            "resource": {
+                                "type": "string",
+                                "description": "The client resource"
+                            },
+                            "callback_url": {
+                                "type": "string",
+                                "description": "The app webhook"
+                            }
+                        },
+                        "description": "Connection object"
+                    }
+                },
+                "example": {
+                    "connection": {
+                        "resource": "s2s_1533285965700317606",
+                        "callback_url": "https://thirdpartyapp.com/api"
+                    }
+                },
+                "description": "Connection creation data"
+            },
+            "Connection": {
+                "type": "object",
+                "title": "Connection",
+                "required": [
+                    "callback_url"
+                ],
+                "properties": {
+                    "resource": {
+                        "type": "string",
+                        "description": "The client resource"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The connection identifier"
+                    },
+                    "callback_url": {
+                        "type": "string",
+                        "description": "The app webhook"
+                    }
+                },
+                "example": {
+                    "resource": "s2s_1533285965700317606",
+                    "id": "a8c152dc-96f9-11e8-b33d-00146c8c2dd7",
+                    "callback_url": "https://thirdpartyapp.com/api"
+                },
+                "description": "A S2S client connection"
+            },
+            "Attachment": {
+                "type": "object",
+                "title": "Attachment",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "description": "Attachment URL"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "description": "Attachment size"
+                    },
+                    "mime": {
+                        "type": "string",
+                        "description": "Attachment mime type"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "Attachment filename"
+                    }
+                },
+                "example": {
+                    "attachment": {
+                        "url": "https://openrainbow.com:443/api/rainbow/fileserver/v1.0/files/5d4d3696cfd53e023dadcb07",
+                        "size": 93536,
+                        "mime": "text/csv",
+                        "filename": "sales.csv"
+                    }
+                },
+                "description": "Attachment data"
+            },
+            "CbConnection": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "the connection Id",
+                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "the message timestamp",
+                        "example": "2018-08-23T08:52:04.001535Z"
+                    },
+                    "connection": {
+                        "type": "object",
+                        "properties": {
+                            "state": {
+                                "type": "string",
+                                "enum": [
+                                    "ready",
+                                    "unavailable",
+                                    "terminated"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "state"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "timestamp",
+                    "connection"
+                ],
+                "title": "CbConnection"
+            },
+            "CbPresence": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "the connection Id",
+                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "the message timestamp",
+                        "example": "2018-08-23T08:52:04.001535Z"
+                    },
+                    "presence": {
+                        "type": "object",
+                        "properties": {
+                            "from": {
+                                "type": "string",
+                                "example": "59f1ecc4ea84f9b5c339958d"
+                            },
+                            "resource": {
+                                "type": "string",
+                                "description": "the presence emitting resource",
+                                "example": "web_win_1.57.6_O3MRXPqy"
+                            },
+                            "show": {
+                                "type": "string",
+                                "enum": [
+                                    "away",
+                                    "chat",
+                                    "dnd",
+                                    "xa"
+                                ],
+                                "example": "away",
+                                "description": "presence 'show' attribute"
+                            },
+                            "status": {
+                                "type": "string",
+                                "example": "out for lunch",
+                                "description": "presence 'status' attribute"
+                            }
+                        },
+                        "required": [
+                            "from"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "timestamp",
+                    "presence"
+                ],
+                "title": "CbPresence"
+            },
+            "CbChatState": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "the connection Id",
+                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "the message timestamp",
+                        "example": "2018-08-23T08:52:04.001535Z"
+                    },
+                    "chatstate": {
+                        "type": "object",
+                        "properties": {
+                            "state": {
+                                "type": "string",
+                                "enum": [
+                                    "composing",
+                                    "paused",
+                                    "inactive",
+                                    "active"
+                                ],
+                                "description": "The chat state"
+                            },
+                            "conversation_id": {
+                                "type": "string",
+                                "example": "1555081424877876"
+                            },
+                            "peer": {
+                                "type": "string",
+                                "example": "59f1ecc4ea84f9b5c339958d"
+                            }
+                        },
+                        "required": [
+                            "state",
+                            "conversation_id",
+                            "peer"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "timestamp",
+                    "chatstate"
+                ],
+                "title": "CbChatState"
+            },
+            "CbReceipt": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "the connection Id",
+                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "the message timestamp",
+                        "example": "2018-08-23T08:52:04.001535Z"
+                    },
+                    "receipt": {
+                        "type": "object",
+                        "properties": {
+                            "msg_id": {
+                                "type": "string",
+                                "example": "cf05daec-c32e-11e8-affe-309c2364ed11"
+                            },
+                            "entity": {
+                                "type": "string",
+                                "enum": [
+                                    "client",
+                                    "server"
+                                ],
+                                "description": "The receipt emitter entity",
+                                "example": "server"
+                            },
+                            "conversation_id": {
+                                "type": "string",
+                                "description": "Its value is the 'undefined' conversation '0000000000000000' on the server 'received receipt' event",
+                                "example": "1555081424877876"
+                            },
+                            "event": {
+                                "type": "string",
+                                "enum": [
+                                    "received",
+                                    "read"
+                                ],
+                                "example": "received"
+                            }
+                        },
+                        "required": [
+                            "msg_id",
+                            "entity",
+                            "event"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "timestamp",
+                    "receipt"
+                ],
+                "title": "CbReceipt"
+            },
+            "CbAllReceipt": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "the connection Id",
+                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "the message timestamp",
+                        "example": "2018-08-23T08:52:04.001535Z"
+                    },
+                    "all-receipt": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "enum": [
+                                    "all-received",
+                                    "all-sent"
+                                ],
+                                "description": "Receipt applies to 'sent' or 'received' messages",
+                                "example": "all-received"
+                            },
+                            "conversation_id": {
+                                "type": "string",
+                                "example": "1555081424877876"
+                            },
+                            "with": {
+                                "type": "string",
+                                "example": "59f1ecc4ea84f9b5c339958d"
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "conversation_id",
+                            "with"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "timestamp",
+                    "all-receipt"
+                ],
+                "title": "CbAllReceipt"
+            },
+            "CbConversation": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "the connection Id",
+                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "the message timestamp",
+                        "example": "2018-08-23T08:52:04.001535Z"
+                    },
+                    "conversation": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "the conversation Id",
+                                "example": "1554380274531685"
+                            },
+                            "action": {
+                                "type": "string",
+                                "enum": [
+                                    "create",
+                                    "update",
+                                    "delete"
+                                ],
+                                "description": "the action type",
+                                "example": "update"
+                            },
+                            "peer": {
+                                "type": "string",
+                                "description": "the peer Id",
+                                "example": "59f1ecc4ea84f9b5c339958d"
+                            },
+                            "type": {
+                                "type": "string",
+                                "enum": [
+                                    "user",
+                                    "bot",
+                                    "room"
+                                ],
+                                "description": "the peer type",
+                                "example": "user"
+                            },
+                            "mute": {
+                                "type": "boolean",
+                                "description": "the mute flag",
+                                "example": "true"
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "action",
+                            "peer",
+                            "type"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "timestamp",
+                    "conversation"
+                ],
+                "title": "CbConversation"
+            },
+            "CbRoomInvite": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "the connection Id",
+                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "the message timestamp",
+                        "example": "2018-08-23T08:52:04.001535Z"
+                    },
+                    "room-invite": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "the room Id",
+                                "example": "1554380274531685"
+                            },
+                            "by": {
+                                "type": "string",
+                                "description": "the inviting user Id",
+                                "example": "59f1ecc4ea84f9b5c339958d"
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "the room name",
+                                "example": "Hot news"
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "by",
+                            "name"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "timestamp",
+                    "room-invite"
+                ],
+                "title": "CbRoomInvite"
+            },
+            "CbRoomMember": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "the connection Id",
+                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "the message timestamp",
+                        "example": "2018-08-23T08:52:04.001535Z"
+                    },
+                    "room-member": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "the room Id",
+                                "example": "1554380274531685"
+                            },
+                            "user": {
+                                "type": "string",
+                                "description": "the user Id",
+                                "example": "59f1ecc4ea84f9b5c339958d"
+                            },
+                            "status": {
+                                "type": "string",
+                                "enum": [
+                                    "accepted",
+                                    "rejected",
+                                    "unsubscribed"
+                                ],
+                                "description": "the member status",
+                                "example": "accepted"
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "user",
+                            "status"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "timestamp",
+                    "room-member"
+                ],
+                "title": "CbRoomMember"
+            },
+            "CbRoomState": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "the connection Id",
+                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "the message timestamp",
+                        "example": "2018-08-23T08:52:04.001535Z"
+                    },
+                    "room-state": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string",
+                                "description": "the room Id",
+                                "example": "1554380274531685"
+                            },
+                            "event": {
+                                "type": "string",
+                                "enum": [
+                                    "available",
+                                    "unavailable",
+                                    "deactivated",
+                                    "resumed",
+                                    "shutdown",
+                                    "deleted"
+                                ],
+                                "description": "the room event",
+                                "example": "deleted"
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "event"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "timestamp",
+                    "room-state"
+                ],
+                "title": "CbRoomState"
+            },
+            "CbError": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "the connection Id",
+                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "the message timestamp",
+                        "example": "2018-08-23T08:52:04.001535Z"
+                    },
+                    "error": {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "integer",
+                                "description": "the error code",
+                                "example": "406"
+                            },
+                            "reason": {
+                                "type": "string",
+                                "description": "the error reason",
+                                "example": "not-acceptable"
+                            },
+                            "description": {
+                                "type": "string",
+                                "description": "the error description",
+                                "example": "Only occupants are allowed to send messages to the conference"
+                            },
+                            "conversation_id": {
+                                "type": "string",
+                                "example": "1555081424877876"
+                            },
+                            "msg_id": {
+                                "type": "string",
+                                "description": "the message Id",
+                                "example": "e68d78c0-aa3a-11e9-920b-00146c8c2dd7"
+                            }
+                        },
+                        "required": [
+                            "code",
+                            "reason"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "timestamp",
+                    "error"
+                ],
+                "title": "CbError"
+            }
+        }
+    }
+}

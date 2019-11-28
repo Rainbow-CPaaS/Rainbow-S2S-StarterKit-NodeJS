@@ -22,6 +22,7 @@ const _signin = Symbol('signin');
 const _signout = Symbol('signout');
 const _signinRequired = Symbol('signinRequired');
 const _createConnection = Symbol('createConnection');
+const _setupBasicAuth = Symbol('setupBasicAuth');
 const _setupAuthBearer = Symbol('setupAuthBearer');
 const _setupUrlBasePath = Symbol('setupUrlBasePath');
 const _sendSelfPresence = Symbol('sendSelfPresence');
@@ -44,7 +45,7 @@ const ImService = require('./services/ImService');
 const ConversationService = require('./services/ConversationService');
 const PresenceService = require('./services/PresenceService');
 const BotService = require('./services/BotsService');
-
+const ConnectionService = require('./services/ConnectionService');
 class SdkCore {
 
     constructor(options, logger, sdkinfo, eventsModule, stateManager) {
@@ -73,6 +74,7 @@ class SdkCore {
         this._imService = null;
         this._presenceService = null;
         this._botService = null;
+        this._connectionService = null;
 
         this._authApiInstance = null;
         this._endUserConversationApi = null;
@@ -125,6 +127,12 @@ class SdkCore {
         clientApi.basePath = this.options.rainbow.host;
     }
 
+    [_setupBasicAuth](clientApi) {
+        var that = this;
+        var Basic = clientApi.authentications['Basic'];
+        Basic.username = this.options.credentials.login;
+        Basic.password = this.options.credentials.password;
+    }
     /**
      * @private
      * set authentication Bearer token for the givven client API.
@@ -181,7 +189,7 @@ class SdkCore {
             this._s2sMessageApi = new S2SApi.MessageApi(this._s2sClient);
             this._s2sPresenceApi = new S2SApi.PresenceApi(this._s2sClient);
             this._s2sRoomApi = new S2SApi.RoomApi(this._s2sClient);
-            this._s2sConversationApi = S2SApi.ConversationApi(this._s2sClient);
+            this._s2sConversationApi = new S2SApi.ConversationApi(this._s2sClient);
 
             this._bubbleService = new BubbleService(this.logger,
                 this._connectedUserInfo,
@@ -200,9 +208,10 @@ class SdkCore {
                 this._connectionInfo,
                 this._eventsModule.iee,
                 this._accept,
-                this._endUserConversationApi,
+                //this._endUserConversationApi,
                 this._s2sConversationApi
             );
+
             /*
                         this._contactService = new ContactService(
                             this._connectecUserInfo,
@@ -387,7 +396,9 @@ class SdkCore {
             let authHeaders = this._basicAuthCredsHelper.genAuthParams4Header(this.options.credentials.login, this.options.credentials.password);
             this.logger.info(this, `authHeaders => ${JSON.stringify(authHeaders,null,4)}`);
 
-            await this._authApiInstance.getBasicLogin(authHeaders.authorization, authHeaders.xRainbowAppAuth, that._accept, that._authOpts).then((data) => {
+            //await this._authApiInstance.getBasicLogin(authHeaders.authorization, authHeaders.xRainbowAppAuth, that._accept, that._authOpts).then((data) => {
+            that[_setupBasicAuth](that._authPortalClient); // for later use
+            await this._authApiInstance.getBasicLogin(authHeaders.xRainbowAppAuth, that._accept, that._authOpts).then((data) => {
                 that._connectedUserInfo = data.loggedInUser;
                 //that.logger.debug(this,'Connected user info ', that._connectedUserInfo);
                 that.logger.debug(this, 'Connected user info Token', that.applicationToken);
@@ -474,18 +485,23 @@ class SdkCore {
     async [_closeAllUserConnectons]() {
         var that = this;
         that.logger.enter(this, '_closeAllUserConnectons');
+
         let connectionList = [];
         try {
+            await that._connectionService.stop();
+            /*
             await this._s2sConnectionApi.connectionIndex().then(function(responseBody) {
                 connectionList = that[_extractResponseSchemaData](responseBody);
             }, function(error) {
                 that.logger.exitWithError(this, '[_closeAllUserConnectons]() : connection closing failed KO :', error);
                 throw new Error(JSON.stringify(error));
             });
+            */
         } catch (ex) {
             that.logger.error(this, '_closeAllUserConnectons :', ex);
             throw ex;
         }
+        /*
         that.logger.info(this, '_closeAllUserConnectons all old connections: ' + JSON.stringify(connectionList, null, 4));
         if (connectionList) {
             try {
@@ -504,6 +520,7 @@ class SdkCore {
                 throw e;
             }
         }
+        */
     }
 
     async [_renewAuthToken]() {
@@ -596,6 +613,13 @@ class SdkCore {
                 that[_subscribeToRainbowEvents]();
                 await that[_signin]();
                 this._s2sConnectionApi = new S2SApi.ConnectionApi(this._s2sClient);
+
+                that._connectionService = new ConnectionService(this.logger,
+                    this._eventsModule.iee,
+                    this._accept,
+                    this._s2sConnectionApi
+                );
+
                 await that[_closeAllUserConnectons]();
                 that.logger.info(this, 'creating connection ...');
                 await that[_createConnection](that.callback_url);
@@ -612,8 +636,10 @@ class SdkCore {
                 await that._imService.start();
                 await this._presenceService.start();
                 await this._botService.start();
+                await this._connectionService.start();
                 that.logger.exit(this, 'sdk engine started.');
                 return this._botService.getAll(); // must contains the list of bots jids
+
             } else {
                 that.logger.exit(this, 'sdk engine already started');
             }
@@ -709,8 +735,12 @@ class SdkCore {
         }
 
     */
-    get Conversationservice() {
+    get ConversationService() {
         return this._conversationService;
+    }
+
+    get ConnectionService() {
+        return this._connectionService;
     }
 }
 module.exports = SdkCore;

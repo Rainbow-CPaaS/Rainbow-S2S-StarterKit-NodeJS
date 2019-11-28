@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**emails** | [**[GetContactSuccessEmails]**](GetContactSuccessEmails.md) | Contact emails | 
+**id** | **String** | Contact unique identifier | 
+**contactId** | **String** | Id of the contact coming from the source who created it | 
 **firstName** | **String** | Contact firstName | 
 **lastName** | **String** | Contact lastName | 
-**addresses** | [**[GetContactSuccessAddresses]**](GetContactSuccessAddresses.md) | Contact addresses | 
-**contactId** | **String** | Id of the contact coming from the source who created it | 
 **displayName** | **String** | Contact displayName | 
-**otherData** | [**[GetContactSuccessOtherData]**](GetContactSuccessOtherData.md) | Other user data – may include birthday date, Skype/Facebook pseudo/profile | 
-**jobTitle** | **String** | Contact jobTitle | 
-**groups** | **[String]** | Contact groups type | 
 **company** | **String** | Contact company | 
-**id** | **String** | Contact unique identifier | 
+**jobTitle** | **String** | Contact jobTitle | 
 **phoneNumbers** | [**[GetContactSuccessPhoneNumbers]**](GetContactSuccessPhoneNumbers.md) | Contact phone numbers | 
+**emails** | [**[GetContactSuccessEmails]**](GetContactSuccessEmails.md) | Contact emails | 
+**addresses** | [**[GetContactSuccessAddresses]**](GetContactSuccessAddresses.md) | Contact addresses | 
+**groups** | **[String]** | Contact groups type | 
+**otherData** | [**[GetContactSuccessOtherData]**](GetContactSuccessOtherData.md) | Other user data – may include birthday date, Skype/Facebook pseudo/profile | 
 
 

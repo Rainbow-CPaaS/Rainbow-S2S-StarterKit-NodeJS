@@ -1,9 +1,9 @@
-<a name="Bots"></a>
+<a name="Bot"></a>
 
 ## Bot
 **Kind**: global class  
 
-* [Bots](#Bot)
+* [Bot](#Bot)
     * [new Bot()](#new_Bot_new)
     * [.getAll()](#Bot+getAll) ⇒ <code>Array.&lt;bot&gt;</code>
 
@@ -14,7 +14,7 @@ This service is used to get all available bots information.
 
 <a name="Bot+getAll"></a>
 
-### bots.getAll() ⇒ <code>Array.&lt;bot&gt;</code>
+### bot.getAll() ⇒ <code>Array.&lt;bot&gt;</code>
 Return the list of bots
 
 **Kind**: instance method of [<code>Bot</code>](#Bot)  

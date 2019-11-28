@@ -1,4 +1,4 @@
-# RainbowAuthentPortal.GetBasicLoginSuccessLoggedInUserCreatedByAdmin
+# RainbowAuthenticationPortal.GetBasicLoginSuccessLoggedInUserCreatedByAdmin
 
 ## Properties
 

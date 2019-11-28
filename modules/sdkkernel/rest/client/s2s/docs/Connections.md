@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | [**Connection**](Connection.md) |  | [optional] 
-**data** | **[Object]** |  | [optional] 
+**data** | [**[Connection]**](Connection.md) | the list of connections | [optional] 
 
 

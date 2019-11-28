@@ -1,4 +1,4 @@
-# RainbowAuthentPortal.GetLogoutSuccess
+# RainbowAuthenticationPortal.GetLogoutSuccess
 
 ## Properties
 

@@ -1,6 +1,6 @@
 # S2SApi.MessageApi
 
-All URIs are relative to *http://localhost:4000*
+All URIs are relative to *http://openrainbow.com:443*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 Send a new message
 
-Send a new message
+Send a new message to a recipient identified by a conversation Id. **Caution**: prior to sending a message to a room, you will have to &#39;join&#39; it
 
 ### Example
 
@@ -118,7 +118,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: application/json
 
 
 ## messageReadReceipt

@@ -4,6 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | [**MessageCreateMessage**](MessageCreateMessage.md) |  | [optional] 
+**message** | [**MessageCreateMessage**](MessageCreateMessage.md) |  | 
 
 

@@ -119,7 +119,7 @@ The `hostname` is also necessary to know which server is used: [the sandbox](/#/
 ---
 
 1. clone Rainbow-S2S-StarterKit-NodeJS
- git clone ssh://git@git.openrainbow.org:2223/rainbow-cpaas/Rainbow-S2S-StarterKit-NodeJS.git Rainbow-S2S-StarterKit-NodeJS
+ git clone https://github.com/Rainbow-CPaaS/Rainbow-S2S-StarterKit-NodeJS.git
 
 2. Go to Rainbow-S2S-StarterKit-NodeJS directory
 

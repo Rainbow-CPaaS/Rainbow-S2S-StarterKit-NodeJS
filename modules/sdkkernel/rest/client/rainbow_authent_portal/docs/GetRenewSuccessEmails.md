@@ -1,10 +1,10 @@
-# RainbowAuthentPortal.GetRenewSuccessEmails
+# RainbowAuthenticationPortal.GetRenewSuccessEmails
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email** | **String** | User email address | 
-**type** | **String** | Email type, one of &#x60;home&#x60;, &#x60;work&#x60;, &#x60;other&#x60; | 
+**type** | **String** | Email type, one of &lt;code&gt;home&lt;/code&gt;, &lt;code&gt;work&lt;/code&gt;, &lt;code&gt;other&lt;/code&gt; &lt;/li&gt; | 
 
 

@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**privilege** | **String** | Privilege of the user in the room | 
-**additionDate** | **String** | Date when the user has been added in the room | 
 **userId** | **String** | User identifier | 
+**additionDate** | **String** | Date when the user has been added in the room | 
+**privilege** | **String** | Privilege of the user in the room | 
 **status** | **String** | Status of the user in the room | 
 
 

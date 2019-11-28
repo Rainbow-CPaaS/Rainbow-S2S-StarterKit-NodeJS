@@ -754,8 +754,8 @@
               }
             }
           },
-          "Success fields for OIDC SSO authentication type": {
-            "description": "successful operation",
+          "200": {
+            "description": "Success fields for OIDC SSO authentication type, successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -2790,7 +2790,7 @@
                       "NONE",
                       "HDS"
                     ],
-                    "default": "[\"NONE",
+                    "default": ["NONE"],
                     "items": {
                       "type": "string"
                     }
@@ -3425,7 +3425,7 @@
                       "NONE",
                       "HDS"
                     ],
-                    "default": "[\"NONE",
+                    "default": ["NONE"],
                     "items": {
                       "type": "string"
                     }
@@ -4436,7 +4436,7 @@
                       "NONE",
                       "HDS"
                     ],
-                    "default": "[\"NONE",
+                    "default": ["NONE"],
                     "items": {
                       "type": "string"
                     }
@@ -5095,7 +5095,7 @@
                       "NONE",
                       "HDS"
                     ],
-                    "default": "[\"NONE",
+                    "default": ["NONE"],
                     "items": {
                       "type": "string"
                     }

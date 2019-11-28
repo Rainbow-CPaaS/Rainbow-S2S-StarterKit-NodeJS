@@ -4,6 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**ConnectionCreateResponseData**](ConnectionCreateResponseData.md) |  | [optional] 
+**data** | [**Connection**](Connection.md) |  | 
 
 

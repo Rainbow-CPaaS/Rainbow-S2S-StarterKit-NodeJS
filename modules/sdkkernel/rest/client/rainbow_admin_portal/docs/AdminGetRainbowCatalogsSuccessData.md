@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**isDefault** | **Boolean** | Indicates if it is the default Rainbow catalog. Only one catalog can be the default one.    Default catalog is the catalog which automatically assigned to newly created companies.    Only superadmin can specify a different catalog for a given company. | 
+**id** | **String** | Catalog unique identifier | 
 **name** | **String** | Catalog name | 
 **description** | **String** | Catalog description | 
-**id** | **String** | Catalog unique identifier | 
+**isDefault** | **Boolean** | Indicates if it is the default Rainbow catalog. Only one catalog can be the default one.    Default catalog is the catalog which automatically assigned to newly created companies.    Only superadmin can specify a different catalog for a given company. | 
 **creationDate** | **Date** | Catalog creation date | 
 **offersList** | **[String]** | List of offerIds the catalog contains | 
 

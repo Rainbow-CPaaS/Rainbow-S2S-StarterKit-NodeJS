@@ -1,4 +1,4 @@
-# RainbowAuthentPortal.GetApiRainbowAuthenticationV10ValidatorSuccess
+# RainbowAuthenticationPortal.GetApiRainbowAuthenticationV10ValidatorSuccess
 
 ## Properties
 

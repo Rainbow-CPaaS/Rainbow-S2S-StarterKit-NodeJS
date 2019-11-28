@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **String** | User email type | 
 **email** | **String** | User email address | 
+**type** | **String** | User email type | 
 
 
 
