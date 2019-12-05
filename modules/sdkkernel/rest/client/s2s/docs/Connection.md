@@ -6,6 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **resource** | **String** | The client resource | [optional] 
 **id** | **String** | The connection identifier | [optional] 
-**callbackUrl** | **String** | The app webhook | 
+**callback_url** | **String** | The app webhook | 
 
 
