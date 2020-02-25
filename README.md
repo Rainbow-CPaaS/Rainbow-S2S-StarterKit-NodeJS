@@ -12,9 +12,9 @@ This starter guide will help you :
 
 ### Prerequisites
 
-To use the Rainbow-S2S-StarterKit-NodeJS you need an `applicationID` and a `secretKey` from the [openrainbow hub](https://hub.openrainbow.com/). These information allow you to identify your application and allow you to use the rainbow platform. For more information, see [Applications lifecycle](/#/documentation/doc/hub/application-lifecycle) which explains what is the purpose, how to create an application and how to get the application ID and the secret key.
+To use the Rainbow-S2S-StarterKit-NodeJS you need an `applicationID` and a `secretKey` from the [openrainbow hub](https://hub.openrainbow.com/). These information allow you to identify your application and allow you to use the rainbow platform. For more information, see [Applications lifecycle](https://hub.openrainbow.com/#/documentation/doc/hub/application-lifecycle) which explains what is the purpose, how to create an application and how to get the application ID and the secret key.
 
-The `hostname` is also necessary to know which server is used: [the sandbox](/#/documentation/doc/hub/developer-sandboxed-platform) or [the production server](/#/documentation/doc/hub/get-ready-for-production)
+The `hostname` is also necessary to know which server is used: [the sandbox](https://hub.openrainbow.com/#/documentation/doc/hub/developer-sandboxed-platform) or [the production server](https://hub.openrainbow.com/#/documentation/doc/hub/get-ready-for-production)
 
 As Rainbow-S2S-StarterKit-NodeJS is intended to be used on a server it is recommended to have a Linux OS with those minimum components installed:
 
