@@ -1,0 +1,10 @@
+**/webhook_docs
+**/java/BotSample/s2s/target
+**/java/BotSample/echo-bot/target
+**/java/BotSample/rainbow_authent_portal/target
+**/java/BotSample/dist/target
+**/java/output
+**/java/generated
+**/php/vendor
+**/php/generated
+

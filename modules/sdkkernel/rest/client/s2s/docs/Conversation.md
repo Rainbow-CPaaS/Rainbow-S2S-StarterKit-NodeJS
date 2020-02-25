@@ -1,7 +1,6 @@
 # S2SApi.Conversation
 
 ## Properties
-
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **String** | The conversation type | [optional] 
@@ -11,7 +10,7 @@ Name | Type | Description | Notes
 **creationDate** | **String** | The creation datetime | [optional] 
 
 
-
+<a name="TypeEnum"></a>
 ## Enum: TypeEnum
 
 

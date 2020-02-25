@@ -36,8 +36,8 @@ class Router {
         let httpServerSettings = that._options.rainbow_notification_service.sdkrouter;
         this.port = process.env.PORT || httpServerSettings.port || this.port;
         this.protocol = process.env.SERVER_PROTO || httpServerSettings.protocol || this.protocol;
-        this.logger.enter(that,'starting router service ...');
-        this.logger.info(that,`webhook dynamic implementation will use ${yamlpath}`);
+        this.logger.enter(that, 'starting router service ...');
+        this.logger.info(that, `webhook dynamic implementation will use ${yamlpath}`);
         return new Promise((resolve, reject) => {
             if (!that._started) {
                 app.use(express.json());
@@ -57,7 +57,7 @@ class Router {
                     let key = fs.readFileSync(cert_key_path);
                     let cert = fs.readFileSync(cert_path);
                     let https_options = { key: key, cert: cert };
-                    that._httpServer = https.createServer(app).listen(that.port, () => {
+                    that._httpServer = http.createServer(app).listen(that.port, () => {
                         that.logger.info("App running at https://localhost:" + that.port);
                         that.logger.info('server started in https on port ' + that.port);
                         resolve(true);

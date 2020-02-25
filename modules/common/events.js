@@ -2,7 +2,7 @@
 
 const EventEmitter = require('events');
 const LOG_ID = "EVENTS - ";
-
+const ZmqEventPublisher = require('./ZmqEventPublisher');
 /**
  * @class
  * @name Events
@@ -57,7 +57,7 @@ const LOG_ID = "EVENTS - ";
  */
 class Events {
 
-    constructor(_logger, _filterCallback) {
+    constructor(_logger, options, _filterCallback) {
         var that = this;
         //this.core = _sdkengine;
         this._logger = _logger;
@@ -66,6 +66,8 @@ class Events {
         this._evReceiver = new EventEmitter();
 
         this._evPublisher = new EventEmitter();
+
+        this._zmqEventPublisher = new ZmqEventPublisher(this._logger, options);
 
         this._evReceiver.on("rainbow_onreceipt", function(receipt) {
             if (_filterCallback && _filterCallback(receipt.fromJid)) {
@@ -520,6 +522,14 @@ class Events {
         });
     }
 
+    async start() {
+        this._zmqEventPublisher.start();
+    }
+
+    async stop() {
+        this._zmqEventPublisher.stop();
+    }
+
     get iee() {
         return this._evReceiver;
     }
@@ -696,6 +706,7 @@ class Events {
         });
 
         this._evPublisher.emit(eventName, ...params);
+        this._zmqEventPublisher.publish('rainbow_on' + event, ...params);
     }
 
     /*

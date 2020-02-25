@@ -7,9 +7,11 @@
                     "Connection"
                 ],
                 "summary": "Get the data of a connection",
-                "security": [{
-                    "Bearer": []
-                }],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -22,15 +24,17 @@
                         }
                     }
                 },
-                "parameters": [{
-                    "required": true,
-                    "name": "id",
-                    "in": "path",
-                    "description": "Connection id",
-                    "schema": {
-                        "type": "string"
+                "parameters": [
+                    {
+                        "required": true,
+                        "name": "id",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                }],
+                ],
                 "operationId": "Connection.show",
                 "description": "Get the data of a connection"
             },
@@ -39,23 +43,27 @@
                     "Connection"
                 ],
                 "summary": "Delete a connection",
-                "security": [{
-                    "Bearer": []
-                }],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "responses": {
                     "204": {
                         "description": "No Content"
                     }
                 },
-                "parameters": [{
-                    "required": true,
-                    "name": "id",
-                    "in": "path",
-                    "description": "Connection id",
-                    "schema": {
-                        "type": "string"
+                "parameters": [
+                    {
+                        "required": true,
+                        "name": "id",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                }],
+                ],
                 "operationId": "Connection.delete",
                 "description": "Delete a connection"
             }
@@ -66,9 +74,11 @@
                     "Room"
                 ],
                 "summary": "Join a room",
-                "security": [{
-                    "Bearer": []
-                }],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -81,7 +91,8 @@
                         }
                     }
                 },
-                "parameters": [{
+                "parameters": [
+                    {
                         "required": true,
                         "name": "cnxId",
                         "in": "path",
@@ -110,9 +121,11 @@
                     "Presence"
                 ],
                 "summary": "Probe a user's presence",
-                "security": [{
-                    "Bearer": []
-                }],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -125,7 +138,8 @@
                         }
                     }
                 },
-                "parameters": [{
+                "parameters": [
+                    {
                         "required": true,
                         "name": "cnxId",
                         "in": "path",
@@ -154,23 +168,27 @@
                     "Presence"
                 ],
                 "summary": "Set the user's presence",
-                "security": [{
-                    "Bearer": []
-                }],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "responses": {
                     "202": {
                         "description": "Accepted"
                     }
                 },
-                "parameters": [{
-                    "required": true,
-                    "name": "cnxId",
-                    "in": "path",
-                    "description": "Connection id",
-                    "schema": {
-                        "type": "string"
+                "parameters": [
+                    {
+                        "required": true,
+                        "name": "cnxId",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                }],
+                ],
                 "operationId": "Presence.update",
                 "description": "A user presence preference could be managed with the following API :\n\n**/api/rainbow/enduser/v1.0/users/{userId}/settings**\n\nThe mapping between this presence setting and the **show/status** fields of the presence stanza is show here :\n\n| setting   | show | status    |\n| --------- | ---- | --------- |\n| away      | xa   | away      |\n| invisible | xa   | n/a       | \n| dnd       | dnd  | n/a       | \n| online    | n/a  | mode=auto | \n\nMoreover, the Rainbow webclient sends presence stanzas with the following **show/status** fields to show user (keyboard/focus) state :\n\n| state    | show | status |\n| -------- | ---- | ------ |\n| inactive | away | n/a    |\n| active   | n/a  | n/a    |\n",
                 "requestBody": {
@@ -191,9 +209,11 @@
                     "Conversation"
                 ],
                 "summary": "Get a conversation",
-                "security": [{
-                    "Bearer": []
-                }],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -209,7 +229,8 @@
                         "description": "Not Found"
                     }
                 },
-                "parameters": [{
+                "parameters": [
+                    {
                         "required": true,
                         "name": "cnxId",
                         "in": "path",
@@ -236,15 +257,18 @@
                     "Conversation"
                 ],
                 "summary": "Delete a conversation",
-                "security": [{
-                    "Bearer": []
-                }],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "responses": {
                     "204": {
                         "description": "No Content"
                     }
                 },
-                "parameters": [{
+                "parameters": [
+                    {
                         "required": true,
                         "name": "cnxId",
                         "in": "path",
@@ -273,15 +297,18 @@
                     "Message"
                 ],
                 "summary": "Send a received receipt",
-                "security": [{
-                    "Bearer": []
-                }],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "responses": {
                     "202": {
                         "description": "Accepted"
                     }
                 },
-                "parameters": [{
+                "parameters": [
+                    {
                         "required": true,
                         "name": "cnxId",
                         "in": "path",
@@ -319,15 +346,18 @@
                     "Message"
                 ],
                 "summary": "Send a read receipt",
-                "security": [{
-                    "Bearer": []
-                }],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "responses": {
                     "202": {
                         "description": "Accepted"
                     }
                 },
-                "parameters": [{
+                "parameters": [
+                    {
                         "required": true,
                         "name": "cnxId",
                         "in": "path",
@@ -365,9 +395,11 @@
                     "Message"
                 ],
                 "summary": "Send a new message",
-                "security": [{
-                    "Bearer": []
-                }],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -380,7 +412,8 @@
                         }
                     }
                 },
-                "parameters": [{
+                "parameters": [
+                    {
                         "required": true,
                         "name": "cnxId",
                         "in": "path",
@@ -417,9 +450,11 @@
                     "Message"
                 ],
                 "summary": "List the messages of a conversation",
-                "security": [{
-                    "Bearer": []
-                }],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -432,7 +467,8 @@
                         }
                     }
                 },
-                "parameters": [{
+                "parameters": [
+                    {
                         "required": true,
                         "name": "cnxId",
                         "in": "path",
@@ -453,6 +489,51 @@
                 ],
                 "operationId": "Message.index",
                 "description": "Paginated list the messages of a conversation"
+            },
+            "delete": {
+                "tags": [
+                    "Message"
+                ],
+                "summary": "Delete all conversation messages",
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeleteAllResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "required": true,
+                        "name": "cnxId",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "required": true,
+                        "name": "cvId",
+                        "in": "path",
+                        "description": "Conversation id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "operationId": "Message.delete_all",
+                "description": "Delete all conversation messages"
             }
         },
         "/api/rainbow/ucs/v1.0/connections/{cnxId}/conversations/{cvId}/chatstate/{state}": {
@@ -461,9 +542,11 @@
                     "Conversation"
                 ],
                 "summary": "Send a chat state",
-                "security": [{
-                    "Bearer": []
-                }],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "responses": {
                     "202": {
                         "description": "Accepted"
@@ -475,7 +558,8 @@
                         "description": "Not Found"
                     }
                 },
-                "parameters": [{
+                "parameters": [
+                    {
                         "required": true,
                         "name": "cnxId",
                         "in": "path",
@@ -520,9 +604,11 @@
                     "Conversation"
                 ],
                 "summary": "Create a conversation",
-                "security": [{
-                    "Bearer": []
-                }],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -538,15 +624,17 @@
                         "description": "Bad Request"
                     }
                 },
-                "parameters": [{
-                    "required": true,
-                    "name": "cnxId",
-                    "in": "path",
-                    "description": "Connection id",
-                    "schema": {
-                        "type": "string"
+                "parameters": [
+                    {
+                        "required": true,
+                        "name": "cnxId",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                }],
+                ],
                 "operationId": "Conversation.create",
                 "description": "Create a conversation",
                 "requestBody": {
@@ -565,9 +653,11 @@
                     "Conversation"
                 ],
                 "summary": "Get all conversations",
-                "security": [{
-                    "Bearer": []
-                }],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -583,15 +673,17 @@
                         "description": "Not Found"
                     }
                 },
-                "parameters": [{
-                    "required": true,
-                    "name": "cnxId",
-                    "in": "path",
-                    "description": "Connection id",
-                    "schema": {
-                        "type": "string"
+                "parameters": [
+                    {
+                        "required": true,
+                        "name": "cnxId",
+                        "in": "path",
+                        "description": "Connection id",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
-                }],
+                ],
                 "operationId": "Conversation.index",
                 "description": "Get all conversations"
             }
@@ -602,9 +694,11 @@
                     "Connection"
                 ],
                 "summary": "Create a new user connection",
-                "security": [{
-                    "Bearer": []
-                }],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -970,6 +1064,63 @@
                             }
                         }
                     },
+                    "all-deleted": {
+                        "{$request.body#/callback_url}/all-deleted": {
+                            "post": {
+                                "operationId": "allDeletedNotificationReceived",
+                                "requestBody": {
+                                    "required": true,
+                                    "content": {
+                                        "application/json": {
+                                            "schema": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string",
+                                                        "description": "the connection Id",
+                                                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                                                    },
+                                                    "timestamp": {
+                                                        "type": "string",
+                                                        "description": "the notification timestamp",
+                                                        "example": "2018-08-23T08:52:04.001535Z"
+                                                    },
+                                                    "all-deleted": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "conversation_id": {
+                                                                "type": "string",
+                                                                "example": "1555081424877876"
+                                                            },
+                                                            "with": {
+                                                                "type": "string",
+                                                                "example": "59f1ecc4ea84f9b5c339958d"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "conversation_id",
+                                                            "with"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "id",
+                                                    "timestamp",
+                                                    "all-deleted"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "responses": {
+                                    "200": {
+                                        "description": "return this code if your server accepts the callback"
+                                    }
+                                },
+                                "x-swagger-router-controller": "MessageCtrl"
+                            }
+                        }
+                    },
                     "conversation": {
                         "{$request.body#/callback_url}/conversation": {
                             "post": {
@@ -988,7 +1139,7 @@
                                                     },
                                                     "timestamp": {
                                                         "type": "string",
-                                                        "description": "the message timestamp",
+                                                        "description": "the notification timestamp",
                                                         "example": "2018-08-23T08:52:04.001535Z"
                                                     },
                                                     "conversation": {
@@ -1074,7 +1225,7 @@
                                                     },
                                                     "timestamp": {
                                                         "type": "string",
-                                                        "description": "the message timestamp",
+                                                        "description": "the notification timestamp",
                                                         "example": "2018-08-23T08:52:04.001535Z"
                                                     },
                                                     "room-invite": {
@@ -1139,7 +1290,7 @@
                                                     },
                                                     "timestamp": {
                                                         "type": "string",
-                                                        "description": "the message timestamp",
+                                                        "description": "the notification timestamp",
                                                         "example": "2018-08-23T08:52:04.001535Z"
                                                     },
                                                     "room-member": {
@@ -1209,7 +1360,7 @@
                                                     },
                                                     "timestamp": {
                                                         "type": "string",
-                                                        "description": "the message timestamp",
+                                                        "description": "the notification timestamp",
                                                         "example": "2018-08-23T08:52:04.001535Z"
                                                     },
                                                     "room-state": {
@@ -1276,7 +1427,7 @@
                                                     },
                                                     "timestamp": {
                                                         "type": "string",
-                                                        "description": "the message timestamp",
+                                                        "description": "the notification timestamp",
                                                         "example": "2018-08-23T08:52:04.001535Z"
                                                     },
                                                     "error": {
@@ -1335,15 +1486,17 @@
                         "{$request.body#/callback_url}/message": {
                             "post": {
                                 "operationId": "messageNotificationReceived",
-                                "parameters": [{
-                                    "name": "x-resource",
-                                    "in": "header",
-                                    "description": "resource of the message sender",
-                                    "schema": {
-                                        "type": "string"
-                                    },
-                                    "example": "mobile_android_020000000000"
-                                }],
+                                "parameters": [
+                                    {
+                                        "name": "x-resource",
+                                        "in": "header",
+                                        "description": "resource of the message sender",
+                                        "schema": {
+                                            "type": "string"
+                                        },
+                                        "example": "mobile_android_020000000000"
+                                    }
+                                ],
                                 "requestBody": {
                                     "required": true,
                                     "content": {
@@ -1358,7 +1511,7 @@
                                                     },
                                                     "timestamp": {
                                                         "type": "string",
-                                                        "description": "the message timestamp",
+                                                        "description": "the notification timestamp",
                                                         "example": "2018-08-23T08:52:04.001535Z"
                                                     },
                                                     "message": {
@@ -1428,7 +1581,8 @@
                                                                 "items": {
                                                                     "$ref": "#/components/schemas/Content"
                                                                 },
-                                                                "example": [{
+                                                                "example": [
+                                                                    {
                                                                         "type": "application/json",
                                                                         "data": "{\"isTest\": true}"
                                                                     },
@@ -1473,9 +1627,11 @@
                     "Connection"
                 ],
                 "summary": "List all user connections",
-                "security": [{
-                    "Bearer": []
-                }],
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -1498,13 +1654,15 @@
             "url": "https://hub.openrainbow.com/img/logohub.svg",
             "backgroundColor": "#ff4900"
         },
-        "version": "1.99.0",
+        "version": "1.104.0",
         "title": "S2S api",
-        "description": "# Rainbow S2S API guide\n\n## Preamble\n\n### Introduction\n\nThis guide describes a list of API services that are provided by the OT Rainbow S2S portal.\nThis portal is dedicated to S2S features, providing a full REST API for Rainbow features.\n\n### Protocol\n\nREST interface is used for sending/receiving OT rainbow API messages.\nHTTP verbs GET, DELETE, POST, PUT, etc. are used.\nStandard HTTP responses are used to provide requested information or error status.\nThere is no session notion in OT Rainbow system, so requests could be issued according to the stateless model,\nwithout transport conservation between them.\nAdditional data could be provided in message body.\nJSON is used as a main format for data encoding in message body part.\nEach request is started with the following pattern /{module}/{version}/ where {module} is a portal module name\nto address and {version} is a version of used API, e.g. “v1.0”.\n\n### Security considerations\n\nEach request should contain some credential information to authenticate itself.\nStandard HTTP authentication with basic/bearer modes is used.\nJSON Web Token mechanism is used to provide authentication information.\nJWT has a expire timeout that is controlled by OT Rainbow portal to prevent very long token usage.\nAlso authentication with application token is used.\nThe token must be provided in the request HTTP header, using a custom header: APIKey.\nAt server side, token is verified, and if it doesn’t match, 403 Not Allowed response is sent.\nTLS is used as a transport protocol to support message exchanges between OT Rainbow portal and an application.\n\n# Authentication\n\n<!-- ReDoc-Inject: <security-definitions> -->"
+        "description": "# Rainbow S2S API guide\n\n## Preamble\n\n### Introduction\n\nThis guide describes a list of API services that are provided by the OT Rainbow S2S portal.\nThis portal is dedicated to S2S features, providing a full REST API for Rainbow features.\n\n### Protocol\n\nREST interface is used for sending/receiving OT rainbow API messages.\nHTTP verbs GET, DELETE, POST, PUT, etc. are used.\nStandard HTTP responses are used to provide requested information or error status.\nThere is no session notion in OT Rainbow system, so requests could be issued according to the stateless model,\nwithout transport conservation between them.\nAdditional data could be provided in message body.\nJSON is used as a main format for data encoding in message body part.\nEach request is started with the following pattern /{module}/{version}/ where {module} is a portal module name\nto address and {version} is a version of used API, e.g. “v1.0”.\n\n### Security considerations\n\nEach request should contain some credential information to authenticate itself.\nStandard HTTP authentication with basic/bearer modes is used.\nJSON Web Token mechanism is used to provide authentication information.\nJWT has a expire timeout that is controlled by OT Rainbow portal to prevent very long token usage.\nAlso authentication with application token is used.\nThe token must be provided in the request HTTP header, using a custom header: APIKey.\nAt server side, token is verified, and if it doesn’t match, 403 Not Allowed response is sent.\nTLS is used as a transport protocol to support message exchanges between OT Rainbow portal and an application.\n\n"
     },
-    "servers": [{
-        "url": "//openrainbow.com:443"
-    }],
+    "servers": [
+        {
+            "url": "//openrainbow.com:443"
+        }
+    ],
     "components": {
         "securitySchemes": {
             "Bearer": {
@@ -1605,16 +1763,19 @@
                 },
                 "example": {
                     "total_count": "3",
-                    "messages": [{
+                    "messages": [
+                        {
                             "subject": "",
                             "lang": "en",
                             "id": "web_5ed74032-2b8c-48c0-8e4b-414da884c7c71",
                             "from": "59f1ecc4ea84f9b5c339958d",
                             "datetime": "2018-08-23T08:52:04.001535Z",
-                            "contents": [{
-                                "type": "text/markdown",
-                                "data": "## Hello BOB"
-                            }],
+                            "contents": [
+                                {
+                                    "type": "text/markdown",
+                                    "data": "## Hello BOB"
+                                }
+                            ],
                             "body": "Hello BOB",
                             "attachment": {
                                 "url": "https://openrainbow.com:443/api/rainbow/fileserver/v1.0/files/5d4d3696cfd53e023dadcb07",
@@ -1685,10 +1846,12 @@
                         "subject": "Greeting",
                         "lang": "en",
                         "id": "3dfdecf6-d1e8-11e8-bbed-00146c8c2dd7",
-                        "contents": [{
-                            "type": "application/markdown",
-                            "data": "##Hello World"
-                        }],
+                        "contents": [
+                            {
+                                "type": "application/markdown",
+                                "data": "##Hello World"
+                            }
+                        ],
                         "body": "Hello world"
                     }
                 }
@@ -1733,10 +1896,12 @@
                     "message": {
                         "subject": "Greeting",
                         "lang": "en",
-                        "contents": [{
-                            "type": "text/markdown",
-                            "data": "## Hello Bob"
-                        }],
+                        "contents": [
+                            {
+                                "type": "text/markdown",
+                                "data": "## Hello Bob"
+                            }
+                        ],
                         "body": "Hello world"
                     }
                 },
@@ -1787,10 +1952,12 @@
                     "id": "web_5ed74032-2b8c-48c0-8e4b-414da884c7c71",
                     "from": "59f1ecc4ea84f9b5c339958d",
                     "datetime": "2018-08-23T08:52:04.001535Z",
-                    "contents": [{
-                        "type": "text/markdown",
-                        "data": "## Hello BOB"
-                    }],
+                    "contents": [
+                        {
+                            "type": "text/markdown",
+                            "data": "## Hello BOB"
+                        }
+                    ],
                     "body": "Hello BOB",
                     "attachment": {
                         "url": "https://openrainbow.com:443/api/rainbow/fileserver/v1.0/files/5d4d3696cfd53e023dadcb07",
@@ -1800,6 +1967,24 @@
                     }
                 },
                 "description": "A message"
+            },
+            "DeleteAllResponse": {
+                "type": "object",
+                "title": "DeleteAllResponse",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "deleted": {
+                                "type": "integer",
+                                "description": "deleted count"
+                            }
+                        }
+                    }
+                },
+                "example": {
+                    "deleted": 25
+                }
             },
             "Conversations": {
                 "type": "object",
@@ -1942,7 +2127,7 @@
                         "callback_url": "https://thirdpartyapp.com/api"
                     }
                 },
-                "description": "Creation crreate response data"
+                "description": "Creation create response data"
             },
             "ConnectionCreate": {
                 "type": "object",

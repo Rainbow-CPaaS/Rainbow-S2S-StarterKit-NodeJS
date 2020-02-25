@@ -1,7 +1,6 @@
 # S2SApi.Message
 
 ## Properties
-
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **subject** | **String** | The subject | [optional] 

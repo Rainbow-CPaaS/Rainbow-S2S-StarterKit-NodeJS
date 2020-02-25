@@ -1,0 +1,17 @@
+{
+	"apiPackage":"com.ale.rainbow.s2s.client.auth.api",
+	"modelPackage":"com.ale.rainbow.s2s.client.auth.models",
+	"invokerPackage":"com.ale.rainbow.s2s.client.auth",
+	"developerName": "J.O",
+        "developerEmail": "j.o@al-enterprise.com",
+        "developerOrganization":"ale-enterprise.com",
+	"parentGroupId":"com.ale.rainbow.s2s",
+        "parentArtifactId":"BotSample",
+        "parentVersion":"1.0.0",
+	"groupId":"com.ale.rainbow.s2s",
+        "artifactId":"s2s-client-auth",
+        "artifactVersion":"1.0.0",
+	"snapshotVersion":"false",
+	"serializableModel": "true",
+        "artifactDescription":"S2S client api generated from OpenAPIGenerator"	
+}

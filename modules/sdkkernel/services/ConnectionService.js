@@ -1,5 +1,6 @@
 "use stricts";
 const Utils = require('./../../common/utils');
+var DataHelper = require('./DataHelper');
 
 /**
  * @class
@@ -35,7 +36,7 @@ class ConnectionService {
         that._logger.enter(this, "start");
         try {
             that.connections = await that.getAllConnections();
-            that._logger.info(that, that.connections);
+            //that._logger.info(that, JSON.stringify(that.connections, null, 4));
             return true;
         } catch (err) {
             that._logger.exitWithError(that, "start", err);
@@ -43,18 +44,30 @@ class ConnectionService {
         }
     }
 
-    /**
-     * Stop connection service.
-     * When stoppped, all user connections are closed.
-     */
+    async _deleteCtx(foundConnections) {
+            if (Array.isArray(foundConnections)) {
+                for (let i = 0; i < foundConnections.length; i++) {
+                    let aCtx = foundConnections[i];
+                    if (aCtx.id) {
+                        this._logger.info(this, 'colsing connection ' + aCtx.id + '...');
+                        await this.deleteConnection(aCtx.id);
+                        this._logger.info(this, 'connection ' + aCtx.id + 'closed OK');
+                    }
+                }
+            }
+        }
+        /**
+         * Stop connection service.
+         * When stoppped, all user connections are closed.
+         */
     async stop() {
         let that = this;
         that._logger.enter(this, "stop");
         try {
-            var foundConnections = that.getAllConnections();
-            for (aConnection in foundConnections) {
-                await this.deleteConnection(aConnection.id);
-            }
+            await that._deleteCtx(that.connections);
+            var foundConnections = await that.getAllConnections();
+            await that._deleteCtx(foundConnections);
+            that._logger.exit(that, "stop");
             return true;
         } catch (err) {
             that._logger.exitWithError(that, "stop", err);
@@ -96,7 +109,7 @@ class ConnectionService {
         let that = this;
         that._logger.enter(this, `deleteConnection(${id})`);
         await that._s2sConnectionApi.connectionDelete(id).then(() => {
-            that._logger.info(this, `deleteConnection(${id}) : connection deleted`);
+            that._logger.info(that, `deleteConnection(${id}) : connection deleted`);
             return true;
         }, (error) => {
             that._logger.exitWithError(that, 'deleteConnection :', error);
@@ -115,9 +128,10 @@ class ConnectionService {
     async getAllConnections() {
         let that = this;
         that._logger.enter(this, 'getAllConnections');
-        await that._s2sConnectionApi.connectionIndex().then((data) => {
-            that._logger.info(this, "getAllConnections:cnxId", data);
-            that.connections = data;
+        return await that._s2sConnectionApi.connectionIndex().then((data) => {
+            that.connections = DataHelper.extractResponseSchemaData(data);
+            that._logger.exit(that, 'getAllConnections : returning ' + ((Array.isArray(that.connections)) ? that.connections.length : 0) + ' connection(s)');
+            //that._logger.exit(that, JSON.stringify(ctxs, null, 4));
             return that.connections;
         }, (error) => {
             that._logger.exitWithError(that, 'getAllConnections :', error);
@@ -144,8 +158,8 @@ class ConnectionService {
                 return conv;
             }
         }
-        await that._s2sConnectionApi.connectionShow(conId).then((data) => {
-            that._logger.info(this, `getConnection(${conId})`, data);
+        return await that._s2sConnectionApi.connectionShow(conId).then((data) => {
+            that._logger.info(that, `getConnection(${conId})`, data);
             return data;
         }, (error) => {
             that._logger.exitWithError(that, 'getConnection :', error);

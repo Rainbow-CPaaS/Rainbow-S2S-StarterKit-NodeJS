@@ -1,0 +1,6 @@
+{
+	"apiPackage":"Api",
+	"modelPackage":"Model",
+	"invokerPackage":"Ale\\Rainbow\\S2S\\Client\\S2S",
+	"packageName":"GeneratedS2S"
+}

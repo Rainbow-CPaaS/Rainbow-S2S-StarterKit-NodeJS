@@ -1,0 +1,25 @@
+{
+    "rainbow": {
+          "host": "https://openrainbow.net",
+          "mode": "bot"
+      },
+      "credentials": {
+          "login": "jo.sophia06560@gmail.com",
+          "password": "GG2+kla2bF&1bC"
+      },
+      "application": {
+          "appID": "dbb6d920755a11e8805111bfa635ad2f",
+          "appSecret": "Y3RyRVW12opjXIHERiUmBOkGd8UYmmKxZBNtFwfaX6QxtNgRV9I7Wx4wvlwhl8KW"
+      },
+      "logs": {
+          "enableConsoleLogs": true,
+          "enableFileLogs": false,
+          "file": {
+              "path": "/var/tmp/rainbowsdk/",
+              "level": "debug"
+          }
+      },
+      "im": {
+          "sendReadReceipt": false
+      }
+  }

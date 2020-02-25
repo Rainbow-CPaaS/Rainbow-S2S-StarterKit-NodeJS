@@ -1,7 +1,6 @@
 # S2SApi.ConnectionCreateConnection
 
 ## Properties
-
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **resource** | **String** | The client resource | [optional] 

@@ -1,7 +1,6 @@
 # RainbowAuthenticationPortal.PutApiRainbowLogsLevelsSuccessOldLoggerLevels
 
 ## Properties
-
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **console** | **String** | Previous log level of &lt;strong&gt;console&lt;/strong&gt; transport (if enabled in portal&#39;s configuration) | [optional] 

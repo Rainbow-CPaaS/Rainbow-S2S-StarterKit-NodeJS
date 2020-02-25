@@ -1,7 +1,6 @@
 # S2SApi.MessageCreateResponseData
 
 ## Properties
-
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **to** | **String** | 5bc50eea4ca684544b694004 | [optional] 

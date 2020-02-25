@@ -210,19 +210,19 @@ class Logger {
         };
 
         this._logger.info = function() {
-            that._logger.log.apply(this._logger, ["info", `${argumentsToString(arguments)}`]);
+            that._logger.log.apply(this._logger, ["info", `INFO : ${argumentsToString(arguments)}`]);
         };
 
         this._logger.error = function() {
-            that._logger.log.apply(this._logger, ["error", `${argumentsToString(arguments)}`]);
+            that._logger.log.apply(this._logger, ["error", `ERROR : ${argumentsToString(arguments)}`]);
         };
 
         this._logger.debug = function() {
-            that._logger.log.apply(that._logger, ["debug", `${argumentsToString(arguments)}`]);
+            that._logger.log.apply(that._logger, ["debug", `DEBUG : ${argumentsToString(arguments)}`]);
         };
 
         this._logger.warn = function() {
-            that._logger.log.apply(that._logger, ["warn", `${argumentsToString(arguments)}`]);
+            that._logger.log.apply(that._logger, ["warn", `WARN : ${argumentsToString(arguments)}`]);
         };
 
         this.hideId = function(url) {

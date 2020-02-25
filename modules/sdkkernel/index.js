@@ -4,10 +4,11 @@ const fs = require('fs');
 const path = require('path');
 const jwt = require("jwt-decode");
 const moment = require('moment');
+const sleep = require('sleep-promise');
 const HttpServer = require('./webhook');
 const NgrokService = require('./services/ngrok-service');
 const BasicAuthCredsHelper = require('./services/basicauthcredshelper');
-
+const os = require('os');
 var RainbowAdminPortal = require('./rest/client/rainbow_admin_portal/src');
 var RainbowEnduserPortal = require('./rest/client/rainbow_enduser_portal/src');
 var RainbowAuthentPortal = require('./rest/client/rainbow_authent_portal/src');
@@ -36,7 +37,7 @@ const _stopTokenWatcher = Symbol('stopTokenWatcher');
 const _unbscribeFromRainbowEvents = Symbol('_unbscribeFromRainbowEvents');
 const _startAllServices = Symbol('startAllServices');
 const _stopAllServices = Symbol('stopAllServices');
-
+const _saveCallbackUrl = Symbol('saveCallbackUrl');
 const BubbleService = require('./services/BubbleService');
 //const NotificationService = require('./services/Notifications');
 //const CompanyService = require('./services/CompanyService');
@@ -117,6 +118,29 @@ class SdkCore {
         this._authApiInstance = new RainbowAuthentPortal.AuthenticationApi(this._authPortalClient);
     }
 
+    [_saveCallbackUrl](jsonSchema, filename) {
+        let fd;
+        let destdirectory = os.tmpdir() + path.sep + 's2s';
+        this.logger.enter(this, '_saveCallbackUrl', `${destdirectory}${path.sep}${filename}`);
+        try {
+            if (!fs.existsSync(destdirectory)) {
+                this.logger.info(this, '_saveCallbackUrl', `creatig directory ${destdirectory} ...`);
+                fs.mkdirSync(destdirectory);
+            }
+            if (fs.existsSync(`${destdirectory}${path.sep}${filename}`)) {
+                fs.unlinkSync(`${destdirectory}${path.sep}${filename}`);
+            }
+            fd = fs.openSync(`${destdirectory}${path.sep}${filename}`, 'a');
+            fs.appendFileSync(fd, JSON.stringify(jsonSchema, null, 4), 'utf8');
+        } catch (e) {
+            this.logger.exitWithError(this, '' + e);
+        } finally {
+            if (fd !== undefined) {
+                fs.closeSync(fd);
+            }
+        }
+    }
+
     /**
      * @private
      * configure default values [host] for the givven S2S API client.
@@ -154,8 +178,9 @@ class SdkCore {
     [_extractResponseSchemaData](responseBody) {
         let res = {};
         try {
-            this.logger.enter(this, '_unbscribeFromRainbowEvents', responseBody);
+            //this.logger.enter(this, '_extractResponseSchemaData', responseBody);
             res = (responseBody !== null && responseBody !== 'undefined' && responseBody.hasOwnProperty('data')) ? responseBody.data : responseBody;
+            this.logger.enter(this, '_extractResponseSchemaData', res);
         } catch (ex) {
             this.logger.error(this, '_extractResponseSchemaData :', ex);
         }
@@ -400,9 +425,9 @@ class SdkCore {
             that[_setupBasicAuth](that._authPortalClient); // for later use
             await this._authApiInstance.getBasicLogin(authHeaders.xRainbowAppAuth, that._accept, that._authOpts).then((data) => {
                 that._connectedUserInfo = data.loggedInUser;
-                //that.logger.debug(this,'Connected user info ', that._connectedUserInfo);
-                that.logger.debug(this, 'Connected user info Token', that.applicationToken);
+                //that.logger.debug(this,'Connected user info ', that._connectedUserInfo);                
                 that.applicationToken = data.token;
+                that.logger.debug(this, 'Connected user info Token', that.applicationToken);
                 that[_startTokenWatcher]();
                 that.logger.debug(this, 'setting up Auth Portal Client ...');
                 that[_setupAuthBearer](that._authPortalClient); // for later use
@@ -436,9 +461,9 @@ class SdkCore {
 
     async [_signout]() {
         var that = this;
-        that.logger.enter(this, '_signout');
+        that.logger.enter(this, '[_signout]()');
         await this._authApiInstance.getLogout(this._accept).then(function(data) {
-            that.logger.exit(this, '_signout');
+            that.logger.exit(this, '[_signout]()');
         }, function(error) {
             that.logger.exitWithError(this, '_signout :logout failed ! Returned error: ' + JSON.stringify(error, null, 4));
             throw new Error(JSON.stringify(error));
@@ -472,8 +497,9 @@ class SdkCore {
         };
         await this._s2sConnectionApi.connectionCreate(opts).then((responseBody) => {
             that._connectionInfo = that[_extractResponseSchemaData](responseBody);
-            that.logger.exit(this, '[_createConnection]() : connection created OK :' + JSON.stringify(responseBody, null, 4));
+            that.logger.exit(this, '[_createConnection]() : connection created OK :' + JSON.stringify(that._connectionInfo, null, 4));
             that.logger.exit(this, '[_createConnection]() : connection created OK ');
+            that[_saveCallbackUrl]({ callback_url: callback_url }, 's2s_callback_url.json');
             that._stateManager.transitTo(that._stateManager.CONNECTED);
         }, (error) => {
             that.logger.exitWithError(this, '[_createConnection]() : connection creation failed KO :' + JSON.stringify(error, null, 4));
@@ -484,43 +510,14 @@ class SdkCore {
 
     async [_closeAllUserConnectons]() {
         var that = this;
-        that.logger.enter(this, '_closeAllUserConnectons');
-
-        let connectionList = [];
+        that.logger.enter(this, '[_closeAllUserConnectons]() closing connection ...');
         try {
             await that._connectionService.stop();
-            /*
-            await this._s2sConnectionApi.connectionIndex().then(function(responseBody) {
-                connectionList = that[_extractResponseSchemaData](responseBody);
-            }, function(error) {
-                that.logger.exitWithError(this, '[_closeAllUserConnectons]() : connection closing failed KO :', error);
-                throw new Error(JSON.stringify(error));
-            });
-            */
+            that.logger.exit(this, '[_closeAllUserConnectons]()');
         } catch (ex) {
-            that.logger.error(this, '_closeAllUserConnectons :', ex);
+            that.logger.error(this, '[_closeAllUserConnectons]() :', ex);
             throw ex;
         }
-        /*
-        that.logger.info(this, '_closeAllUserConnectons all old connections: ' + JSON.stringify(connectionList, null, 4));
-        if (connectionList) {
-            try {
-                for (var i = 0; i < connectionList.length; i++) {
-                    that.logger.info(this, '_closeAllUserConnectons closing ' + JSON.stringify(connectionList[i]) + '...');
-                    await that._s2sConnectionApi.connectionDelete(connectionList[i].id).then((responseData) => {
-                            that.logger.info(this, '_closeAllUserConnectons : connection ' + JSON.stringify(connectionList[i]) + ' closed OK.');
-                        },
-                        (error) => {
-                            that.logger.error(this, '_closeAllUserConnectons : connection ' + JSON.stringify(connectionList[i]) + ' closing KO.');
-                        });
-                }
-                that.logger.exit(this, '_closeAllUserConnectons : all connection closed !');
-            } catch (e) {
-                that.logger.exitWithError(this, '_closeAllUserConnectons : connection ' + JSON.stringify(e) + ' closing KO.');
-                throw e;
-            }
-        }
-        */
     }
 
     async [_renewAuthToken]() {
@@ -607,8 +604,13 @@ class SdkCore {
         try {
             if (!that._started) {
                 that.logger.info(this, 'starting statemanager...');
+                await that._eventsModule.start();
                 await that._stateManager.start();
-                that.callback_url = await that._ngrokService.start();
+                if (that.options.rainbow_notification_service.endpoint == 'ngrok') {
+                    that._callback_url = await that._ngrokService.start();
+                } else if (that.options.rainbow_notification_service.endpoint == 'reverse_proxy') {
+                    that._callback_url = that.options.rainbow_notification_service.reverse_proxy.url;
+                }
                 await that._httpServer.start();
                 that[_subscribeToRainbowEvents]();
                 await that[_signin]();
@@ -619,10 +621,10 @@ class SdkCore {
                     this._accept,
                     this._s2sConnectionApi
                 );
-
+                that.logger.info(this, 'close all previous connection ...');
                 await that[_closeAllUserConnectons]();
-                that.logger.info(this, 'creating connection ...');
-                await that[_createConnection](that.callback_url);
+                that.logger.info(this, 'creating new connection ...');
+                await that[_createConnection](that._callback_url);
                 that[_initializeRESTApiAndServices]();
                 that._stateManager.transitTo(that._stateManager.STARTED);
                 await that[_sendSelfPresence]();
@@ -638,7 +640,8 @@ class SdkCore {
                 await this._botService.start();
                 await this._connectionService.start();
                 that.logger.exit(this, 'sdk engine started.');
-                return this._botService.getAll(); // must contains the list of bots jids
+                //return this._botService.getAll(); // must contains the list of bots jids
+                return this._callback_url; // must contains the list of bots jids
 
             } else {
                 that.logger.exit(this, 'sdk engine already started');
@@ -659,16 +662,27 @@ class SdkCore {
             this[_stopTokenWatcher]();
 
             if (that._connectionInfo !== null) {
+                that.logger.info(this, 'closing connections ...');
                 await that[_closeAllUserConnectons]();
             }
             if (that._connectedUserInfo !== null) {
+                that.logger.info(this, 'signing out ...');
                 await that[_signout]();
+                // sleep to avoid ngrok failure
+                await sleep(2000);
             }
+            that.logger.info(this, 'stopping ngrok service ...');
             await that._ngrokService.stop();
+            that.logger.info(this, 'stopping express service ...');
             await that._httpServer.stop();
+            that.logger.info(this, 'unsubscribing from rainbow events ...');
             that[_unbscribeFromRainbowEvents]();
             that._started = false;
-            that._stateManager.stop();
+            that.logger.info(this, 'stopping state manager ...');
+            await that._stateManager.stop();
+            //that._eventsModule.iee.emit("rainbow_rainbow_onstopped");
+            that.logger.info(this, 'stopping event module ...');
+            await that._eventsModule.stop();
             return true;
         } catch (e) {
             that.logger.exitWithError(this, 'sdkengine stop :', e);

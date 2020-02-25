@@ -1,7 +1,6 @@
 # RainbowAuthenticationPortal.PostSamlAssertionSuccessProvisioningNeeded
 
 ## Properties
-
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **mediaType** | **String** | Only set if provisioningNeeded is set and the element of the array has providerType &#x60;JANUS&#x60;. Corresponds to the media type to use when provisioning the company account on WebRTC Conferencing component. | [optional] 
@@ -9,7 +8,7 @@ Name | Type | Description | Notes
 **providerType** | **String** | If provisioningNeeded is set, each element of the array must contain providerType. providerType defines the internal component on which the provisioning is needed when subscribing to this offer (provisioning is launched asynchronously when the subscription is created). | 
 
 
-
+<a name="MediaTypeEnum"></a>
 ## Enum: MediaTypeEnum
 
 
@@ -18,7 +17,7 @@ Name | Type | Description | Notes
 
 
 
-
+<a name="PgiEnterpriseIdEnum"></a>
 ## Enum: PgiEnterpriseIdEnum
 
 
@@ -31,7 +30,7 @@ Name | Type | Description | Notes
 
 
 
-
+<a name="ProviderTypeEnum"></a>
 ## Enum: ProviderTypeEnum
 
 

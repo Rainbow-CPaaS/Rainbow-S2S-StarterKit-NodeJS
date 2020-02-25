@@ -3,7 +3,7 @@
 const moment = require("moment");
 const Utils = require('./../../common/utils');
 const PeerType = require('./PeerType');
-
+const DataHelper = require('./DataHelper');
 /**
  * @class
  * @name ConversationService
@@ -46,7 +46,7 @@ class ConversationService {
         try {
             //this._eventEmitter.on("rainbow_onreceipt", this._onReceipt.bind(this));
             that.conversations = await that.getAllConversations();
-            that._logger.info(that, that.conversations);
+            that._logger.exit(that, that.conversations);
             return true;
             //resolve();
         } catch (err) {
@@ -181,10 +181,10 @@ class ConversationService {
         let that = this;
         that._logger.enter(this, 'getAllConversations');
         var cnxId = this._connectionInfo.id;
-        that._logger.info(this, "getAllConversations:cnxId", cnxId);
+        that._logger.info(this, "getAllConversations the connection cnxId = " + cnxId);
         await that._s2sConversationApi.conversationIndex(cnxId).then((data) => {
-            that._logger.info(this, "getAllConversations:cnxId", data);
-            that.conversations = data;
+            that.conversations = DataHelper.extractResponseSchemaData(data);
+            that._logger.exit(that, "getAllConversations conversations" + JSON.stringify(that.conversations, null, 4));
             return that.conversations;
         }, (error) => {
             that._logger.exitWithError(that, 'getAllConversations :', error);

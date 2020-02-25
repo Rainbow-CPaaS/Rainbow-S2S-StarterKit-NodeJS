@@ -1,0 +1,6 @@
+{
+	"interpreter": "/usr/bin/php",
+	"programm": "./php/src/start.php",
+	"args": [
+	]
+}

@@ -7,7 +7,7 @@
     * [new ConnectionService()](#new_ConnectionService_new)
     * [.start()](#ConnectionService+start)
     * [.stop()](#ConnectionService+stop)
-    * [.createConnection(ressource, callbackurl)](#ConnectionService+createConnection) ⇒ <code>Object</code>
+    * [.createConnection(ressource, callbackurl)](#ConnectionService+createConnection) ⇒ <code>json</code>
     * [.deleteConnection(id)](#ConnectionService+deleteConnection) ⇒ <code>Boolean</code>
     * [.getAllConnections()](#ConnectionService+getAllConnections) ⇒ <code>json</code>
     * [.getConnection(convId)](#ConnectionService+getConnection) ⇒ <code>json</code>
@@ -38,16 +38,11 @@ When stoppped, all user connections are closed.
 **Kind**: instance method of [<code>ConnectionService</code>](#ConnectionService)  
 <a name="ConnectionService+createConnection"></a>
 
-### connectionService.createConnection(ressource, callbackurl) ⇒ <code>Object</code>
+### connectionService.createConnection(ressource, callbackurl) ⇒ <code>json</code>
 Creates a connection givven a ressource name and a callback url
 
 **Kind**: instance method of [<code>ConnectionService</code>](#ConnectionService)  
-**Returns**: <code>Object</code> - a json data object {resource:xxx,id:xxx,callbackurl:xxx}
-|Json object property | Type | Description |
-|------------ | ------------- | ------------- |
-|**resource** | **String** | The client resource |
-|**id** | **String** | The connection identifier |
-|**callbackUrl** | **String** | The app webhook |  
+**Returns**: <code>json</code> - a json data object containning [Connection](../api/Connection) properties  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -72,14 +67,14 @@ Delete a connection  givven its Id
 Get all connection of the connected user
 
 **Kind**: instance method of [<code>ConnectionService</code>](#ConnectionService)  
-**Returns**: <code>json</code> - an array list of connection data in json format  
+**Returns**: <code>json</code> - an array list of connection data object containning [Connection](../api/Connection) properties  
 <a name="ConnectionService+getConnection"></a>
 
 ### connectionService.getConnection(convId) ⇒ <code>json</code>
 Get a connection data givven its Id
 
 **Kind**: instance method of [<code>ConnectionService</code>](#ConnectionService)  
-**Returns**: <code>json</code> - a json data object {resource:xxx,id:xxx,callbackurl:xxx}  
+**Returns**: <code>json</code> - a json data object containning [Connection](../api/Connection) properties  
 
 | Param | Type |
 | --- | --- |

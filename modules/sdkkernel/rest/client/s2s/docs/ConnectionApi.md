@@ -10,9 +10,8 @@ Method | HTTP request | Description
 [**connectionShow**](ConnectionApi.md#connectionShow) | **GET** /api/rainbow/ucs/v1.0/connections/{id} | Get the data of a connection
 
 
-
-## connectionCreate
-
+<a name="connectionCreate"></a>
+# **connectionCreate**
 > ConnectionCreateResponse connectionCreate(opts)
 
 Create a new user connection
@@ -20,7 +19,6 @@ Create a new user connection
 Create a new user connection. NOTE: If a connection with a same &#39;resource&#39; or &#39;callback_url&#39; already exists for a given user, this connection is reused. In such a case, the &#39;callback_url&#39; may be updated
 
 ### Example
-
 ```javascript
 var S2SApi = require('s2_s_api');
 var defaultClient = S2SApi.ApiClient.instance;
@@ -44,8 +42,6 @@ apiInstance.connectionCreate(opts).then(function(data) {
 
 ### Parameters
 
-
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **connectionCreate** | [**ConnectionCreate**](ConnectionCreate.md)| Connection creation data | [optional] 
@@ -60,12 +56,11 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
-
-## connectionDelete
-
+<a name="connectionDelete"></a>
+# **connectionDelete**
 > connectionDelete(id)
 
 Delete a connection
@@ -73,7 +68,6 @@ Delete a connection
 Delete a connection
 
 ### Example
-
 ```javascript
 var S2SApi = require('s2_s_api');
 var defaultClient = S2SApi.ApiClient.instance;
@@ -95,8 +89,6 @@ apiInstance.connectionDelete(id).then(function() {
 
 ### Parameters
 
-
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| Connection id | 
@@ -111,12 +103,11 @@ null (empty response body)
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
 
-
-## connectionIndex
-
+<a name="connectionIndex"></a>
+# **connectionIndex**
 > Connections connectionIndex()
 
 List all user connections
@@ -124,7 +115,6 @@ List all user connections
 List all user connections
 
 ### Example
-
 ```javascript
 var S2SApi = require('s2_s_api');
 var defaultClient = S2SApi.ApiClient.instance;
@@ -144,7 +134,6 @@ apiInstance.connectionIndex().then(function(data) {
 ```
 
 ### Parameters
-
 This endpoint does not need any parameter.
 
 ### Return type
@@ -157,12 +146,11 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
-
-## connectionShow
-
+<a name="connectionShow"></a>
+# **connectionShow**
 > Connection connectionShow(id)
 
 Get the data of a connection
@@ -170,7 +158,6 @@ Get the data of a connection
 Get the data of a connection
 
 ### Example
-
 ```javascript
 var S2SApi = require('s2_s_api');
 var defaultClient = S2SApi.ApiClient.instance;
@@ -192,8 +179,6 @@ apiInstance.connectionShow(id).then(function(data) {
 
 ### Parameters
 
-
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **String**| Connection id | 
@@ -208,6 +193,6 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 

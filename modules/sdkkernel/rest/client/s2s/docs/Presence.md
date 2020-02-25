@@ -1,14 +1,13 @@
 # S2SApi.Presence
 
 ## Properties
-
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **status** | **String** | An optional additional information | [optional] 
 **show** | **String** | The user presence status | [optional] 
 
 
-
+<a name="ShowEnum"></a>
 ## Enum: ShowEnum
 
 

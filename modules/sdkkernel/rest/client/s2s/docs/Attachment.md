@@ -1,7 +1,6 @@
 # S2SApi.Attachment
 
 ## Properties
-
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **url** | **String** | Attachment URL | [optional] 

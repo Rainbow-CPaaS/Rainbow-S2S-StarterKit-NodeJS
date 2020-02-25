@@ -1,7 +1,6 @@
 # RainbowAuthenticationPortal.GetBasicLoginSuccessEmails
 
 ## Properties
-
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **email** | **String** | User email address | 

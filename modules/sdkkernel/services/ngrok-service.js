@@ -18,6 +18,10 @@ class NgrokService {
 
     async start() {
         let that = this;
+        if (that._options.rainbow_notification_service.endpoint != 'ngrok') {
+            // do nothing , just return true;
+            return true;
+        }
         try {
             //return (async function() {
             that._logger.enter('starting ngrok ...');
@@ -41,6 +45,10 @@ class NgrokService {
 
     async stop() {
         let that = this;
+        if (that._options.rainbow_notification_service.endpoint != 'ngrok') {
+            // do nothing , just return true;
+            return true;
+        }
         //return (async function() {
         try {
             if (that._started) {
@@ -53,9 +61,10 @@ class NgrokService {
                 that._logger.enter('ngrok and http server already stopped !');
             }
         } catch (ex) {
-            that._logger.exitWithError('ngrok stop', ex);
+            //that._logger.exitWithError('ngrok stop', ex);
+            that._logger.warn('ngrok stop stop error :' + ex);
             that._started = false;
-            throw ex;
+            //throw ex;
         }
         //})();
     }

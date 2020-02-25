@@ -1,6 +1,6 @@
 'use strict';
 
-const S2sSdk = require('../../Rainbow-S2S-StarterKit-NodeJS');
+const S2sSdk = require('../../rainbow-s2s-starterkit-nodejs');
 const sdkConfig = require('./config/sdkConfig.json');
 
 let cmdLineArgs = require('node-getopt').create([

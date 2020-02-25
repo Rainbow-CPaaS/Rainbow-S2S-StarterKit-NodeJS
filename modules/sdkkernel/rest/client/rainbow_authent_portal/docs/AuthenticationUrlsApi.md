@@ -1,15 +1,14 @@
 # RainbowAuthenticationPortal.AuthenticationUrlsApi
 
-All URIs are relative to *https://openrainbow.com*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getLoginUrl**](AuthenticationUrlsApi.md#getLoginUrl) | **GET** /api/rainbow/authentication/v1.0/urls | Get user authentication URLs
 
 
-
-## getLoginUrl
-
+<a name="getLoginUrl"></a>
+# **getLoginUrl**
 > GetLoginUrlSuccess getLoginUrl(uid)
 
 Get user authentication URLs
@@ -17,7 +16,6 @@ Get user authentication URLs
 This API allows Rainbow users to know that URL they can use to perform a login.
 
 ### Example
-
 ```javascript
 var RainbowAuthenticationPortal = require('rainbow_authentication_portal');
 
@@ -33,8 +31,6 @@ apiInstance.getLoginUrl(uid).then(function(data) {
 
 ### Parameters
 
-
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **uid** | **String**| Rainbow user unique identifier: typically his login email | 
@@ -49,6 +45,6 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 

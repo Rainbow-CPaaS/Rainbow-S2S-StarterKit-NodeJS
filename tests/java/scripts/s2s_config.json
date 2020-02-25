@@ -1,0 +1,17 @@
+{
+	"apiPackage":"com.ale.rainbow.s2s.client.s2s.api",
+	"modelPackage":"com.ale.rainbow.s2s.client.s2s.models",
+	"invokerPackage":"com.ale.rainbow.s2s.client.s2s",
+	"developerName": "J.O",
+	"developerEmail": "j.o@al-enterprise.com",
+	"developerOrganization":"ale-enterprise.com",
+        "parentGroupId":"com.ale.rainbow.s2s",
+        "parentArtifactId":"BotSample",
+        "parentVersion":"1.0.0",	
+	"groupId":"com.ale.rainbow.s2s",
+	"artifactId":"s2s-client-s2s",
+	"artifactVersion":"1.0.0",
+	"snapshotVersion":"false",
+	"serializableModel":"true",
+	"artifactDescription":"S2S client api generated from OpenAPIGenerator"
+}

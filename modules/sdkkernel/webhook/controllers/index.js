@@ -11,63 +11,63 @@ var RoomMemberCtrl = require('../controllers/RoomMemberCtrl');
 var RoomStateCtrl = require('../controllers/RoomStateCtrl');
 module.exports = (eventManager, logger) => {
     return {
-        connectionNotificationReceived: function(context,req, res) {
+        connectionNotificationReceived: function(context, req, res) {
             try {
                 ConnectionCtrl.handleConnectionCreateCallback(eventManager, logger, req, res, null);
             } catch (ex) {
                 logger.exitWithError('ConnectionCtrl_connectionNotificationReceived', ex);
             }
         },
-        presenceNotificationReceived: function(context,req, res) {
+        presenceNotificationReceived: function(context, req, res) {
             try {
                 PresenceCtrl.handlePresenceUpdateCallback(eventManager, logger, req, res, null);
             } catch (ex) {
                 logger.exitWithError('PresenceCtrl_presenceNotificationReceived', ex);
             }
         },
-        receiptNotificationReceived: function(context,req, res) {
+        receiptNotificationReceived: function(context, req, res) {
             try {
                 ReceiptCtrl.handleReceiptReceivedCallback(eventManager, logger, req, res, null);
             } catch (ex) {
                 logger.exitWithError('ReceiptCtrl_receiptNotificationReceived', ex);
             }
         },
-        chatStateNotificationReceived: function(context,req, res) {
+        chatStateNotificationReceived: function(context, req, res) {
             try {
                 ChatStateCtrl.handleChatStateUpdateCallback(eventManager, logger, req, res, null);
             } catch (ex) {
                 logger.exitWithError('ChatStateCtrl_chatStateNotificationReceived', ex);
             }
         },
-        messageNotificationReceived: function(context,req, res) {
+        messageNotificationReceived: function(context, req, res) {
             try {
                 MessageCtrl.handleMessageReceivedCallback(eventManager, logger, req, res, null);
             } catch (ex) {
                 logger.exitWithError('MessageCtrl_messageNotificationReceived', ex);
             }
         },
-        allReceiptNotificationReceived: function(context,req, res) {
+        allReceiptNotificationReceived: function(context, req, res) {
             try {
                 AllReceiptCtrl.handleAllReceiptReceivedCallback(eventManager, logger, req, res, null);
             } catch (ex) {
                 logger.exitWithError('AllReceiptCtrl_allReceiptNotificationReceived', ex);
             }
         },
-        roomInviteNotificationReceived: function(context,req, res) {
+        roomInviteNotificationReceived: function(context, req, res) {
             try {
                 RoomInviteCtrl.handleRoomInviteReceivedCallback(eventManager, logger, req, res, null);
             } catch (ex) {
                 logger.exitWithError('RoomInviteCtrl_roomInviteNotificationReceived', ex);
             }
         },
-        roomMemberNotificationReceived: function(context,req, res) {
+        roomMemberNotificationReceived: function(context, req, res) {
             try {
                 RoomMemberCtrl.handleRoomMemberReceivedCallback(eventManager, logger, req, res, null);
             } catch (ex) {
                 logger.exitWithError('RoomMemberCtrl_roomMemberNotificationReceived', ex);
             }
         },
-        roomStateNotificationReceived: function(context,req, res) {
+        roomStateNotificationReceived: function(context, req, res) {
             try {
                 RoomStateCtrl.handleRoomStateReceivedCallback(eventManager, logger, req, res, null);
             } catch (ex) {

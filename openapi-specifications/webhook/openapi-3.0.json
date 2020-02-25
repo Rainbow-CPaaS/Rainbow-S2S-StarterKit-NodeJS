@@ -137,6 +137,30 @@
                 }
             }
         },
+        "/all-deleted": {
+            "post": {
+                "operationId": "allDeletedNotificationReceived",
+                "responses": {
+                    "200": {
+                        "description": "return this code if your server accepts the callback"
+                    }
+                },
+                "x-swagger-router-controller": "AllDeletedCtrl",
+                "tags": [
+                    "AllDeleted"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CbAllDeleted"
+                            }
+                        }
+                    },
+                    "required": true
+                }
+            }
+        },
         "/conversation": {
             "post": {
                 "operationId": "conversationNotificationReceived",
@@ -285,7 +309,7 @@
                                     },
                                     "timestamp": {
                                         "type": "string",
-                                        "description": "the message timestamp",
+                                        "description": "the notification timestamp",
                                         "example": "2018-08-23T08:52:04.001535Z"
                                     },
                                     "message": {
@@ -691,6 +715,24 @@
                 },
                 "description": "A message"
             },
+            "DeleteAllResponse": {
+                "type": "object",
+                "title": "DeleteAllResponse",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "deleted": {
+                                "type": "integer",
+                                "description": "deleted count"
+                            }
+                        }
+                    }
+                },
+                "example": {
+                    "deleted": 25
+                }
+            },
             "Conversations": {
                 "type": "object",
                 "title": "Conversations",
@@ -832,7 +874,7 @@
                         "callback_url": "https://thirdpartyapp.com/api"
                     }
                 },
-                "description": "Creation crreate response data"
+                "description": "Creation create response data"
             },
             "ConnectionCreate": {
                 "type": "object",
@@ -1170,6 +1212,44 @@
                 ],
                 "title": "CbAllReceipt"
             },
+            "CbAllDeleted": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "the connection Id",
+                        "example": "f8e81b4e-a7dc-11e8-a734-f894c2dba3d5"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "the notification timestamp",
+                        "example": "2018-08-23T08:52:04.001535Z"
+                    },
+                    "all-deleted": {
+                        "type": "object",
+                        "properties": {
+                            "conversation_id": {
+                                "type": "string",
+                                "example": "1555081424877876"
+                            },
+                            "with": {
+                                "type": "string",
+                                "example": "59f1ecc4ea84f9b5c339958d"
+                            }
+                        },
+                        "required": [
+                            "conversation_id",
+                            "with"
+                        ]
+                    }
+                },
+                "required": [
+                    "id",
+                    "timestamp",
+                    "all-deleted"
+                ],
+                "title": "CbAllDeleted"
+            },
             "CbConversation": {
                 "type": "object",
                 "properties": {
@@ -1180,7 +1260,7 @@
                     },
                     "timestamp": {
                         "type": "string",
-                        "description": "the message timestamp",
+                        "description": "the notification timestamp",
                         "example": "2018-08-23T08:52:04.001535Z"
                     },
                     "conversation": {
@@ -1247,7 +1327,7 @@
                     },
                     "timestamp": {
                         "type": "string",
-                        "description": "the message timestamp",
+                        "description": "the notification timestamp",
                         "example": "2018-08-23T08:52:04.001535Z"
                     },
                     "room-invite": {
@@ -1293,7 +1373,7 @@
                     },
                     "timestamp": {
                         "type": "string",
-                        "description": "the message timestamp",
+                        "description": "the notification timestamp",
                         "example": "2018-08-23T08:52:04.001535Z"
                     },
                     "room-member": {
@@ -1344,7 +1424,7 @@
                     },
                     "timestamp": {
                         "type": "string",
-                        "description": "the message timestamp",
+                        "description": "the notification timestamp",
                         "example": "2018-08-23T08:52:04.001535Z"
                     },
                     "room-state": {
@@ -1392,7 +1472,7 @@
                     },
                     "timestamp": {
                         "type": "string",
-                        "description": "the message timestamp",
+                        "description": "the notification timestamp",
                         "example": "2018-08-23T08:52:04.001535Z"
                     },
                     "error": {

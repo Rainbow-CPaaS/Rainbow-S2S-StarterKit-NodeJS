@@ -5,7 +5,7 @@ const sdkInfo = require('./package.json');
 const Events = require('./modules/common/events');
 const StateManager = require('./modules/common/state-manager');
 
-class S2sSdk {
+class S2sStarterkit {
 
     constructor(options) {
         var that = this;
@@ -19,11 +19,12 @@ class S2sSdk {
         } else if (options.rainbow_notification_service.endpoint === 'reverse_proxy') {
             this.options.reverse_proxy = options.rainbow_notification_service.reverse_proxy;
         } else {
+            // use default ngrok config if no proxy is set
             this.options.ngrok = require('./config/ngrok.json');
         }
         this._logger = new Logger(this.options).log;
         this._botsjid = [];
-        this._eventsModule = new Events(this._logger, (jid) => {
+        this._eventsModule = new Events(this._logger, this.options, (jid) => {
             return that._botsjid.includes(jid);
         });
         this._stateManager = new StateManager(this._eventsModule, this._logger);
@@ -53,7 +54,7 @@ class S2sSdk {
                 this._botsjid = data.botsjids;
             }
             that._logger.info("Sdk engine returns ", JSON.stringify(data, null, 4));
-            return true;
+            return data;
         } catch (e) {
             that._logger.error('rainbow-s2s-starterkit-nodejs :' + JSON.stringify(e));
             throw e;
@@ -124,4 +125,4 @@ class S2sSdk {
         return this._sdkEngine.Conversationservice;
     }
 }
-module.exports = S2sSdk;
+module.exports = S2sStarterkit;

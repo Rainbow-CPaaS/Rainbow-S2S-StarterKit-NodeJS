@@ -11,9 +11,8 @@ Method | HTTP request | Description
 [**conversationShow**](ConversationApi.md#conversationShow) | **GET** /api/rainbow/ucs/v1.0/connections/{cnxId}/conversations/{id} | Get a conversation
 
 
-
-## conversationChatstate
-
+<a name="conversationChatstate"></a>
+# **conversationChatstate**
 > conversationChatstate(cnxId, cvId, state)
 
 Send a chat state
@@ -21,7 +20,6 @@ Send a chat state
 Send a conversation state
 
 ### Example
-
 ```javascript
 var S2SApi = require('s2_s_api');
 var defaultClient = S2SApi.ApiClient.instance;
@@ -45,8 +43,6 @@ apiInstance.conversationChatstate(cnxId, cvId, state).then(function() {
 
 ### Parameters
 
-
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cnxId** | **String**| Connection id | 
@@ -63,12 +59,11 @@ null (empty response body)
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
 
-
-## conversationCreate
-
+<a name="conversationCreate"></a>
+# **conversationCreate**
 > Conversation conversationCreate(cnxId, opts)
 
 Create a conversation
@@ -76,7 +71,6 @@ Create a conversation
 Create a conversation
 
 ### Example
-
 ```javascript
 var S2SApi = require('s2_s_api');
 var defaultClient = S2SApi.ApiClient.instance;
@@ -101,8 +95,6 @@ apiInstance.conversationCreate(cnxId, opts).then(function(data) {
 
 ### Parameters
 
-
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cnxId** | **String**| Connection id | 
@@ -118,12 +110,11 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: */*
+ - **Content-Type**: application/json
+ - **Accept**: */*
 
-
-## conversationDelete
-
+<a name="conversationDelete"></a>
+# **conversationDelete**
 > conversationDelete(cnxId, id)
 
 Delete a conversation
@@ -131,7 +122,6 @@ Delete a conversation
 Delete a conversation
 
 ### Example
-
 ```javascript
 var S2SApi = require('s2_s_api');
 var defaultClient = S2SApi.ApiClient.instance;
@@ -154,8 +144,6 @@ apiInstance.conversationDelete(cnxId, id).then(function() {
 
 ### Parameters
 
-
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cnxId** | **String**| Connection id | 
@@ -171,12 +159,11 @@ null (empty response body)
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
 
-
-## conversationIndex
-
+<a name="conversationIndex"></a>
+# **conversationIndex**
 > Conversations conversationIndex(cnxId)
 
 Get all conversations
@@ -184,7 +171,6 @@ Get all conversations
 Get all conversations
 
 ### Example
-
 ```javascript
 var S2SApi = require('s2_s_api');
 var defaultClient = S2SApi.ApiClient.instance;
@@ -206,8 +192,6 @@ apiInstance.conversationIndex(cnxId).then(function(data) {
 
 ### Parameters
 
-
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cnxId** | **String**| Connection id | 
@@ -222,12 +206,11 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+ - **Content-Type**: Not defined
+ - **Accept**: */*
 
-
-## conversationShow
-
+<a name="conversationShow"></a>
+# **conversationShow**
 > Conversation conversationShow(cnxId, id)
 
 Get a conversation
@@ -235,7 +218,6 @@ Get a conversation
 Get a conversation
 
 ### Example
-
 ```javascript
 var S2SApi = require('s2_s_api');
 var defaultClient = S2SApi.ApiClient.instance;
@@ -258,8 +240,6 @@ apiInstance.conversationShow(cnxId, id).then(function(data) {
 
 ### Parameters
 
-
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cnxId** | **String**| Connection id | 
@@ -275,6 +255,6 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: */*
+ - **Content-Type**: Not defined
+ - **Accept**: */*
 

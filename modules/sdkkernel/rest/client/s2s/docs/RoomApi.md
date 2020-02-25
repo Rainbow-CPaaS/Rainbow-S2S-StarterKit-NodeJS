@@ -7,9 +7,8 @@ Method | HTTP request | Description
 [**roomJoin**](RoomApi.md#roomJoin) | **POST** /api/rainbow/ucs/v1.0/connections/{cnxId}/rooms/{roomId}/join | Join a room
 
 
-
-## roomJoin
-
+<a name="roomJoin"></a>
+# **roomJoin**
 > RoomStatus roomJoin(cnxId, roomId)
 
 Join a room
@@ -17,7 +16,6 @@ Join a room
 Join a room
 
 ### Example
-
 ```javascript
 var S2SApi = require('s2_s_api');
 var defaultClient = S2SApi.ApiClient.instance;
@@ -40,8 +38,6 @@ apiInstance.roomJoin(cnxId, roomId).then(function(data) {
 
 ### Parameters
 
-
-
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cnxId** | **String**| Connection id | 
@@ -57,6 +53,6 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 

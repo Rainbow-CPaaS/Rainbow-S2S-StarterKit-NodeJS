@@ -1,7 +1,6 @@
 # RainbowAuthenticationPortal.PutApiRainbowLogsLevels
 
 ## Properties
-
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **console** | **String** | Level to set for &lt;strong&gt;console&lt;/strong&gt; transport | [optional] 
@@ -9,7 +8,7 @@ Name | Type | Description | Notes
 **syslog** | **String** | Level to set for &lt;strong&gt;syslog&lt;/strong&gt; transport | [optional] 
 
 
-
+<a name="ConsoleEnum"></a>
 ## Enum: ConsoleEnum
 
 
@@ -24,7 +23,7 @@ Name | Type | Description | Notes
 
 
 
-
+<a name="FileEnum"></a>
 ## Enum: FileEnum
 
 
@@ -39,7 +38,7 @@ Name | Type | Description | Notes
 
 
 
-
+<a name="SyslogEnum"></a>
 ## Enum: SyslogEnum
 
 

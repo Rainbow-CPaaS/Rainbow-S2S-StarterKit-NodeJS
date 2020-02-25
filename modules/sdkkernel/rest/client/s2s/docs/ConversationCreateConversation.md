@@ -1,14 +1,13 @@
 # S2SApi.ConversationCreateConversation
 
 ## Properties
-
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **type** | **String** | The conversation type | [optional] 
 **peer** | **String** | The peer id | [optional] 
 
 
-
+<a name="TypeEnum"></a>
 ## Enum: TypeEnum
 
 

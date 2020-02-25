@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "DEBUG=swagger-tools* node --trace-warnings ./tests/test-s2ssdk.js --protocol http --port 8080",
-    "docs": "node ./bin/generate-doc4hub.js && ./bin/generate-sitemap.js"
+    "s2snode": "DEBUG=swagger-tools* node --trace-warnings ./bin/start-s2snode-core.js --protocol http --port 8080",
+    "docs": "node ./bin/generate-doc4hub.js && ./bin/generate-sitemap.js",
+    "s2s-zmq-php": "DEBUG=swagger-tools* node --trace-warnings ./tests/s2s-zmq-php.js --protocol http --port 8080"
   },
   "author": "J.O",
   "license": "ISC",
@@ -38,10 +40,12 @@
     "promise.prototype.finally": "^3.1.0",
     "shelljs": "^0.8.3",
     "sinon": "^7.2.7",
+    "sleep-promise": "^8.0.1",
     "superagent": "^4.1.0",
     "swagger-tools": "^0.10.4",
     "winston": "^3.2.1",
-    "winston-daily-rotate-file": "^3.7.0"
+    "winston-daily-rotate-file": "^3.7.0",
+    "zeromq": "^5.2.0"
   },
   "bin": {
     "gen-auth-client-api": "bin/generate-auth-api.js",
