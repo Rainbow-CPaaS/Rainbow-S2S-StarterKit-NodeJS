@@ -1,15 +1,15 @@
 {
     "rainbow": {
-        "host": "https://openrainbow.net",
+        "host": "https://rainbow_server",
         "mode": "bot"
     },
     "credentials": {
-        "login": "jo.sophia06560@gmail.com",
-        "password": "GG2+kla2bF&1bC"
+        "login": "registered account login",
+        "password": "registered account password"
     },
     "application": {
-        "appID": "dbb6d920755a11e8805111bfa635ad2f",
-        "appSecret": "Y3RyRVW12opjXIHERiUmBOkGd8UYmmKxZBNtFwfaX6QxtNgRV9I7Wx4wvlwhl8KW"
+        "appID": "your app ID",
+        "appSecret": "Your app secret"
     },
     "logs": {
         "enableConsoleLogs": true,
