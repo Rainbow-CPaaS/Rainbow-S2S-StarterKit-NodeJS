@@ -1,8 +1,11 @@
-## Getting started
+Rainbow-S2S-StarterKit-NodeJS
+================================
 
 Welcome to the Alcatel-Lucent Enterprise Rainbow Software **S2S Starterkit (Rainbow-S2S-StarterKit-NodeJS) for NodeJS and other languages**
 
 The Alcatel-Lucent Enterprise (ALE) Rainbow Software Rainbow-S2S-StarterKit-NodeJS is a nodejs tool provided to help user build server backend applications (bot, agnets) based on **Rainbow S2S API modules**  to interact with Rainbow server system without directly implement the underlaying REST protocol and callback notifications mechanism.
+
+## Preanble
 
 This starter guide will help you :
 
@@ -10,7 +13,15 @@ This starter guide will help you :
 - Setup Rainbow-S2S-StarterKit-NodeJS  in a linux server environnement
 - Subscribe to Rainbow server callback notifications  and help you build your own server application in your choosen languange.
 
-### Prerequisites
+## Beta disclaimer
+
+Please note that this is a Beta version of the Rainbow-S2S-StarterKit-NodeJS which is still undergoing final testing before its official release. The SDK for Node.js and the documentation are provided on a "as is" and "as available" basis. Before releasing the official release, all these content can change depending on the feedback we receive in one hand and the developpement of the Rainbow official product in the other hand.
+
+Alcatel-Lucent Enterprise will not be liable for any loss, whether such loss is direct, indirect, special or consequential, suffered by any party as a result of their use of the Rainbow SDK for Node.js, the application sample software or the documentation content.
+
+If you encounter any bugs, lack of functionality or other problems regarding the Rainbow-S2S-StarterKit-NodeJS, the application samples or the documentation, please let us know immediately so we can rectify these accordingly. Your help in this regard is greatly appreciated.
+
+## Prerequisites
 
 To use the Rainbow-S2S-StarterKit-NodeJS you need an `applicationID` and a `secretKey` from the [openrainbow hub](https://hub.openrainbow.com/). These information allow you to identify your application and allow you to use the rainbow platform. For more information, see [Applications lifecycle](https://hub.openrainbow.com/#/documentation/doc/hub/application-lifecycle) which explains what is the purpose, how to create an application and how to get the application ID and the secret key.
 
@@ -24,7 +35,7 @@ As Rainbow-S2S-StarterKit-NodeJS is intended to be used on a server it is recomm
 
 It is also recommened to have a minimum knowlegde on OAS standard [(Open API Specification)](https://www.openapis.org/)
 
-##What are S2S API modules used in Rainbow-S2S-StarterKit-NodeJS
+## What are S2S API modules used in Rainbow-S2S-StarterKit-NodeJS
 
 Rainbow S2S module are based on REST APIs description over OpenAPI standard (via **swagger files** [openapi.yaml or openapi.json]) so user can generates clients inplementation in various languages and hide REST calls by manipulating objects
 
@@ -178,7 +189,7 @@ Here is a description from zmq website
 ZeroMQ (also known as ØMQ, 0MQ, or zmq) looks like an **embeddable networking library** but acts like a concurrency framework. It **gives you sockets that carry atomic messages across various transports** like **in-process, inter-process, TCP, and multicast**. You can **connect sockets N-to-N** with patterns like fan-out, **pub-sub**, task distribution, and request-reply. It's fast enough to be the fabric for clustered products. Its **asynchronous I/O model** gives you scalable multicore applications, built as asynchronous message-processing tasks. It has a **score of language APIs** and **runs on most operating systems**. 
 
 
-### How to use Rainbow-S2S-StarterKit-NodeJS
+## How to use Rainbow-S2S-StarterKit-NodeJS
 
 1. clone Rainbow-S2S-StarterKit-NodeJS
  git clone https://github.com/Rainbow-CPaaS/Rainbow-S2S-StarterKit-NodeJS.git
