@@ -1,8 +1,0 @@
-{
-    "port": 8080,
-    "protocol": "http",
-    "certificates": {
-        "key": "key.pem",
-        "cert": "cert.pem"
-    }
-}
