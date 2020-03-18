@@ -3,8 +3,8 @@
  * File: start-s2snode-core.js
  * Description : Rainbow-S2S-Starterkit-NodeJS launcher file
  *=============================================================*/
-const S2sStarterkit = require('../../rainbow-s2s-starterkit-nodejs');
-const sdkConfig = require('../config/config.json');
+const S2sStarterkit = require('rainbow-s2s-starterkit-nodejs');
+const sdkConfig = require('./config/config.json');
 
 let cmdLineArgs = require('node-getopt').create([
         ['L', 'protocol=ARG', 'http protocol [http or https]'],

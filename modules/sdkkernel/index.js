@@ -1,5 +1,6 @@
 'use strict';
 
+const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
 const path = require('path');
 const jwt = require("jwt-decode");
@@ -67,7 +68,7 @@ class SdkCore {
         this._authPortalClient = RainbowAuthentPortal.ApiClient.instance;
         this._adminPortalClient = RainbowAdminPortal.ApiClient.instance;
 
-        this.__bubbleService = null;
+        this._bubbleService = null;
         this._notificationService = null;
         this._companyService = null;
         this._conversationService = null;
@@ -220,9 +221,8 @@ class SdkCore {
                 this._connectedUserInfo,
                 this._connectionInfo,
                 this._accept,
-                this._endUserPortalClient,
                 this._s2sClient,
-                this._eventsModule.iee
+                this._eventsModule
             );
 
             //this._notificationService = new NotificationService(this._endUserPortalClient);
@@ -251,11 +251,12 @@ class SdkCore {
                             this._adminUserNetworkApi
                         );
             */
-            this._imService = new ImService(this._eventsModule.iee,
+            this._imService = new ImService(this._eventsModule,
                 this.logger,
                 this._s2sMessageApi,
                 this._connectedUserInfo,
                 this._connectionInfo,
+                this.options,
             );
 
             this._presenceService = new PresenceService(this._connectionInfo,
@@ -288,10 +289,12 @@ class SdkCore {
         this._contactService.stop();
         this._imService.stop();
         */
+        this._bubbleService.stop();
+        this._imService.stop();
         this._conversationService.stop();
         this._presenceService.stop();
 
-        //delete this._bubbleService;
+        delete this._bubbleService;
         //delete this._notificationService;
         //delete this._companyService;
         //delete this._conversationService;
@@ -314,22 +317,30 @@ class SdkCore {
         delete this._s2sConversationApi;
     }
 
+    async _rainbow_onready_handler(){
+        this.logger.info(this, 'S2SStartertkit Kernel -> rainbow_onready received.');
+            let rooms = await this._conversationService.getAllRoomsConversations();
+            for(let i=0;i<rooms.length;i++){
+                this._bubbleService.joinRoom(rooms[i].peer);
+            }	    
+    }
+
     _rainbow_signinrequired_handler() {
-        this.logger.info(this, 'SDKKernel -> rainbow_signinrequired received.');
+        this.logger.info(this, 'S2SStartertkit Kernel -> rainbow_signinrequired received.');
         this[_signinRequired]();
     }
 
     _rainbow_application_token_updated_handler(token) {
         this.applicationToken = token; // shoud be taken from redis
-        this.logger.info(this, 'SDKKernel -> rainbow_application_token_updated :', token);
+        this.logger.info(this, 'S2SStartertkit Kernel -> rainbow_application_token_updated :', token);
     }
 
     _rainbow_onconnected_handler(data) {
-        this.logger.info(this, 'SDKKernel -> rainbow_onconnected :', data);
+        this.logger.info(this, 'S2SStartertkit Kernel -> rainbow_onconnected :', data);
     }
 
     _rainbow_onpresencechanged_handler(data) {
-        this.logger.info(this, 'SDKKernel -> rainbow_onpresencechanged received :' + JSON.stringify(data));
+        this.logger.info(this, 'S2SStartertkit Kernel -> rainbow_onpresencechanged received :' + JSON.stringify(data));
     }
 
     _rainbow_tokenexpired_handler() {
@@ -354,20 +365,21 @@ class SdkCore {
             this._eventsModule.on("rainbow_onpresencechanged", this._rainbow_onpresencechanged_handler.bind(this));
             this._eventsModule.on("rainbow_tokenexpired", this._rainbow_tokenexpired_handler.bind(this));
             this._eventsModule.on("rainbow_tokenrenewed", this._rainbow_tokenrenewed_handler.bind(this));
+            this._eventsModule.once("rainbow_onready", this._rainbow_onready_handler.bind(this));
             /*
             this._eventsModule.on("rainbow_signinrequired", function() {
-                that.logger.info(this,'SDKKernel -> rainbow_signinrequired received.');
+                that.logger.info(this,'S2SStartertkit Kernel -> rainbow_signinrequired received.');
                 that[_signinRequired]();
             });
             this._eventsModule.on("rainbow_application_token_updated", function(token) {
                 that.applicationToken = token; // shoud be taken from redis
-                that.logger.info(this,'SDKKernel -> rainbow_application_token_updated :', token);
+                that.logger.info(this,'S2SStartertkit Kernel -> rainbow_application_token_updated :', token);
             });
             this._eventsModule.once("rainbow_onconnected", function(data) {
-                that.logger.info(this,'SDKKernel -> rainbow_onconnected :', data);
+                that.logger.info(this,'S2SStartertkit Kernel -> rainbow_onconnected :', data);
             });
             this._eventsModule.on("rainbow_onpresencechanged", function(data) {
-                that.logger.info(this,'SDKKernel -> rainbow_onpresencechanged received :' + JSON.stringify(data));
+                that.logger.info(this,'S2SStartertkit Kernel -> rainbow_onpresencechanged received :' + JSON.stringify(data));
             });
             this._eventsModule.on("rainbow_tokenexpired", function() {
                 this._eventsModule.iee.emit("rainbow_signinrequired");
@@ -393,6 +405,7 @@ class SdkCore {
             this._eventsModule.removeListener("rainbow_onpresencechanged", this._rainbow_onpresencechanged_handler);
             this._eventsModule.removeListener("rainbow_tokenexpired", this._rainbow_tokenexpired_handler);
             this._eventsModule.removeListener("rainbow_tokenrenewed", this._rainbow_tokenrenewed_handler);
+            this._eventsModule.removeListener("rainbow_onready", this._rainbow_onready_handler);
             this.logger.exit(this, '_unbscribeFromRainbowEvents');
         } catch (ex) {
             this.logger.exitWithError(this, '_unbscribeFromRainbowEvents', ex);
@@ -481,7 +494,7 @@ class SdkCore {
         opts.presenceUpdate.presence = presence;
         await this._s2sPresenceApi.presenceUpdate(cnxId, opts).then(function() {
             that.logger.exit(this, '_sendSelfPresence successfull.');
-            that._stateManager.transitTo(that._stateManager.READY);
+            //that._stateManager.transitTo(that._stateManager.READY);
         }, function(error) {
             that.logger.exitWithError(this, '_sendSelfPresence :' + JSON.stringify(error, null, 4));
             throw new Error(JSON.stringify(error));
@@ -492,6 +505,7 @@ class SdkCore {
         var that = this;
         this.logger.enter(this, `[_createConnection](${callback_url})`);
         var connection = new S2SApi.Connection(callback_url);
+        connection.resource = 's2s_startekit_'+uuidv4();
         var opts = {
             'connectionCreate': new S2SApi.ConnectionCreate(connection) // ConnectionCreate | Connection creation data
         };
@@ -629,7 +643,7 @@ class SdkCore {
                 that._stateManager.transitTo(that._stateManager.STARTED);
                 await that[_sendSelfPresence]();
                 that._started = true;
-                //await that._bubbleService.start();
+                await that._bubbleService.start();
                 //await that._contactService.start();
                 await that._conversationService.start();
                 //await that._companyService.start();
@@ -640,6 +654,7 @@ class SdkCore {
                 await this._botService.start();
                 await this._connectionService.start();
                 that.logger.exit(this, 'sdk engine started.');
+                that._stateManager.transitTo(that._stateManager.READY);
                 //return this._botService.getAll(); // must contains the list of bots jids
                 return this._callback_url; // must contains the list of bots jids
 
@@ -714,11 +729,11 @@ class SdkCore {
     get eventsModule() {
         return this._eventsModule;
     }
-
+/*
     get endUserModule() {
         return this._endUserApi;
     }
-
+*/
     get connectionModule() {
         return this._s2sConnectionApi;
     }
@@ -736,7 +751,7 @@ class SdkCore {
     }
 
     get BubbleService() {
-        return this.__bubbleService;
+        return this._bubbleService;
     }
 
     /*

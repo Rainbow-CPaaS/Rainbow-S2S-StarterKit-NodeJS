@@ -26,6 +26,10 @@ class BotService {
         this.bots = [];
     }
 
+    /**
+     * Start bot service
+     * @return {boolean} true if bot service start succeeded or false
+     */	
     async start() {
         let that = this;
         try {
@@ -43,6 +47,11 @@ class BotService {
         return true;
     }
 
+    /**
+     * Stop bot service
+     * @returns {boolean} always return true as the bot service isn't (for the moment) a real service.
+     * The stop has no effect
+     */
     async stop() {
         return true;
     }

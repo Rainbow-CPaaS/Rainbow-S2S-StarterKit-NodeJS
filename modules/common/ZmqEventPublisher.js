@@ -24,9 +24,10 @@ class ZmqEventPublisher {
     async stop() {
         let that = this;
         try {
-            that.enter('closing zmq publisher connecton...');
+            that._logger.enter('closing zmq publisher connecton...');
+	    that.publish('zmq-stop',{msg:'stop signal received'});
             this._pubSock.unbindSync("tcp://" + that._options.rainbow_notification_service.zmq.host + ":" + that._options.rainbow_notification_service.zmq.port);
-            that.exit('zmq publisher connecton closed !');
+            that._logger.exit('zmq publisher connecton closed !');
         } catch (e) {
             that._logger.error('failed to close zmq publisher connecton', e);
         }

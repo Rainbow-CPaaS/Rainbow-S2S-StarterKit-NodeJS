@@ -9,6 +9,7 @@ var ReceiptCtrl = require('../controllers/ReceiptCtrl');
 var RoomInviteCtrl = require('../controllers/RoomInviteCtrl');
 var RoomMemberCtrl = require('../controllers/RoomMemberCtrl');
 var RoomStateCtrl = require('../controllers/RoomStateCtrl');
+var ConversationCtrl = require('../controllers/ConversationCtrl');
 module.exports = (eventManager, logger) => {
     return {
         connectionNotificationReceived: function(context, req, res) {
@@ -16,6 +17,14 @@ module.exports = (eventManager, logger) => {
                 ConnectionCtrl.handleConnectionCreateCallback(eventManager, logger, req, res, null);
             } catch (ex) {
                 logger.exitWithError('ConnectionCtrl_connectionNotificationReceived', ex);
+            }
+        },
+        conversationNotificationReceived: function(context, req, res) {
+            try {
+                //logger.log('ConversationCtrl_conversationNotificationReceived :'+JSON.stringify(req,null,4));
+                ConversationCtrl.handleConversationReceivedCallback(eventManager, logger, req, res, null);
+            } catch (ex) {
+                logger.exitWithError('ConversationCtrl_conversationNotificationReceived', ex);
             }
         },
         presenceNotificationReceived: function(context, req, res) {

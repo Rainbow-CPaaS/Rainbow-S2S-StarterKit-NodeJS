@@ -63,7 +63,7 @@ class PresenceService {
     }
 
     /**
-     * Stop presence servie
+     * Stop presence service
      */
     stop() {
         var that = this;

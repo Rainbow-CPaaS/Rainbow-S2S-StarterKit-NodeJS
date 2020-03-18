@@ -18,8 +18,8 @@ const LOG_ID = "STATEMGR - ";
 
 class StateManager {
 
-    constructor(_eventEmitter, logger) {
-        this.eventEmitter = _eventEmitter;
+    constructor(_eventModule, logger) {
+        this.eventEmitter = _eventModule;
         this.logger = logger;
 
         // Initial state

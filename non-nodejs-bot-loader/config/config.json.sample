@@ -4,12 +4,12 @@
           "mode": "bot"
       },
       "credentials": {
-          "login": "<your bot email>",
-          "password": "<your bot password>"
+          "login": "xxxx",
+          "password": "xxxx"
       },
       "application": {
-          "appID": "<your application id>",
-          "appSecret": "<the applicatin secret key>"
+          "appID": "xxxx",
+          "appSecret": "xxxx"
       },
       "logs": {
           "enableConsoleLogs": true,
@@ -31,7 +31,7 @@
             "description":"This Ngrok configuraton must reflect the port and protocol configured in sdkrouter"
         },
         "reverse_proxy": {
-            "url":"my_reverse_proxy_url",
+            "url":"",
             "description":"The url will be used as callback endpoint if endpoint=reverse_proxy. Its up to the administrator to configure reverse proxy to forward requests to sdkrouter."
         },
         "sdkrouter": {
@@ -41,13 +41,8 @@
                 "key": "./app/certificates/s2s-sdk-key.pem",
                 "cert": "./app/certificates/s2s-sdk-cert.pem"
            },
-           "description":"sdkrouter Event service is the SDK http server receiving event callbacks (webhook events)"
+           "description":"Event service is the SDK http server receiving event callbacks"
         }
     },
-    "zmq":{
-          "description" : "zmq is a module used by sdkrouter Event service to relay (using socket) all event callbacks (webhook events) recieve from OT rainbow server"
-          "port":3000,
-          "host":"127.0.0.1"
-    },    
     "appdir":""
   }

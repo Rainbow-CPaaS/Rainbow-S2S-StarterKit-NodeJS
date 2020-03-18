@@ -1,15 +1,15 @@
 {
     "rainbow": {
-        "host": "https://rainbow_server",
+        "host": "https://openrainbow.net",
         "mode": "bot"
     },
     "credentials": {
-        "login": "registered account login",
-        "password": "registered account password"
+        "login": "xxxx",
+        "password": "xxxx"
     },
     "application": {
-        "appID": "your app ID",
-        "appSecret": "Your app secret"
+        "appID": "xxxx",
+        "appSecret": "xxxx"
     },
     "logs": {
         "enableConsoleLogs": true,
@@ -20,7 +20,7 @@
         }
     },
     "im": {
-        "sendReadReceipt": false
+        "sendReadReceipt": true
     },
     "rainbow_notification_service": {
         "description": "Configure Rainbow notification receiver.Possible values are [ngrok,reverse_proxy,default]. If endpoint==default, sdk internal default values will be used (ngrok :{proto:http,port:8080})",

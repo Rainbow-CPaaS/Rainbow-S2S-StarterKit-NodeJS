@@ -2,7 +2,7 @@
 const Logger = require('./modules/common/logger');
 const SdkEngine = require('./modules/sdkkernel');
 const sdkInfo = require('./package.json');
-const Events = require('./modules/common/events');
+const Events = require('./modules/common/s2s-events-manager');
 const StateManager = require('./modules/common/state-manager');
 
 class S2sStarterkit {
@@ -45,7 +45,7 @@ class S2sStarterkit {
         });
         try {
             let data = await that._sdkEngine.start().catch((ex) => {
-                that._logger.error(that, "Sdk engine start has error :", ex);
+                that._logger.error(that, "S2sStarterkit engine start has error :", ex);
             });
             if (data === false) {
                 return false;
@@ -53,7 +53,13 @@ class S2sStarterkit {
             if (data && data.hasOwnProperty('botsjids')) {
                 this._botsjid = data.botsjids;
             }
-            that._logger.info("Sdk engine returns ", JSON.stringify(data, null, 4));
+            that._logger.info("S2sStarterkit engine returns ", JSON.stringify(data, null, 4));
+/*		
+            let rooms = await this._sdkEngine.ConversationService.getAllRoomsConversations();
+            for(let i=0;i<rooms.length;i++){
+                this._sdkEngine.BubbleService.joinRoom(rooms[i].peer);
+            }
+*/	    
             return data;
         } catch (e) {
             that._logger.error('rainbow-s2s-starterkit-nodejs :' + JSON.stringify(e));

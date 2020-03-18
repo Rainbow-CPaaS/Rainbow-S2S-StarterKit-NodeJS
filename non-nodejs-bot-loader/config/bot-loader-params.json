@@ -1,6 +1,6 @@
 {
 	"interpreter": "/usr/bin/php",
-	"programm": "./php/src/start.php",
+	"program": "./php/src/start.php",
 	"isblocking": true,
 	"args": [
 	]

@@ -19,6 +19,8 @@ const myS2sSdk = new S2sSdk(sdkConfig);
 (async() => {
     try {
         await myS2sSdk.start().then((data) => {
+            let res = await myS2sSdk.BubbleService.joinRoom();
+            console.log(res);
         }).catch((e) => {
             console.error(e);
             myS2sSdk.stop();

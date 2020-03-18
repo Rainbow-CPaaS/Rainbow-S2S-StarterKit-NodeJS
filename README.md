@@ -10,7 +10,7 @@ The Alcatel-Lucent Enterprise (ALE) Rainbow Software Rainbow-S2S-StarterKit-Node
 This starter guide will help you :
 
 - Understand Rainbow S2S API
-- Setup Rainbow-S2S-StarterKit-NodeJS  in a linux server environnement
+- Setup Rainbow-S2S-StarterKit-NodeJS  in a linux server environnement (for other environnements,the tools used here are the same, you will have to refer to installation process for your OS)
 - Subscribe to Rainbow server callback notifications and build your own server application in your chosen languange
 
 ## Beta disclaimer
@@ -29,9 +29,9 @@ The `hostname` is also necessary to know which server is used: [the sandbox](htt
 
 As Rainbow-S2S-StarterKit-NodeJS is intended to be used on a server, it is recommended to have a Linux OS with those minimum components installed:
 
-- NodeJS
-- npm package manager
-- @openapitools/openapi-generator-cli ( node component )
+- NodeJS (see [https://nodejs.org/en/download/](https://nodejs.org/en/download/) for other OS)
+- npm package manager (see [https://www.npmjs.com/get-npm](https://www.npmjs.com/get-npm) for other OS)
+- @openapitools/openapi-generator-cli (node component) (as an npm package the installation is the same for all OS [https://openapi-generator.tech/docs/installation/](https://openapi-generator.tech/docs/installation/))
 
 It is also recommened to have a minimum knowlegde on OAS standard [(Open API Specification)](https://www.openapis.org/).
 
@@ -162,21 +162,33 @@ This module validates all received data according to contract defined in swagger
 
 #### Rainbow-S2S-StarterKit-NodeJS webhook s2s events
 
-| S2S events |
-|-------------------------------------|
-| rainbow_onchatstate |
-| rainbow_onroommember |
-| rainbow_onroominvite |
-| rainbow_onbubbleinvitationreceived |
-| rainbow_onconnected |
-| rainbow_onreceipt |
-| rainbow_onallreceiptrecived |
-| rainbow_onmessagereceived |
-|rainbow_onmessagereceiptreadreceived|
-| rainbow_onpresencechanged |
-| rainbow_onroomstate |
-| rainbow_onalldeleted |
-| rainbow_onconversation |
+| S2S events | Description |
+| ------------------------------------- | ------------------------------------- |
+| **rainbow_onconnectioncreated** | Fired when the connection with rainbow is created bot not sign in |
+| **rainbow_onconnectionerror** | Fired when the connection can't be done with Rainbow (ie. issue on sign-in) |
+| **rainbow_onmessagereceived** | Fired when a one-to-one message is received |
+| **rainbow_onmessageserverreceiptreceived** | Fired when the message has been received by the server |
+| **rainbow_onmessagereceiptreceived** | Fired when the message has been received by the recipient |
+| **rainbow_onmessagereceiptreadreceived** | Fired when the message has been read by the recipient |
+| **rainbow_onallmessagereceiptreceived** | Fired when the all message has been received by the recipient |
+| **rainbow_onallmessagereceiptsent** | Fired when the all message has been sent to the recipient |
+| **rainbow_onpresencechanged** | fired when the presence of the connected user changes |
+| **rainbow_onerror** |  Fired when something goes wrong (ie: bad 'configurations' parameter, impossible to connect or reconnect, etc...) |
+| **rainbow_onbubbleremoved** | Fired when a bubble the connected user is member of is deleted |
+| **rainbow_onbubbleinvitationreceived** | Fired when an invitation to join a bubble is received |
+| **rainbow_onready** | Fired when S2S starterkit is connected to Rainbow and ready to be used |
+| **rainbow_onstarted** | Fired when the S2S starterkit has successfully started (not yet signed in) |
+| **rainbow_onconnected** | Fired when the connection is successfull with Rainbow (signin complete) |
+| **rainbow_onstopped** | Fired when the connection has stooped |
+| **rainbow_ondisconnected** | Fired when the S2S starterkit lost the connection with Rainbow |
+| **rainbow_onreconnecting** | Fired when the SDK tries to reconnect |
+| **rainbow_onfailed** | Fired when the SDK didn't succeed to reconnect and stop trying |
+| **rainbow_onbubbleaffiliationchanged** | Fired when a user changes his affiliation with a bubble |
+| **rainbow_onconversationremoved** | Fired when a conversation is deleted |
+| **rainbow_onconversationcreated** | Fired when a conversation is created |
+| **rainbow_onconversationupdate** | Fired when a conversation is updated |
+| **rainbow_onchatstate** | Fired when a chat state change occurs in a conversation |
+| **rainbow_onreceipt** | Fired when a receipt notification occurs |
 
 #### Webhook event forwarding using zmq
 
@@ -193,34 +205,19 @@ Here is a description from zmq website :
 
 ## How to use Rainbow-S2S-StarterKit-NodeJS
 
-1. Clone Rainbow-S2S-StarterKit-NodeJS
- git clone https://github.com/Rainbow-CPaaS/Rainbow-S2S-StarterKit-NodeJS.git
-
-2. Go to Rainbow-S2S-StarterKit-NodeJS directory
-
-3. Install dependencies by typing :<br/> npm install
-
-4. Create a local link by typing : <br/> npm link
-
-7. Create a new directory for a project :<br/>
+1. Create a new directory for a project :<br/>
 > mkdir myproject
 
-8. Go into myproject and type : <br/>npm init
+2. Go into myproject and type : <br/>npm init
 
-9. Make Rainbow-S2S-StarterKit-NodeJS accessible to your poject by typing :</br>
-> npm link \<full path to Rainbow-S2S-StarterKit-NodeJS\>
+3. Install rainbow-s2s-starterKit-nodejs package :<br/>
+> myproject$ npm install rainbow-s2s-starterKit-nodejs
 
-10. Copy Rainbow-S2S-StarterKit-NodeJS/config/StarterKitConfig.json.sample to your project and rename it as you want (for example myStarterKitProjectConfig.json).</br>
+4. Edit configuration file in the current project directory (myproject/config/config.json) 
 
-Modify myStarterKitProjectConfig.json according to your registration parameters on the Hub web site.</br>
+Update configuration file according to your registration parameters [see section configuration file](#configuration-file).
 
-In configuration file some parameters are related to your credentials and allow to target the Rainbow Cloud Services server to use.
-
-[see section configuration file](#configuration-file)
-
-Update configuration file according to your registration parameters.
-
-11. Edit your main file following the sample below
+5. Edit your main file following the sample below
 ```
 'use strict';
 
@@ -246,26 +243,11 @@ myS2sStarterkit.events.on('rainbow_onchatstate', (data) => {
 myS2sStarterkit.events.on('rainbow_onpresencechanged', (data) => {
     console.log('test : rainbow_onpresencechanged : ' + JSON.stringify(data));
 });
-myS2sStarterkit.events.on('rainbow_onroommember', (data) => {
-    console.log('test : rainbow_onroommember : ' + JSON.stringify(data));
-});
-myS2sStarterkit.events.on('rainbow_onroominvite', (data) => {
-    console.log('test : rainbow_onroominvite : ' + JSON.stringify(data));
+myS2sStarterkit.events.on('rainbow_onbubbleaffiliationchanged', (data) => {
+    console.log('test : rainbow_onbubbleaffiliationchanged : ' + JSON.stringify(data));
 });
 myS2sStarterkit.events.on('rainbow_onbubbleinvitationreceived', (data) => {
     console.log('test : rainbow_onbubbleinvitationreceived : ' + JSON.stringify(data));
-});
-myS2sStarterkit.events.on('connected', (data) => {
-    console.log('test : connected : ' + JSON.stringify(data));
-});
-myS2sStarterkit.events.on('rainbow_onreceipt', (data) => {
-    console.log('test : rainbow_onreceipt : ' + JSON.stringify(data));
-});
-myS2sStarterkit.events.on('rainbow_onallreceiptrecived', (data) => {
-    console.log('test : rainbow_onallreceiptrecived : ' + JSON.stringify(data));
-});
-myS2sStarterkit.events.on('rainbow_onmessagereceiptreadreceived', (data) => {
-    console.log('test : rainbow_onmessagereceiptreadreceived : ' + JSON.stringify(data));
 });
 myS2sStarterkit.events.on('rainbow_onroomstate', (data) => {
     console.log('test : rainbow_onroomstate : ' + JSON.stringify(data));
@@ -279,3 +261,9 @@ You have 3 samples :
 - NodeJS Bot Sample
 - Java BotSample
 - Php Bot Sample
+
+To use thoses samples it is required to have a linux OS or VM.
+
+**NOTE :**
+rainbow-s2s-starterkit-nodejs (and particularly its webhook events forwarder via zmq) works on all OS that support NodeJS and npm package manager.
+If you want to implement your own bot on other OS in other languages, you are supposed to have the required knowledges to install your language environement and necessary tools on those OS.

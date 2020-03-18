@@ -12,7 +12,9 @@
         logger.info('handleRoomInviteReceivedCallback : ' + JSON.stringify(body, null, 4));
         res.status(200).json({});
         Service.handleRoomInviteReceivedCallback(logger, body).then((response) => {
+            console.log(JSON.stringify(response,null,4));
             eventManager.iee.emit(response.eventName, response.data);
+            console.log('emitted');
         }, (error) => {
             eventManager.iee.emit(error.eventName, error.data);
         }).catch((err) => {

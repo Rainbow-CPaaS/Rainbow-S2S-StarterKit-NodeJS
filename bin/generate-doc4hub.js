@@ -41,6 +41,7 @@ var generateServicesDocs = (directoryPath, destPath) => {
             if (!exceptionFiles.includes(file)) {
                 let mdFile = file;
                 mdFile = mdFile.replace('.js', '') + '.md';
+                //var result = shell.exec(`node ${__dirname}${path.sep}..${path.sep}node_modules${path.sep}.bin${path.sep}jsdoc2md --heading-depth 3 ${directoryPath}${path.sep}${file} >${destPath }${path.sep}${mdFile}`);
                 var result = shell.exec(`node ${__dirname}${path.sep}..${path.sep}node_modules${path.sep}.bin${path.sep}jsdoc2md ${directoryPath}${path.sep}${file} >${destPath }${path.sep}${mdFile}`);
                 //console.log(file);
             }
@@ -56,13 +57,13 @@ var destdirectories = [
     `${__dirname}${path.sep}..${path.sep}doc`,
     `${__dirname}${path.sep}..${ path.sep}doc${path.sep}sdk`,
     `${__dirname}${path.sep}..${ path.sep}doc${path.sep}sdk${path.sep}s2s-starterkit-nodejs`,
-    `${__dirname}${path.sep}..${ path.sep}doc${path.sep}sdk${path.sep}s2s-starterkit-nodejs${path.sep}api`
+    //`${__dirname}${path.sep}..${ path.sep}doc${path.sep}sdk${path.sep}s2s-starterkit-nodejs${path.sep}api`
 ];
 
 var dir2copyParams = [
     { src: `${__dirname}${path.sep}..${path.sep}doc4hub`, dest: `${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-starterkit-nodejs${path.sep}` },
     //{ src: `${__dirname}${path.sep}..${path.sep}doc4hub${path.sep}services`, dest: `${__dirname}${path.sep}..${path.sep}doc${path.sep }sdk${path.sep}s2s-starterkit-nodejs${path.sep}` },
-    { src: `${__dirname}${path.sep}..${path.sep}modules${path.sep}sdkkernel${path.sep}rest${path.sep}client${path.sep}s2s${ path.sep }docs`, dest: `${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-starterkit-nodejs${path.sep}api` },
+    //{ src: `${__dirname}${path.sep}..${path.sep}modules${path.sep}sdkkernel${path.sep}rest${path.sep}client${path.sep}s2s${ path.sep }docs`, dest: `${__dirname}${path.sep}..${path.sep}doc${path.sep}sdk${path.sep}s2s-starterkit-nodejs${path.sep}api` },
 ];
 for (var idx in destdirectories) {
     createDirectory(destdirectories[idx]);

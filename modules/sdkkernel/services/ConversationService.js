@@ -42,10 +42,10 @@ class ConversationService {
      */
     async start() {
         let that = this;
-        that._logger.enter(this, "start");
+        that._logger.enter(this,'starting Conversation service...');
         try {
-            //this._eventEmitter.on("rainbow_onreceipt", this._onReceipt.bind(this));
-            that.conversations = await that.getAllConversations();
+            let convs = await that.getAllConversations();
+            that._logger.info(this,'starting Conversation service...'+JSON.stringify(convs,null,4));
             that._logger.exit(that, that.conversations);
             return true;
             //resolve();
@@ -61,7 +61,7 @@ class ConversationService {
      */
     async stop() {
         let that = this;
-        that._logger.enter(this, "stop");
+        that._logger.enter(this,'stoppping Conversation service...');
         try {
             //that._eventEmitter.removeListener("rainbow_onreceipt", that._onReceipt.bind(this));
             for (aConv in that.conversations) {
@@ -69,7 +69,7 @@ class ConversationService {
             }
             return true;
         } catch (err) {
-            that._logger.log("debug", LOG_ID + "(stop) _exiting_");
+            that._logger.exitWithError(that,'stopping conversation service failed',err);
             throw err;
         }
     }
@@ -182,10 +182,10 @@ class ConversationService {
         that._logger.enter(this, 'getAllConversations');
         var cnxId = this._connectionInfo.id;
         that._logger.info(this, "getAllConversations the connection cnxId = " + cnxId);
-        await that._s2sConversationApi.conversationIndex(cnxId).then((data) => {
-            that.conversations = DataHelper.extractResponseSchemaData(data);
-            that._logger.exit(that, "getAllConversations conversations" + JSON.stringify(that.conversations, null, 4));
-            return that.conversations;
+        that.conversations = await that._s2sConversationApi.conversationIndex(cnxId).then((data) => {
+            let resConvs = DataHelper.extractResponseSchemaData(data);
+            that._logger.exit(that, "getAllConversations conversations" + JSON.stringify(resConvs, null, 4));
+            return resConvs;
         }, (error) => {
             that._logger.exitWithError(that, 'getAllConversations :', error);
             throw error;
@@ -193,6 +193,7 @@ class ConversationService {
             that._logger.exitWithError(that, 'getAllConversations :', error);
             throw error;
         });
+	return that.conversations;
     }
 
     /**
@@ -213,7 +214,7 @@ class ConversationService {
         }
         var cnxId = this._connectionInfo.id;
         that._logger.info(this, "getConversation:cnxId", cnxId);
-        await that._s2sConversationApi.conversationShow(cnxId, convId).then((data) => {
+        var conv = await that._s2sConversationApi.conversationShow(cnxId, convId).then((data) => {
             that._logger.info(this, `getConversation(${convId})`, data);
             return data;
         }, (error) => {
@@ -223,6 +224,21 @@ class ConversationService {
             that._logger.exitWithError(that, 'getConversation :', error);
             throw error;
         });
+	return conv;
+    }
+
+    /**
+     * get all conversation associated to room
+     * @returns a list of all rooms conversations
+     */
+    async getAllRoomsConversations(){
+        let that = this;
+        if(typeof this.conversations !='undefined' && this.conversations.length==0){
+            this.conversations = await this.getAllConversations();
+        }
+        let rooms = this.conversations.filter(conv => conv.type == PeerType.ROOM);
+        //that._logger.info(that, 'getAllRoomConversations filtered on type='+PeerType.ROOM+' :'+JSON.stringify(rooms));
+        return rooms;
     }
 }
 

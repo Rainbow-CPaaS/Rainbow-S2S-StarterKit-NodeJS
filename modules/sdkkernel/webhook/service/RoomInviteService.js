@@ -9,10 +9,9 @@ exports.handleRoomInviteReceivedCallback = function(logger, body) {
     //logger.info('RoominviteService :' + JSON.stringify(body));
     logger.info('RoominviteService handleRoomInviteReceivedCallback :' + JSON.stringify(body, null, 4));
     return new Promise(function(resolve, reject) {
-        //resolve({ eventName: 'rainbow_onroominvite', data: body });
-        resolve({ eventName: 'rainbow_onbubbleinvitationreceived', data: body });
+        resolve({ eventName: 'webhook_rainbow_roominvitationreceived', data: body });
     }).catch((e) => {
         logger.error('ReceiptService.handleRoomInviteReceivedCallback failed');
         throw e;
     });
-}
+};
