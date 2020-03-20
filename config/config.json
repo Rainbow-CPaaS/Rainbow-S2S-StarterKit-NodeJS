@@ -4,12 +4,12 @@
         "mode": "bot"
     },
     "credentials": {
-        "login": "xxxx",
-        "password": "xxxx"
+        "login": "<the registerd login used by the bot>",
+        "password": "<the password used by the bot>"
     },
     "application": {
-        "appID": "xxxx",
-        "appSecret": "xxxx"
+        "appID": "<the appID>",
+        "appSecret": "<the appSecret>"
     },
     "logs": {
         "enableConsoleLogs": true,

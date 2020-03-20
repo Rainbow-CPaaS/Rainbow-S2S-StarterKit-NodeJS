@@ -126,19 +126,23 @@ var files2copyParams = [
     { src: `${__dirname}${path.sep}..${path.sep}bin${path.sep}s2snode-core-starter.js.sample`, dest: `${userPath}${path.sep}s2snode-core-starter.js.sample` }
 ];
 
-for (var idx in dir2CreateParams) {
-   createDirectory(dir2CreateParams[idx]);
-}
+const p1 = /rainbow-s2s-starterkit-nodejs$/;
+const p2 = /(^$|^undefined$)/;
+// execute post install only out of the self package update or dependencies install
+if(!p1.test(userPath) && p2.test(userPath)){
+  for (var idx in dir2CreateParams) {
+     createDirectory(dir2CreateParams[idx]);
+  }
 
-for (var idx in files2copyParams) {
-  copyFile(files2copyParams[idx].src, files2copyParams[idx].dest);
-}
+  for (var idx in files2copyParams) {
+    copyFile(files2copyParams[idx].src, files2copyParams[idx].dest);
+  }
 
-for(var idx in fileupdateParams){
-  updateConfigs(fileupdateParams[idx].backupedfile,fileupdateParams[idx].file2update);
-}
+  for(var idx in fileupdateParams){
+    updateConfigs(fileupdateParams[idx].backupedfile,fileupdateParams[idx].file2update);
+  }
 
-for (var idx in dir2CleanParams) {
-  cleanBackups(dir2CleanParams[idx]);
+  for (var idx in dir2CleanParams) {
+    cleanBackups(dir2CleanParams[idx]);
+  }
 }
-

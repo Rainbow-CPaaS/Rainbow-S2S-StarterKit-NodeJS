@@ -91,7 +91,12 @@
             let that = this; 
             var invitation = Utils.getJsonData(data);    
             that._logger.enter(that, "_onInvitationReceived", JSON.stringify(invitation, null, 4));
-            await that.joinRoom(invitation['room-invite']['id']);
+                try{
+                    //await new Promise(resolve => setTimeout(resolve, 30000));
+                    await that.joinRoom(invitation['room-invite']['id']);
+                }catch(e){
+                    that._logger.error(that,"_onInvitationReceived",JSON.stringify(e, null, 4));
+                }
         }
 
         [_onMemberChanged](memberData){
