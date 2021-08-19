@@ -127,8 +127,8 @@ class S2sStarterkit {
         return this._sdkEngine.BubbleService;
     }
 
-    get Conversationservice() {
-        return this._sdkEngine.Conversationservice;
+    get ConversationService() {
+        return this._sdkEngine.ConversationService;
     }
 }
 module.exports = S2sStarterkit;
