@@ -51,7 +51,7 @@
     "moment-timezone": "^0.5.28",
     "ngrok": "^3.2.7",
     "node-getopt": "^0.3.2",
-    "oas-tools": "^2.1.7",
+    "oas-tools": "^3.0.0",
     "openapi-backend": "^2.3.5",
     "promise.prototype.finally": "^3.1.2",
     "replace-in-file": "^5.0.2",
